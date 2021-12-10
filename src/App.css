@@ -71,6 +71,32 @@
   cursor: pointer;
   opacity: 0;
 }
+.table-contents {
+  text-align: center;
+}
+.ant-modal-mask {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+.ant-pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .number-panigation {
+  text-align: center;
+  }
+  .ant-pagination {
+    display: flex;
+  }
+  .show-left,
+  .show-right {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
 
 
 /*hihi*/
@@ -2896,6 +2922,7 @@ body {
   -webkit-box-shadow: 0 0 40px rgba(82, 85, 90, 0.1);
   -moz-box-shadow: 0 0 40px rgba(82, 85, 90, 0.1);
   box-shadow: 0 0 40px rgba(82, 85, 90, 0.1);
+  height: 100%;
 }
 
 .modal-contents {
@@ -2910,7 +2937,7 @@ body {
   outline: 0;
 }
 .form-title-wrap {
-  padding: 20px;
+  padding: 45px;
   border-bottom: 1px solid rgba(128, 137, 150, 0.1);
 }
 .form-content {

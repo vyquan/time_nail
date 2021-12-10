@@ -95,7 +95,7 @@ const LoginPage = () => {
                       />
                       <div className="w-100 ">
                         <i
-                          className={passwordShow ? 'fas fa-eye' : 'fas fa-eye-slash'}
+                          className={passwordShow ? 'fas fa-eye-slash' : 'fas fa-eye' }
                           onClick={togglePasswordVisiblity}
                         ></i>
                       </div>

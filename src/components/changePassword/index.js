@@ -39,7 +39,7 @@ const ChangePassword = () => {
   };
 
   return (
-    <div className="col-lg-9">
+    <div className="col-lg-12">
       <div className="form-box">
         <div className="form-title-wrap">
           <h3 className="title">

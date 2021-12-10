@@ -15,11 +15,11 @@ export const AppRoutes = {
   },
   comboService: {
     list: '/combos',
-    detail: '/combo/:id',
+    detail: '/combos/:id',
   },
   gallery: {
     list: '/gallery',
-    detail: '/gallery/:id',
+    detail: '/gallerys',
   },
   news: {
     list: '/news',

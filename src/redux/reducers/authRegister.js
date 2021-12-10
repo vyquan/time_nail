@@ -1,4 +1,4 @@
-import axios from 'axios';
+
 import { FETCH_REGISTER_SUCCESS } from '../constants/ContansLogin';
 
 const initialState = {

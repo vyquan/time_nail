@@ -60,13 +60,13 @@ const ComboService = () => {
                 <div className="col-lg-4 responsive-column" key={item.id}>
                   <div className="card-item ">
                     <div className="card-img">
-                      <Link to={`/combo-services/${item.id}`} className="d-block">
+                      <Link to={`/combos/${item.id}`} className="d-block">
                         <img src={item.image} alt="Destination-img" />
                       </Link>
                     </div>
                     <div className="card-body text-center">
                       <h3 className="card-title">
-                        <Link to={`/combo-services/${item.id}`}>{item.name_combo}</Link>
+                        <Link to={`/combos/${item.id}`}>{item.name_combo}</Link>
                       </h3>
                       <div className="card-rating">
                         <span className="rating__text">{item.short_description}</span>

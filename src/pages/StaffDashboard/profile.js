@@ -37,31 +37,6 @@ const ProfileStaff = () => {
           <div className="contact-form-action">
             <ToastContainer/>
             <form action="#" className="MultiFile-intercepted" onSubmit={handleSubmit(onSubmit)}>
-            {/* <div className="user-profile-action user-avatar-center d-flex align-items-center pb-4">
-            <div className="user-pro-img">
-            <img src={image ? (image) : (data.user.avatar)} alt="true" max-width="600" height="250"/>
-            </div>
-            <div className="upload-btn-box">
-              <div className="file-upload-wrap file-upload-wrap-2">
-                <div className="MultiFile-wrap" id="MultiFile1">
-                  <input
-                    type="file"
-                    name="files[]"
-                    className="multi file-upload-input with-preview MultiFile-applied"
-                    maxLength={1}
-                    id="MultiFile1"
-                    {...register("avatar")}
-                    onChange={onImageChange}
-                  />
-                  <div className="MultiFile-list" id="MultiFile1_list" />
-                </div>
-                <span className="file-upload-text">
-                  <i className="la la-upload mr-2" />
-                  Chọn Ảnh
-                </span>
-              </div>
-            </div>
-          </div> */}
            <div className="profile_page">
             <div className="col-left">
             <div className="avatar">

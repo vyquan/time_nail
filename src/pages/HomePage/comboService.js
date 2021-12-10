@@ -74,7 +74,7 @@ const ComboService = () => {
                 {Arr.slice(0, 6).map((item) => (
                   <div className="card-item " key={item.id}>
                     <div className="card-img ">
-                      <Link to={`/combo-services/${item.id}`} className="d-block">
+                      <Link to={`/combos/${item.id}`} className="d-block">
                         <img src={item.image} alt="hotel-img" />
                       </Link>
                     </div>

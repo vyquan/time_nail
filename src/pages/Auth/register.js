@@ -99,7 +99,7 @@ const RegisterPage = () => {
                         {...register('password', { required: true })}
                       />
                       <i
-                        className={passwordShow ? 'fas fa-eye' : 'fas fa-eye-slash'}
+                        className={passwordShow ? 'fas fa-eye-slash' : 'fas fa-eye' }
                         onClick={togglePasswordVisiblity}
                       ></i>
                       {errors.password && errors.password.type === 'required' && (
@@ -122,7 +122,7 @@ const RegisterPage = () => {
                           validate: (value) => value === password.current,
                         })}
                       />
-                      <i className={passretype ? 'fas fa-eye' : 'fas fa-eye-slash'} onClick={togglePasswordrettype}></i>
+                      <i className={passretype ? 'fas fa-eye-slash' : 'fas fa-eye' } onClick={togglePasswordrettype}></i>
                       {errors.password_repeat && errors.password_repeat.type === 'required' && (
                         <span className="text-danger">Trường xác nhập mật khẩu này là bắt buộc</span>
                       )}
