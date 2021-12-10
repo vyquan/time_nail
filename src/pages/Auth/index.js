@@ -17,6 +17,8 @@ export const isAuthenTicate = () => {
   }
   if (localStorage.getItem('token')) {
     return JSON.parse(localStorage.getItem('token'));
+  } else if (localStorage.getItem('token')) {
+    return true;
   } else {
     return false;
   }

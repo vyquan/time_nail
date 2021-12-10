@@ -13,20 +13,33 @@ import { RegexConstants } from '../../helpers/regex';
 import { AppRoutes } from '../../helpers/app.routes';
 import moment from 'moment';
 import { Booking } from '../../redux/actions/booking.js';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const BookingPage = () => {
   const { Option } = Select;
+  const history = useHistory();
   const [form] = Form.useForm();
   const [guest, setGuest] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [payment, setPayment] = useState([
+    { paymentG1: '' },
+    { paymentG2: '' },
+    { paymentG3: '' },
+    { comboG1: '' },
+    { comboG2: '' },
+    { comboG3: '' },
+  ]);
+  console.log(payment);
   const allService = useSelector((state) => state.services.services);
   const combos = useSelector((state) => state.combos.combos);
   const staff = useSelector((state) => state.staff.staff);
-  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const dataUser = isAuthenTicate();
 
+  const [showModal, setShowModal] = useState(dataUser ? false : true);
+  const handleCancelModal = () => {
+    history.goBack();
+  };
   useEffect(() => {
     dispatch(getAllService());
     dispatch(getCombo());
@@ -39,12 +52,28 @@ const BookingPage = () => {
   const [checked2, setChecked2] = useState(0);
   const [checked3, setChecked3] = useState(0);
 
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
+  const handleChangeServiceG1 = (value) => {
+    setPayment([{ paymentG1: value }]);
   };
+  const handleChangeComboG1 = (value) => {
+    setPayment([{ comboG1: value }]);
+  };
+  const handleChangeServiceG2 = (value) => {
+    setPayment([{ paymentG2: value }]);
+  };
+  const handleChangeComboG2 = (value) => {
+    setPayment([{ comboG1: value }]);
+  };
+  const handleChangeServiceG3 = (value) => {
+    setPayment([{ paymentG3: value }]);
+  };
+  const handleChangeComboG3 = (value) => {
+    setPayment([{ comboG3: value }]);
+  };
+
   const handleVoucher = () => {
     setLoading(true);
-    dispatch(Discount({ code_discount: form.getFieldValue('voucher') }));
+    dispatch(Discount({ code_discount: form.getFieldValue('code_discount') }));
   };
 
   const config = {
@@ -118,7 +147,11 @@ const BookingPage = () => {
                     <Form onFinish={onFinish} form={form} requiredMark={false} className="row" layout="vertical">
                       <div className="col-lg-6 responsive-column">
                         <Form.Item name="name" label={<label className="label-text">Họ và tên</label>}>
-                          <Input size="large" placeholder="Họ tên" />
+                          <Input
+                            size="large"
+                            placeholder="Họ tên"
+                            defaultValue={dataUser.user ? dataUser.user.full_name : dataUser.full_name}
+                          />
                         </Form.Item>
                       </div>
 
@@ -131,7 +164,11 @@ const BookingPage = () => {
                             { pattern: RegexConstants.PHONE, message: 'Số điện thoại không đúng định dạng.' },
                           ]}
                         >
-                          <Input size="large" placeholder="Số điện thoại" />
+                          <Input
+                            size="large"
+                            placeholder="Số điện thoại"
+                            defaultValue={dataUser.user ? dataUser.user.phone : dataUser.phone}
+                          />
                         </Form.Item>
                       </div>
 
@@ -213,7 +250,7 @@ const BookingPage = () => {
                             placeholder="Chọn dịch vụ"
                             showArrow
                             showSearch={true}
-                            onChange={handleChange}
+                            onChange={handleChangeServiceG1}
                             className="form-group select-contain w-100"
                           >
                             {allService.map((item, index) => (
@@ -236,7 +273,7 @@ const BookingPage = () => {
                             placeholder="Chọn combo"
                             showArrow
                             showSearch={true}
-                            onChange={handleChange}
+                            onChange={handleChangeComboG1}
                             className="form-group select-contain w-100"
                           >
                             {combos.map((combo, index) => (
@@ -470,18 +507,21 @@ const BookingPage = () => {
       </div>
       <Modal
         visible={showModal}
-        onCancel={() => setShowModal(false)}
+        onCancel={handleCancelModal}
         footer={
           <div className="d-flex">
+            <Button block className="modal-action-login">
+              <Link to={AppRoutes.home}>TRANG CHỦ</Link>
+            </Button>
             <Button type="primary" block className="modal-action-login">
               <Link to={AppRoutes.login}>ĐĂNG NHẬP</Link>
             </Button>
           </div>
         }
         centered
-        width={400}
+        width={350}
       >
-        <h3 className="text-center title pt-5">Vui lòng đăng nhập để đặt lịch</h3>
+        <h3 className="text-center title pt-5">Bạn vui lòng đăng nhập để đặt lịch</h3>
       </Modal>
     </>
   );

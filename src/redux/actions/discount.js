@@ -3,9 +3,7 @@ import { DISCOUNT } from '../constants/ContansLogin';
 
 export const Discount = (discount) => async (dispatch) => {
   try {
-    const { data } = await DiscountAPI.add(discount).then((res) =>{
-
-    });
+    const { data } = await DiscountAPI.add(discount);
     dispatch({ type: DISCOUNT, payload: data });
     console.log(data);
   } catch (error) {

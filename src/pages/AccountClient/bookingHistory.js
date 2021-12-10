@@ -45,7 +45,7 @@ const BookingHistory = () => {
   // Panagition
     const firstPageIndex = (page - 1) * postPerPage;
     const lastPageIndex = firstPageIndex + postPerPage;
-    const curentPosts = HistoryBook.slice(firstPageIndex, lastPageIndex);
+    const curentPosts = HistoryBook?.slice(firstPageIndex, lastPageIndex);
      
    const openDetails = id => e  => {
           console.log(id);
