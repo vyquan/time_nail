@@ -58,13 +58,13 @@ const GalleryPage = () => {
               <div className="col-lg-4 responsive-column" key={item.id}>
                 <div className="card-item flight-card">
                   <div className="card-img">
-                    <Link to="/gallery-detail" className="d-block">
+                    <Link to="/gallerys" className="d-block">
                       <img src={item.avatar} alt="destination-img" />
                     </Link>
                   </div>
                   <div className="card-body text-center">
                     <h3 className="card-title">
-                      <Link to="/gallery-detail">{item.title}</Link>
+                      <Link to="/gallerys">{item.title}</Link>
                     </h3>
                     <p className="card-meta">
                       {item.avatar.length} Ảnh

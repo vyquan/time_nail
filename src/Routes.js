@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Redirect, BrowserRouter } from 'react-router-dom';
 import RouteLayout from './components/PrivateRoute';
 import { AppRoutes, AppTitle } from './helpers/app.routes';
 import MainLayout from './layouts/MainLayout';

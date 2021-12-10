@@ -1,10 +1,10 @@
-import { ComponentType, Fragment } from 'react';
-import { Redirect, Route, RouteProps } from 'react-router-dom';
+import {  Fragment } from 'react';
+import { Redirect, Route} from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import React from 'react';
 import { isAuthenTicate } from '../../pages/Auth';
-import LayoutClient from '../../layouts/MainLayout';
-import StaffLayout from '../../layouts/StaffLayout';
+// import LayoutClient from '../../layouts/MainLayout';
+// import StaffLayout from '../../layouts/StaffLayout';
 import { AppRoutes } from '../../helpers/app.routes';
 
 export const RouteLayout = ({

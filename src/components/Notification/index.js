@@ -145,7 +145,7 @@ const Notification = (props) => {
                 )
               } */}
               {isAuthenTicate().roles === 'Staff' ? (
-                <Link to={AppRoutes.staffDashboard.listBooking} className="list-group-item list-group-item-action">
+                <Link to={AppRoutes.staffDashboard.profile} className="list-group-item list-group-item-action">
                   <div className="msg-body">
                     <div className="msg-content">
                       <h3 className="title">

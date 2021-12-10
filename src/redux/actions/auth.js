@@ -123,6 +123,7 @@ export const resetPassWord = (passNew, setLoading) => async (dispatch) => {
             })
             if(data.status) {
                 toast.success(data.status);
+                setLoading(true);
             }else {
                 toast.error(data.error);
                  setLoading(false);
@@ -169,7 +170,7 @@ export const loginGoogle = (googleLogin) => async (dispatch) => {
 export const userInfo = (userInfoChange) => async (dispatch) => {
     try {
         const data = await authAPI.userInfor(userInfoChange)
-        console.log(data.data)
+        localStorage.setItem('token', JSON.stringify(data.data));
         dispatch({
             type: CHANGE_INFOR_USER_SUCCESS,
             payload: data.data
@@ -187,6 +188,7 @@ export const userInfo = (userInfoChange) => async (dispatch) => {
 export const staffInfo = (staffInfoChange) => async (dispatch) => {
     try {
         const data = await authAPI.staffInfor(staffInfoChange);
+        localStorage.setItem('token', JSON.stringify(data.data));
         dispatch({
             type: CHANGE_INFOR_STAFF_SUCCESS,
             payload: data.data
