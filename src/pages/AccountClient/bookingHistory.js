@@ -45,11 +45,18 @@ const BookingHistory = () => {
   // Panagition
     const firstPageIndex = (page - 1) * postPerPage;
     const lastPageIndex = firstPageIndex + postPerPage;
-    const curentPosts = HistoryBook.slice(firstPageIndex, lastPageIndex);
-     
+    const curentPosts = HistoryBook?.slice(firstPageIndex, lastPageIndex);
+    const [data, setData] = useState([]);
+ 
+  
    const openDetails = id => e  => {
-          console.log(id);
+    const found = HistoryBook.find(element => element.id === id);
+    console.log(found);
+    setData(found);
     }
+
+   
+
 
   return (
     <div className="col-lg-9">
@@ -130,20 +137,15 @@ const BookingHistory = () => {
                       </tr>
                     </thead>
                     <tbody>
-                        {
-                         curentPosts &&
-                         curentPosts.map(item => (
-                          <tr key={item.id}>
-                          <td>{item.total_time_execution} phút</td>
-                          <td>{item.total_people} người</td>
-                          <td>{item.total_bill.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}</td>
-                          <td>{item.phone}</td>
-                          <td> Sơn Móng + Sơn Gel Gelish+Chà Lớp Bóng Trên Móng</td> 
-                          <td>{item.code_discount}</td>
-                      
-                      </tr>
-                         ))
-                        }
+                           <tr key={data.id}>
+                          <td>{data.total_time_execution} phút</td>
+                           <td>{data.total_people} người</td>
+                           <td>{data.total_bill}</td>
+                           <td>{data.phone}</td>
+                           <td> Sơn Móng + Sơn Gel Gelish+Chà Lớp Bóng Trên Móng</td> 
+                           <td>{data.code_discount}</td>
+                       </tr>
+                        
                     </tbody>
                   </table>
                 </div>

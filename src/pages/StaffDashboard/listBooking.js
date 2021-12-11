@@ -13,7 +13,9 @@ const ListBooking = () => {
    const [total, setTotal] = useState("");
    const [totaltomorow, setTotaltomorow] = useState("");
    const [page, setPage] = useState(1);
-  const [postPerPage] = useState(5);
+   const [pagefuture, setPagefuture] = useState(1);
+   const [postPerPage] = useState(5);
+   const [postPagefuture] = useState(5);
      const {id} = useParams();
      const dispatch = useDispatch();
   useEffect (() => {
@@ -58,13 +60,14 @@ const ListBooking = () => {
   const callback = (key) => {
   // console.log(key);
 }
-   // Panagition
+   // Panagition today
    const firstPageIndex = (page - 1) * postPerPage;
    const lastPageIndex = firstPageIndex + postPerPage;
    const curentPosts =historyBook.today?.slice(firstPageIndex, lastPageIndex);
-   const curentput = historyBook.future?.slice(firstPageIndex, lastPageIndex)
-  
-  
+   // panagition future
+   const firstPage = (pagefuture - 1) * postPagefuture;
+   const lastPage = firstPage + postPagefuture;
+   const curentput = historyBook.future?.slice(firstPage, lastPage)
   return (
     <div className="col-lg-12">
       <div className="form-box">
@@ -290,26 +293,28 @@ const ListBooking = () => {
                    ) : (<>Chưa có lịch đặt cho những ngày tới</>)
                 }
             {
-             historyBook.future && historyBook.future.length > 0 ? (
-              <div className='container'>
-              <div className='row'>
-              <div className='col-lg-6 col-md-6 col-sm-12 col-12 mt-3 show-left' style={{paddingLeft: "10px"}}>
-                   <p>Showing {page} to {postPerPage * page} of {historyBook.future.length} entries</p>
-                 </div>
-                 <div className="col-lg-6 col-md-6 col-sm-12 col-12 mt-3  show-right" style={{paddingRight: "40px"}}>
-               <nav aria-label="Page navigation example">
-               <Pagination
-               onChange={(value) => setPage(value)}
-               pageSize={postPerPage}
-               total={totaltomorow}
-               current={page}
-               />
-               </nav>
-             </div>
-              </div>
-               </div>
-            ) : ('')
-          }
+                   historyBook && historyBook.length > 0 ? (
+                    <div className='container'>
+                    <div className='row'>
+                    <div className='col-lg-6 col-md-6 col-sm-12 col-12 mt-3 show-left' style={{paddingLeft: "10px"}}>
+                         <p>Showing {page} to {postPerPage * page} of {historyBook.today.length} entries</p>
+                       </div>
+                       <div className="col-lg-6 col-md-6 col-sm-12 col-12 mt-3  show-right" style={{paddingRight: "40px"}}>
+                     <nav aria-label="Page navigation example">
+                     <Pagination
+                     onChange={(value) => setPage(value)}
+                     pageSize={postPerPage}
+                     total={total}
+                     current={page}
+                     />
+                     </nav>
+                   </div>
+                    </div>
+                     </div>
+                    ) : ('')
+                }
+
+             
             </TabPane>
             </Tabs>
           </div>

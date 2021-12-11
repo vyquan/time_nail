@@ -26,7 +26,12 @@ const BookingPage = () => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const dataUser = isAuthenTicate();
-
+  // handleError
+  const [errorhandle, setErrorhandle] = useState({
+    error: false,
+    message: ''
+  })
+  console.log(errorhandle);
   useEffect(() => {
     dispatch(getAllService());
     dispatch(getCombo());
@@ -44,7 +49,7 @@ const BookingPage = () => {
   };
   const handleVoucher = () => {
     setLoading(true);
-    dispatch(Discount({ code_discount: form.getFieldValue('voucher') }));
+    dispatch(Discount({ code_discount: form.getFieldValue('voucher') },setErrorhandle));
   };
 
   const config = {
@@ -117,7 +122,9 @@ const BookingPage = () => {
                   <div className="form-content contact-form-action">
                     <Form onFinish={onFinish} form={form} requiredMark={false} className="row" layout="vertical">
                       <div className="col-lg-6 responsive-column">
-                        <Form.Item name="name" label={<label className="label-text">Họ và tên</label>}>
+                        <Form.Item name="name"
+                         label={<label className="label-text">Họ và tên</label>}
+                         >
                           <Input size="large" placeholder="Họ tên" />
                         </Form.Item>
                       </div>
@@ -418,10 +425,16 @@ const BookingPage = () => {
                         <Form.Item
                           extra="Nhập mã Voucher để nhận ưu đãi giảm giá."
                           label={<label className="label-text">Voucher của cửa hàng</label>}
+                          rules={[
+                            {message:  errorhandle.message},
+                          ]}
                         >
                           <Row gutter={12}>
                             <Col span={12}>
-                              <Form.Item name="code_discount" noStyle>
+                              <Form.Item name="code_discount"
+                               noStyle
+                               >
+                           
                                 <Input
                                   size="large"
                                   placeholder="Nhập Voucher"
