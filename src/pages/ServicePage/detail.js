@@ -76,7 +76,7 @@ const ServiceDetail = () => {
                             <td className="w-sm ">{item.total_time_work} phút</td>
                             <td>
                               <div className="table-content d-flex align-items-center">
-                                <h3 className="title">{item.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}</h3>
+                                <h3 className="title">{item.price.toLocaleString('it-IT', {style : 'currency', currency : 'đ'})}</h3>
                               </div>
                             </td>
                           </tr>

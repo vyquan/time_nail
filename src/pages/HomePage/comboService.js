@@ -94,7 +94,7 @@ const ComboService = () => {
                         <p>
                           <span className="price__from">Giá </span>
                           <span className="price__num">
-                            {item.total_price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                            {item.total_price.toLocaleString('it-IT', { style: 'currency', currency: 'đ' })}
                           </span>
                         </p>
                         <div className="nav-btn">

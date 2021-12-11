@@ -21,18 +21,14 @@ const BookingPage = () => {
   const [form] = Form.useForm();
   const [guest, setGuest] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [payment, setPayment] = useState([
-    { paymentG1: '' },
-    { paymentG2: '' },
-    { paymentG3: '' },
-    { comboG1: '' },
-    { comboG2: '' },
-    { comboG3: '' },
-  ]);
-  console.log(payment);
   const allService = useSelector((state) => state.services.services);
   const combos = useSelector((state) => state.combos.combos);
   const staff = useSelector((state) => state.staff.staff);
+  const [errorhandle, setErrorhandle] = useState({
+    error: false,
+    message: '',
+  });
+
   const dispatch = useDispatch();
   const dataUser = isAuthenTicate();
 
@@ -52,29 +48,127 @@ const BookingPage = () => {
   const [checked2, setChecked2] = useState(0);
   const [checked3, setChecked3] = useState(0);
 
+  //handle payment
+  const [paymentServiceG1, setPaymentServiceG1] = useState([]);
+  const [paymentServiceG2, setPaymentServiceG2] = useState([]);
+  const [paymentServiceG3, setPaymentServiceG3] = useState([]);
+  const [paymentComboG1, setPaymentComboG1] = useState([]);
+  const [paymentComboG2, setPaymentComboG2] = useState([]);
+  const [paymentComboG3, setPaymentComboG3] = useState([]);
+
   const handleChangeServiceG1 = (value) => {
-    setPayment([{ paymentG1: value }]);
-  };
-  const handleChangeComboG1 = (value) => {
-    setPayment([{ comboG1: value }]);
+    setPaymentServiceG1(value);
   };
   const handleChangeServiceG2 = (value) => {
-    setPayment([{ paymentG2: value }]);
-  };
-  const handleChangeComboG2 = (value) => {
-    setPayment([{ comboG1: value }]);
+    setPaymentServiceG2(value);
   };
   const handleChangeServiceG3 = (value) => {
-    setPayment([{ paymentG3: value }]);
+    setPaymentServiceG3(value);
+  };
+  const handleChangeComboG1 = (value) => {
+    setPaymentComboG1(value);
+  };
+  const handleChangeComboG2 = (value) => {
+    setPaymentComboG2(value);
   };
   const handleChangeComboG3 = (value) => {
-    setPayment([{ comboG3: value }]);
+    setPaymentComboG3(value);
   };
+
+  //guest 1
+  const resultPaymentServiceG1 = allService.filter((service) => {
+    return paymentServiceG1.some((id) => {
+      return id === service.id;
+    });
+  });
+  const payServiceG1 = resultPaymentServiceG1.reduce((prev, item) => {
+    return prev + item.price;
+  }, 0);
+  const timeServiceG1 = resultPaymentServiceG1.reduce((prev, item) => {
+    return prev + item.total_time_work;
+  }, 0);
+  const resultPaymentComboG1 = combos.filter((combo) => {
+    return paymentComboG1.some((id) => {
+      return id === combo.id;
+    });
+  });
+  const payComboG1 = resultPaymentComboG1.reduce((prev, item) => {
+    return prev + item.total_price;
+  }, 0);
+  const timeComboG1 = resultPaymentComboG1.reduce((prev, item) => {
+    return prev + item.total_time_work;
+  }, 0);
+  const totalPaymentGuest1 = payServiceG1 + payComboG1;
+  const totalTimeGuest1 = timeServiceG1 + timeComboG1;
+
+  //guest 2
+  const resultPaymentServiceG2 = allService.filter((service) => {
+    return paymentServiceG2.some((id) => {
+      return id === service.id;
+    });
+  });
+  const payServiceG2 = resultPaymentServiceG2.reduce((prev, item) => {
+    return prev + item.price;
+  }, 0);
+  const timeServiceG2 = resultPaymentServiceG2.reduce((prev, item) => {
+    return prev + item.total_time_work;
+  }, 0);
+
+  const resultPaymentComboG2 = combos.filter((combo) => {
+    return paymentComboG2.some((id) => {
+      return id === combo.id;
+    });
+  });
+  const payComboG2 = resultPaymentComboG2.reduce((prev, item) => {
+    return prev + item.total_price;
+  }, 0);
+  const timeComboG2 = resultPaymentComboG2.reduce((prev, item) => {
+    return prev + item.total_time_work;
+  }, 0);
+
+  const totalPaymentGuest2 = payServiceG2 + payComboG2;
+  const totalTimeGuest2 = timeServiceG2 + timeComboG2;
+
+  //guest 3
+  const resultPaymentServiceG3 = allService.filter((service) => {
+    return paymentServiceG3.some((id) => {
+      return id === service.id;
+    });
+  });
+  const payServiceG3 = resultPaymentServiceG3.reduce((prev, item) => {
+    return prev + item.price;
+  }, 0);
+  const timeServiceG3 = resultPaymentServiceG3.reduce((prev, item) => {
+    return prev + item.total_time_work;
+  }, 0);
+  const resultPaymentComboG3 = combos.filter((combo) => {
+    return paymentComboG3.some((id) => {
+      return id === combo.id;
+    });
+  });
+  const payComboG3 = resultPaymentComboG3.reduce((prev, item) => {
+    return prev + item.total_price;
+  }, 0);
+  const timeComboG3 = resultPaymentComboG3.reduce((prev, item) => {
+    return prev + item.total_time_work;
+  }, 0);
+  const totalPaymentGuest3 = payServiceG3 + payComboG3;
+  const totalTimeGuest3 = timeServiceG3 + timeComboG3;
+  const totalPayment = totalPaymentGuest1 + totalPaymentGuest2 + totalPaymentGuest3;
+
+  //handle discount
+  const [data, setData] = useState([]);
+  const [quoteIndex] = useState(0);
+  const code_discount = data[quoteIndex] ? data[quoteIndex].code_discount : null;
+  const percent = data[quoteIndex] ? data[quoteIndex].percent : null;
 
   const handleVoucher = () => {
     setLoading(true);
-    dispatch(Discount({ code_discount: form.getFieldValue('code_discount') }));
+    dispatch(Discount({ code_discount: form.getFieldValue('code_discount') }, setErrorhandle, setData));
   };
+
+  const discount = percent / 100;
+  const totalPaymentFinal = totalPayment - totalPayment * discount;
 
   const config = {
     rules: [
@@ -94,7 +188,7 @@ const BookingPage = () => {
       date_work: data.date.format('YYYY-MM-DD'),
       time_work: data.time,
       total_people: guest,
-      code_discount: '12THANG12',
+      code_discount: code_discount,
       total_bill: '100000',
       total_time_execution: '120',
       // message: data.message,
@@ -258,7 +352,9 @@ const BookingPage = () => {
                                 <div className="d-flex align-items-center justify-content-between">
                                   <span className="w-lg">{item.name_service}</span>
                                   <span className="w-sm">({item.total_time_work} phút)</span>
-                                  <span className="w-sm">{item.price} đ</span>
+                                  <span className="w-sm">
+                                    {item.price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                                  </span>
                                 </div>
                               </Option>
                             ))}
@@ -281,14 +377,24 @@ const BookingPage = () => {
                                 <div className="d-flex align-items-center justify-content-between">
                                   <span className="w-lg">{combo.name_combo}</span>
                                   <span className="w-sm">{combo.total_time_work} phút</span>
-                                  <span className="w-sm">{combo.total_price} đ</span>
+                                  <span className="w-sm">
+                                    {combo.total_price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                                  </span>
                                 </div>
                               </Option>
                             ))}
                           </Select>
                         </Form.Item>
                         <div className="float-right">
-                          Tổng giá Khách 1: <span className="font-medium">100.000 vnđ</span>
+                          <p>
+                            Tổng giá Khách 1:{' '}
+                            <span className="font-medium float-right">
+                              {totalPaymentGuest1.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                            </span>
+                          </p>
+                          <p>
+                            Thời gian ước tính: <span className="font-medium float-right">{totalTimeGuest1} phút</span>
+                          </p>
                         </div>
                       </div>
 
@@ -331,6 +437,7 @@ const BookingPage = () => {
                             placeholder="Chọn dịch vụ"
                             showArrow
                             showSearch={true}
+                            onChange={handleChangeServiceG2}
                             className="form-group select-contain w-100"
                           >
                             {allService.map((item, index) => (
@@ -338,7 +445,9 @@ const BookingPage = () => {
                                 <div className="d-flex align-items-center justify-content-between">
                                   <span className="w-lg">{item.name_service}</span>
                                   <span className="w-sm">{item.total_time_work} phút</span>
-                                  <span className="w-sm">{item.price} đ</span>
+                                  <span className="w-sm">
+                                    {item.price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}{' '}
+                                  </span>
                                 </div>
                               </Option>
                             ))}
@@ -356,6 +465,7 @@ const BookingPage = () => {
                             placeholder="Chọn combo"
                             showArrow
                             showSearch={true}
+                            onChange={handleChangeComboG2}
                             className="form-group select-contain w-100"
                           >
                             {combos.map((combo, index) => (
@@ -363,14 +473,24 @@ const BookingPage = () => {
                                 <div className="d-flex align-items-center justify-content-between">
                                   <span className="w-lg">{combo.name_combo}</span>
                                   <span className="w-sm">{combo.total_time_work} phút</span>
-                                  <span className="w-sm">{combo.total_price} đ</span>
+                                  <span className="w-sm">
+                                    {combo.total_price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                                  </span>
                                 </div>
                               </Option>
                             ))}
                           </Select>
                         </Form.Item>
                         <div className="float-right">
-                          Tổng giá Khách 2: <span className="font-medium">100.000 vnđ</span>
+                          <p>
+                            Tổng giá Khách 2:{' '}
+                            <span className="font-medium float-right">
+                              {totalPaymentGuest2.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                            </span>
+                          </p>
+                          <p>
+                            Thời gian ước tính: <span className="font-medium float-right">{totalTimeGuest2} phút</span>
+                          </p>
                         </div>
                       </div>
 
@@ -410,6 +530,7 @@ const BookingPage = () => {
                             placeholder="Chọn dịch vụ"
                             showArrow
                             showSearch={true}
+                            onChange={handleChangeServiceG3}
                             className="form-group select-contain w-100"
                           >
                             {allService.map((item, index) => (
@@ -417,7 +538,9 @@ const BookingPage = () => {
                                 <div className="d-flex align-items-center justify-content-between">
                                   <span className="w-lg">{item.name_service}</span>
                                   <span className="w-sm">{item.total_time_work} phút</span>
-                                  <span className="w-sm">{item.price} đ</span>
+                                  <span className="w-sm">
+                                    {item.price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                                  </span>
                                 </div>
                               </Option>
                             ))}
@@ -432,6 +555,7 @@ const BookingPage = () => {
                             placeholder="Chọn combo"
                             showArrow
                             showSearch={true}
+                            onChange={handleChangeComboG3}
                             className="form-group select-contain w-100"
                           >
                             {combos.map((combo, index) => (
@@ -439,30 +563,44 @@ const BookingPage = () => {
                                 <div className="d-flex align-items-center justify-content-between">
                                   <span className="w-lg">{combo.name_combo}</span>
                                   <span className="w-sm">{combo.total_time_work} phút</span>
-                                  <span className="w-sm">{combo.total_price} đ</span>
+                                  <span className="w-sm">
+                                    {combo.total_price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                                  </span>
                                 </div>
                               </Option>
                             ))}
                           </Select>
                         </Form.Item>
                         <div className="float-right">
-                          Tổng giá Khách 3: <span className="font-medium">100.000 vnđ</span>
+                          <p>
+                            Tổng giá Khách 3:{' '}
+                            <span className="font-medium float-right">
+                              {' '}
+                              {totalPaymentGuest3.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                            </span>
+                          </p>
+                          <p>
+                            Thời gian ước tính:
+                            <span className="font-medium float-right">{totalTimeGuest3} phút</span>
+                          </p>
                         </div>
                       </div>
 
                       <div className="col-lg-12 responsive-column">
                         <Divider />
                         <Form.Item
-                          extra="Nhập mã Voucher để nhận ưu đãi giảm giá."
+                          help={errorhandle.message}
+                          validateStatus={percent === null ? 'error' : ''}
+                          extra={percent !== null ? `Mã giảm giá: ${percent} %` : ``}
                           label={<label className="label-text">Voucher của cửa hàng</label>}
                         >
                           <Row gutter={12}>
                             <Col span={12}>
-                              <Form.Item name="code_discount" noStyle>
+                              <Form.Item name="code_discount" noStyle rules={[{ message: errorhandle.message }]}>
                                 <Input
                                   size="large"
                                   placeholder="Nhập Voucher"
-                                  suffix={<CheckCircleTwoTone twoToneColor="#52c41a" />}
+                                  suffix={percent === null ? '' : <CheckCircleTwoTone twoToneColor="#52c41a" />}
                                 />
                               </Form.Item>
                             </Col>
@@ -475,19 +613,31 @@ const BookingPage = () => {
                         </Form.Item>
                       </div>
 
-                      <div className="col-lg-12">
+                      <div className="col-lg-12 responsive-column">
                         <Form.Item name="message" label={<label className="label-text">Ghi chú</label>}>
                           <Input.TextArea style={{ height: '100px' }} placeholder="VD: Mình cần tư vấn" />
                         </Form.Item>
                       </div>
-                      <div className="col-lg-12  ">
+                      <div className="col-lg-12">
                         <ul className="list-items list-items-2 py-3">
-                          <li>
-                            Voucher: <span style={{ opacity: 0.7 }}>-100.000 vnđ</span>
+                          <li style={{ display: percent === null ? 'none' : 'block' }}>
+                            Tổng:
+                            <span className="font-medium float-right" style={{ opacity: 0.7 }}>
+                              {totalPayment.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                            </span>
+                          </li>
+                          <li style={{ display: percent === null ? 'none' : 'block' }}>
+                            Voucher:{' '}
+                            <span className="font-medium float-right" style={{ opacity: 0.7 }}>
+                              {percent} %
+                            </span>
                           </li>
                           <li>
                             <h3 className="total-bill">
-                              Tổng giá: <span>1.500.000 vnđ</span>
+                              Tổng giá:{' '}
+                              <span className="font-medium float-right">
+                                {totalPaymentFinal.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                              </span>
                             </h3>
                           </li>
                         </ul>
