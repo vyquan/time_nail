@@ -8,7 +8,7 @@ import ServiceCategoryAPI from '../../api/serviceAPI';
 
 const ServiceDetail = () => {
   const { id } = useParams();
-  const [service, setService] = useState({});
+  const [service, setService] = useState([]);
   const dispatch = useDispatch();
   useEffect(() => {
     const getProduct = async () => {

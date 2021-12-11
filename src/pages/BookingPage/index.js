@@ -21,7 +21,9 @@ const BookingPage = () => {
   const [guest, setGuest] = useState(1);
   const [loading, setLoading] = useState(false);
   const allService = useSelector((state) => state.services.services);
+  
   const combos = useSelector((state) => state.combos.combos);
+
   const staff = useSelector((state) => state.staff.staff);
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
@@ -31,7 +33,6 @@ const BookingPage = () => {
     error: false,
     message: ''
   })
-  console.log(errorhandle);
   useEffect(() => {
     dispatch(getAllService());
     dispatch(getCombo());
@@ -43,13 +44,21 @@ const BookingPage = () => {
   const [checked1, setChecked1] = useState(0);
   const [checked2, setChecked2] = useState(0);
   const [checked3, setChecked3] = useState(0);
+  // lấy giá trị từ discount
+  const [data, setData] = useState([]);
+  const [quoteIndex] = useState(0);
+     const hihi = data[quoteIndex] ? data[quoteIndex].code_discount : null;
+     const hihi2 = data[quoteIndex] ? data[quoteIndex].percent : null;
+     console.log(hihi)
+     console.log(hihi2)
+
 
   const handleChange = (value) => {
     console.log(`selected ${value}`);
   };
   const handleVoucher = () => {
     setLoading(true);
-    dispatch(Discount({ code_discount: form.getFieldValue('voucher') },setErrorhandle));
+    dispatch(Discount({ code_discount: form.getFieldValue('code_discount') },setErrorhandle,setData));
   };
 
   const config = {
@@ -223,7 +232,8 @@ const BookingPage = () => {
                             onChange={handleChange}
                             className="form-group select-contain w-100"
                           >
-                            {allService.map((item, index) => (
+                            { allService && allService.length > 0 ?
+                            allService.map((item, index) => (
                               <Option key={index} value={item.id}>
                                 <div className="d-flex align-items-center justify-content-between">
                                   <span className="w-lg">{item.name_service}</span>
@@ -231,7 +241,7 @@ const BookingPage = () => {
                                   <span className="w-sm">{item.price} đ</span>
                                 </div>
                               </Option>
-                            ))}
+                            )) : 0}
                           </Select>
                         </Form.Item>
                       </div>
@@ -246,7 +256,8 @@ const BookingPage = () => {
                             onChange={handleChange}
                             className="form-group select-contain w-100"
                           >
-                            {combos.map((combo, index) => (
+                            {combos && combos.length > 0 ?
+                            combos.map((combo, index) => (
                               <Option key={index} value={combo.id}>
                                 <div className="d-flex align-items-center justify-content-between">
                                   <span className="w-lg">{combo.name_combo}</span>
@@ -254,7 +265,7 @@ const BookingPage = () => {
                                   <span className="w-sm">{combo.total_price} đ</span>
                                 </div>
                               </Option>
-                            ))}
+                            )) : ''}
                           </Select>
                         </Form.Item>
                         <div className="float-right">
@@ -303,7 +314,8 @@ const BookingPage = () => {
                             showSearch={true}
                             className="form-group select-contain w-100"
                           >
-                            {allService.map((item, index) => (
+                            {allService && allService.length > 0 ?
+                            allService.map((item, index) => (
                               <Option key={index} value={item.id}>
                                 <div className="d-flex align-items-center justify-content-between">
                                   <span className="w-lg">{item.name_service}</span>
@@ -311,7 +323,7 @@ const BookingPage = () => {
                                   <span className="w-sm">{item.price} đ</span>
                                 </div>
                               </Option>
-                            ))}
+                            )) : ''}
                           </Select>
                         </Form.Item>
                       </div>
@@ -328,7 +340,8 @@ const BookingPage = () => {
                             showSearch={true}
                             className="form-group select-contain w-100"
                           >
-                            {combos.map((combo, index) => (
+                            {combos && combos > 0 ? 
+                            combos.map((combo, index) => (
                               <Option key={index} value={combo.id}>
                                 <div className="d-flex align-items-center justify-content-between">
                                   <span className="w-lg">{combo.name_combo}</span>
@@ -336,7 +349,7 @@ const BookingPage = () => {
                                   <span className="w-sm">{combo.total_price} đ</span>
                                 </div>
                               </Option>
-                            ))}
+                            )) : ''}
                           </Select>
                         </Form.Item>
                         <div className="float-right">
@@ -382,7 +395,8 @@ const BookingPage = () => {
                             showSearch={true}
                             className="form-group select-contain w-100"
                           >
-                            {allService.map((item, index) => (
+                            {allService && allService.length > 0 ?
+                            allService.map((item, index) => (
                               <Option key={index} value={item.id}>
                                 <div className="d-flex align-items-center justify-content-between">
                                   <span className="w-lg">{item.name_service}</span>
@@ -390,7 +404,7 @@ const BookingPage = () => {
                                   <span className="w-sm">{item.price} đ</span>
                                 </div>
                               </Option>
-                            ))}
+                            )) : 0}
                           </Select>
                         </Form.Item>
                       </div>
@@ -404,7 +418,8 @@ const BookingPage = () => {
                             showSearch={true}
                             className="form-group select-contain w-100"
                           >
-                            {combos.map((combo, index) => (
+                            {combos && combos.length > 0 ?
+                            combos.map((combo, index) => (
                               <Option key={index} value={combo.id}>
                                 <div className="d-flex align-items-center justify-content-between">
                                   <span className="w-lg">{combo.name_combo}</span>
@@ -412,7 +427,7 @@ const BookingPage = () => {
                                   <span className="w-sm">{combo.total_price} đ</span>
                                 </div>
                               </Option>
-                            ))}
+                            )) : ''}
                           </Select>
                         </Form.Item>
                         <div className="float-right">

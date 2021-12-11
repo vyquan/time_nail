@@ -7,7 +7,7 @@ import { Modal, Pagination} from 'antd';
 import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../helpers/app.routes';
 
-const BookingHistory = () => {
+const BookingHistory = React.memo(() => {
   const [HistoryBook, setHistoryBook] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   // panigation
@@ -50,14 +50,13 @@ const BookingHistory = () => {
  
   
    const openDetails = id => e  => {
+    e.preventDefault();
     const found = HistoryBook.find(element => element.id === id);
     console.log(found);
     setData(found);
     }
 
-   
-
-
+  
   return (
     <div className="col-lg-9">
       <div className="form-box">
@@ -122,36 +121,29 @@ const BookingHistory = () => {
                           <i className="la la-eye" />
                         </a>
                       </div>
-                      <Modal title="Chi tiết"  visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} width={1200}>
-                      <div className="form-contents">
-                <div className="table-form table-responsive">
-                  <table className="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">Tổng thời gian</th>
-                        <th scope="col">Số lượng người</th>
-                        <th scope="col">Giá</th>
-                        <th scope="col">Số điện thoại</th>
-                        <th scope="col">Combo</th> 
-                        <th scope="col">Mã giảm giá</th> 
-                      </tr>
-                    </thead>
-                    <tbody>
-                           <tr key={data.id}>
-                          <td>{data.total_time_execution} phút</td>
-                           <td>{data.total_people} người</td>
-                           <td>{data.total_bill}</td>
-                           <td>{data.phone}</td>
-                           <td> Sơn Móng + Sơn Gel Gelish+Chà Lớp Bóng Trên Móng</td> 
-                           <td>{data.code_discount}</td>
-                       </tr>
-                        
-                    </tbody>
-                  </table>
+                      <Modal title="Chi tiết"  visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} width={800}>
+             <div className="row">
+            <div className="col-lg-12">
+              <div className="card-item user-card card-item-list mt-4 mb-0">
+                <div className="card-body">
+                  <h3 className="card-title">Xem thêm </h3>
+                  <div className="d-flex justify-content-between pt-3">
+                    <ul className="list-items list-items-2 flex-grow-1">
+                      <li><span>Tổng thời gian:</span>{data.total_time_execution} phút</li>
+                      <li><span>Số lượng người:</span>{data.total_people} người</li>
+                      <li><span>Giá:</span>{data.total_bill?.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}</li>
+                      <li><span>Số điện thoại:</span>{data.phone}</li>
+                      <li><span>Combo:</span>Sơn Móng + Sơn Gel Gelish+Chà Lớp Bóng Trên Móng </li>
+                      <li><span>Mã giảm giá:</span><a href="#">{data.code_discount}</a></li>
+                      <li><span>Mã hóa đơn:</span><a href="#">{data.code_bill}</a></li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
-                  </Modal>
-                  </td>
+              </div>{/* end card-item */}
+            </div>{/* end col-lg-12 */}
+          </div>
+            </Modal>
+            </td>
               </tr>
                 ))
               }
@@ -187,6 +179,6 @@ const BookingHistory = () => {
       </div>
     </div>
   );
-};
+});
 
 export default BookingHistory;
