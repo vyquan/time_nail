@@ -28,12 +28,15 @@ export const CHANGE_INFOR_STAFF_ERROR = "CHANGE_INFOR_STAFF_ERROR";
 
 // feedback
 export const FEEDBACK = "FEEDBACK";
+export const GET_FEEDBACK = "GET_FEEDBACK";
 export const DISCOUNT = "ADD_DISCOUNT";
 export const BOOKING = "ADD_BOOKING";
-
 // historyBookStaff
 export const HISTORY_BOOK_STAFF = "HISTORY_BOOK_STAFF";
 // historyInfo
 export const HISTORY_BOOK_INFO = "HISTORY_BOOK_INFO";
+
+// Notification
+export const NOTIFICATION = "NOTIFICATION";
 
 

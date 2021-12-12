@@ -44,13 +44,15 @@ const BookingPage = () => {
   const [checked1, setChecked1] = useState(0);
   const [checked2, setChecked2] = useState(0);
   const [checked3, setChecked3] = useState(0);
+  
   // lấy giá trị từ discount
   const [data, setData] = useState([]);
   const [quoteIndex] = useState(0);
-     const hihi = data[quoteIndex] ? data[quoteIndex].code_discount : null;
-     const hihi2 = data[quoteIndex] ? data[quoteIndex].percent : null;
-     console.log(hihi)
-     console.log(hihi2)
+     const code_discount = data[quoteIndex] ? data[quoteIndex].code_discount : null;
+     const percent = data[quoteIndex] ? data[quoteIndex].percent : null;
+     console.log(code_discount);
+     console.log(percent);
+    
 
 
   const handleChange = (value) => {
