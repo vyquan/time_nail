@@ -12,6 +12,7 @@ import AllServiceReducer from './allService';
 import bookingReducer from './booking';
 import FeedbackReducer from './feedback';
 import hisToryBookReducer from './historyBook';
+import notifiCationReducer from './notifiCation'
 const rootReducer = combineReducers({
     services: serviceReducer,
     AllService: AllServiceReducer,
@@ -25,7 +26,8 @@ const rootReducer = combineReducers({
     staff: staffReducer,
     booking: bookingReducer,
     feedback: FeedbackReducer,
-    listbookHistory: hisToryBookReducer
+    listbookHistory: hisToryBookReducer,
+    notifiCation: notifiCationReducer
 });
 
 export default rootReducer;

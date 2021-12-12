@@ -1,41 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Slider from 'react-slick';
-
+import {getFeedback} from '../../redux/actions/feedback';
 const CarouseFeedback = () => {
-  const feedback = [
-    {
-      status: '予想外に三角の飾りが大きいけど、色味は可愛いしなんと言ってもネイル代が安いからまあいっか！って感じ?♥️',
-      image: '/assets/images/team8.jpg',
-      author: 'Kana Umemura',
-      address: 'Nhật Bản',
-    },
-    {
-      status:
-        'Làm nail tại Nail Room max xinh mà còn bền kinh khủng. Mình làm một bộ móng mà chơi dài mấy tháng liền, nhân viên lại dễ thương, cute nữa, mãi yêu Time Nails.',
-      image: '/assets/images/team8.jpg',
-      author: 'Hương Nhi',
-      address: 'Hà Nội',
-    },
-    {
-      status:
-        'Mình làm móng 3 lần ở NAIL ROOM đều làm với chị Trúc và đều làm đúng một bộ ombre + marble. Tiệm đẹp, nhân viên nhẹ nhàng, dễ thương, đi đúng giờ hay gặp người nổi tiếng =)))))',
-      image: '/assets/images/team8.jpg',
-      author: 'Vũ Thảo',
-      address: 'Hà Nội',
-    },
-    {
-      status:
-        'The best nail salon I had in Danang City. Full service include nail service, eyelash extension, facial, and hair wash.',
-      image: '/assets/images/team8.jpg',
-      author: 'Kim Jeong',
-      address: 'Hàn Quốc',
-    },
-  ];
+
+    const feedback = useSelector(state => state.feedback.feedback);
+    const dispatch = useDispatch();
+    useEffect(() => {
+       dispatch(getFeedback());
+       //eslint-disable-next-line
+    },[])
+
   const settings = {
     dots: true,
     arrows: false,
     infinite: false,
-    speed: 500,
+    speed: 2000,
     slidesToShow: 1,
     slidesToScroll: 1,
     initialSlide: 0,
@@ -82,19 +62,21 @@ const CarouseFeedback = () => {
         <div className="row padding-top-50px">
           <div className="col-lg-12">
             <Slider {...settings}>
-              {feedback.map((item, index) => (
+              {
+              // feedback && feedback.user === 4 ?
+              feedback.slice(0,3).map((item, index) => (
                 <div key={index} className="testimonial-card">
                   <div className="testi-desc-box text-center">
                     <p className="testi__desc">
-                      <i className="la la-quote-left"></i> {item.status} <i className="la la-quote-right"></i>
+                      <i className="la la-quote-left"></i> {item.comment} <i className="la la-quote-right"></i>
                     </p>
                   </div>
                   <div className="author-content d-flex justify-content-center">
                     <div>
-                      <img className="author-img" src={item.image} alt="" />
+                      <img className="author-img" src={item.avatar} alt="true" />
                       <div className="author-bio text-center">
-                        <h4 className="author__title">{item.author}</h4>
-                        <span className="author__meta">{item.address}</span>
+                        <h4 className="author__title">{item.user.full_name}</h4>
+                        <span className="author__meta">{item.user.address}</span>
                       </div>
                     </div>
                   </div>

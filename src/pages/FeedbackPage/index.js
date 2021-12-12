@@ -28,6 +28,7 @@ const FeedbackPage = () => {
     datas.append('user_id', data.user_id);
     dispatch(feedback(datas));
     reset('');
+       //eslint-disable-next-line
   };
   return (
     <div>
