@@ -353,7 +353,7 @@ const BookingPage = () => {
                                   <span className="w-lg">{item.name_service}</span>
                                   <span className="w-sm">({item.total_time_work} phút)</span>
                                   <span className="w-sm">
-                                    {item.price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                                    {item.price}
                                   </span>
                                 </div>
                               </Option>
@@ -378,7 +378,7 @@ const BookingPage = () => {
                                   <span className="w-lg">{combo.name_combo}</span>
                                   <span className="w-sm">{combo.total_time_work} phút</span>
                                   <span className="w-sm">
-                                    {combo.total_price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                                    {combo.total_price}
                                   </span>
                                 </div>
                               </Option>
@@ -389,7 +389,7 @@ const BookingPage = () => {
                           <p>
                             Tổng giá Khách 1:{' '}
                             <span className="font-medium float-right">
-                              {totalPaymentGuest1.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                              {totalPaymentGuest1}
                             </span>
                           </p>
                           <p>
@@ -446,7 +446,7 @@ const BookingPage = () => {
                                   <span className="w-lg">{item.name_service}</span>
                                   <span className="w-sm">{item.total_time_work} phút</span>
                                   <span className="w-sm">
-                                    {item.price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}{' '}
+                                    {item.price}{' '}
                                   </span>
                                 </div>
                               </Option>
@@ -474,7 +474,7 @@ const BookingPage = () => {
                                   <span className="w-lg">{combo.name_combo}</span>
                                   <span className="w-sm">{combo.total_time_work} phút</span>
                                   <span className="w-sm">
-                                    {combo.total_price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                                    {combo.total_price}
                                   </span>
                                 </div>
                               </Option>
@@ -485,7 +485,7 @@ const BookingPage = () => {
                           <p>
                             Tổng giá Khách 2:{' '}
                             <span className="font-medium float-right">
-                              {totalPaymentGuest2.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                              {totalPaymentGuest2}
                             </span>
                           </p>
                           <p>
@@ -539,7 +539,7 @@ const BookingPage = () => {
                                   <span className="w-lg">{item.name_service}</span>
                                   <span className="w-sm">{item.total_time_work} phút</span>
                                   <span className="w-sm">
-                                    {item.price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                                    {item.price}
                                   </span>
                                 </div>
                               </Option>
@@ -564,7 +564,7 @@ const BookingPage = () => {
                                   <span className="w-lg">{combo.name_combo}</span>
                                   <span className="w-sm">{combo.total_time_work} phút</span>
                                   <span className="w-sm">
-                                    {combo.total_price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                                    {combo.total_price}
                                   </span>
                                 </div>
                               </Option>
@@ -576,7 +576,7 @@ const BookingPage = () => {
                             Tổng giá Khách 3:{' '}
                             <span className="font-medium float-right">
                               {' '}
-                              {totalPaymentGuest3.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                              {totalPaymentGuest3}
                             </span>
                           </p>
                           <p>
@@ -623,7 +623,7 @@ const BookingPage = () => {
                           <li style={{ display: percent === null ? 'none' : 'block' }}>
                             Tổng:
                             <span className="font-medium float-right" style={{ opacity: 0.7 }}>
-                              {totalPayment.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                              {totalPayment}
                             </span>
                           </li>
                           <li style={{ display: percent === null ? 'none' : 'block' }}>
@@ -636,7 +636,7 @@ const BookingPage = () => {
                             <h3 className="total-bill">
                               Tổng giá:{' '}
                               <span className="font-medium float-right">
-                                {totalPaymentFinal.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                                {totalPaymentFinal}
                               </span>
                             </h3>
                           </li>
