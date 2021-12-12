@@ -95,7 +95,7 @@ const LoginPage = () => {
                       />
                       <div className="w-100 ">
                         <i
-                          className={passwordShow ? 'fas fa-eye-slash' : 'fas fa-eye' }
+                          className={passwordShow ? 'fas fa-eye' : 'fas fa-eye-slash'}
                           onClick={togglePasswordVisiblity}
                         ></i>
                       </div>
@@ -125,15 +125,18 @@ const LoginPage = () => {
                       cookiePolicy={'single_host_origin'}
                     />
                   </div>
-                  <p className="font-size-14 pt-2 pb-2">Bạn chưa có tài khoản? <NavLink
-                    to="/register"
-                    activeClassName="active-btn"
-                    className="theme-btns"
-                    data-toggle="modal"
-                    data-target="/loginPopupForm"
-                  >
-                    Đăng ký
-                  </NavLink></p>
+                  <p className="font-size-14 pt-2 pb-2">
+                    Bạn chưa có tài khoản?{' '}
+                    <NavLink
+                      to="/register"
+                      activeClassName="active-btn"
+                      className="theme-btns"
+                      data-toggle="modal"
+                      data-target="/loginPopupForm"
+                    >
+                      Đăng ký
+                    </NavLink>
+                  </p>
                 </div>
               </div>
             </div>

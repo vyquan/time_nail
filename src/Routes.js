@@ -12,6 +12,7 @@ const Register = React.lazy(() => import('./pages/Auth/register'));
 const ForgotPassword = React.lazy(() => import('./pages/Auth/forgotPassword'));
 const Home = React.lazy(() => import('./pages/HomePage'));
 const Booking = React.lazy(() => import('./pages/BookingPage'));
+const BookingResult = React.lazy(() => import('./pages/BookingPage/booking-result'));
 const Feedback = React.lazy(() => import('./pages/FeedbackPage'));
 const Contact = React.lazy(() => import('./pages/ContactPage'));
 const resetPassWordClient = React.lazy(() => import('./pages/Auth/ResetPassWord'));
@@ -71,6 +72,7 @@ export const RootRouter = React.memo(() => {
           layout={MainLayout}
           />
         <RouteLayout exact path={AppRoutes.booking} component={Booking} title={AppTitle.booking} layout={MainLayout} />
+        <RouteLayout exact path={AppRoutes.bookingResult} component={BookingResult} title={AppTitle.bookingResult} layout={MainLayout} />
         <RouteLayout
           exact
           path={AppRoutes.service.list}

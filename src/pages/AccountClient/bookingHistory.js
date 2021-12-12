@@ -7,7 +7,7 @@ import { Modal, Pagination } from 'antd';
 import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../helpers/app.routes';
 
-const BookingHistory = () => {
+const BookingHistory = React.memo(() => {
   const [HistoryBook, setHistoryBook] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   // panigation
@@ -45,10 +45,14 @@ const BookingHistory = () => {
   // Panagition
   const firstPageIndex = (page - 1) * postPerPage;
   const lastPageIndex = firstPageIndex + postPerPage;
-  const curentPosts = HistoryBook.slice(firstPageIndex, lastPageIndex);
+  const curentPosts = HistoryBook?.slice(firstPageIndex, lastPageIndex);
+  const [data, setData] = useState([]);
 
   const openDetails = (id) => (e) => {
-    console.log(id);
+    e.preventDefault();
+    const found = HistoryBook.find((element) => element.id === id);
+    console.log(found);
+    setData(found);
   };
 
   return (
@@ -114,41 +118,52 @@ const BookingHistory = () => {
                             visible={isModalVisible}
                             onOk={handleOk}
                             onCancel={handleCancel}
-                            width={1200}
+                            width={800}
                           >
-                            <div className="form-contents">
-                              <div className="table-form table-responsive">
-                                <table className="table">
-                                  <thead>
-                                    <tr>
-                                      <th scope="col">Tổng thời gian</th>
-                                      <th scope="col">Số lượng người</th>
-                                      <th scope="col">Giá</th>
-                                      <th scope="col">Số điện thoại</th>
-                                      <th scope="col">Combo</th>
-                                      <th scope="col">Mã giảm giá</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    {curentPosts &&
-                                      curentPosts.map((item) => (
-                                        <tr key={item.id}>
-                                          <td>{item.total_time_execution} phút</td>
-                                          <td>{item.total_people} người</td>
-                                          <td>
-                                            {item.total_bill.toLocaleString('it-IT', {
-                                              style: 'currency',
-                                              currency: 'đ',
-                                            })}
-                                          </td>
-                                          <td>{item.phone}</td>
-                                          <td> Sơn Móng + Sơn Gel Gelish+Chà Lớp Bóng Trên Móng</td>
-                                          <td>{item.code_discount}</td>
-                                        </tr>
-                                      ))}
-                                  </tbody>
-                                </table>
+                            <div className="row">
+                              <div className="col-lg-12">
+                                <div className="card-item user-card card-item-list mt-4 mb-0">
+                                  <div className="card-body">
+                                    <h3 className="card-title">Xem thêm </h3>
+                                    <div className="d-flex justify-content-between pt-3">
+                                      <ul className="list-items list-items-2 flex-grow-1">
+                                        <li>
+                                          <span>Tổng thời gian:</span>
+                                          {data.total_time_execution} phút
+                                        </li>
+                                        <li>
+                                          <span>Số lượng người:</span>
+                                          {data.total_people} người
+                                        </li>
+                                        <li>
+                                          <span>Giá:</span>
+                                          {data.total_bill?.toLocaleString('it-IT', {
+                                            style: 'currency',
+                                            currency: 'VND',
+                                          })}
+                                        </li>
+                                        <li>
+                                          <span>Số điện thoại:</span>
+                                          {data.phone}
+                                        </li>
+                                        <li>
+                                          <span>Combo:</span>Sơn Móng + Sơn Gel Gelish+Chà Lớp Bóng Trên Móng{' '}
+                                        </li>
+                                        <li>
+                                          <span>Mã giảm giá:</span>
+                                          <a href="#">{data.code_discount}</a>
+                                        </li>
+                                        <li>
+                                          <span>Mã hóa đơn:</span>
+                                          <a href="#">{data.code_bill}</a>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                                {/* end card-item */}
                               </div>
+                              {/* end col-lg-12 */}
                             </div>
                           </Modal>
                         </td>
@@ -189,6 +204,6 @@ const BookingHistory = () => {
       </div>
     </div>
   );
-};
+});
 
 export default BookingHistory;

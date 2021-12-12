@@ -25,14 +25,14 @@ export const isAuthenTicate = () => {
 };
 
 // reset Password
-export const resetPasswordChange = (resetPass) => {
-  return fetch(`http://localhost:8000/api/reset-password`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(resetPass),
-  })
-    .then((response) => response.json())
-    .catch((error) => console.log(error));
-};
+// export const resetPasswordChange = (resetPass) => {
+//   return fetch(`http://localhost:8000/api/reset-password`, {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(resetPass),
+//   })
+//     .then((response) => response.json())
+//     .catch((error) => console.log(error));
+// };
