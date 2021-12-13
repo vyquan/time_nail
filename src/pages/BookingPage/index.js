@@ -37,6 +37,10 @@ const BookingPage = () => {
   const dataUser = isAuthenTicate();
 
   const [showModal, setShowModal] = useState(dataUser ? false : true);
+  const [showModalStaff, setShowModalStaff] = useState(false);
+  const handleCancelModalStaff = () => {
+    setShowModalStaff(false);
+  };
   const handleCancelModal = () => {
     history.goBack();
   };
@@ -183,6 +187,7 @@ const BookingPage = () => {
       },
     ],
   };
+  console.log(checked1, checked2);
   const onFinish = (data) => {
     const dataSubmit = {
       user_id: dataUser.id,
@@ -329,11 +334,11 @@ const BookingPage = () => {
                           <h4 className="label-text mb-2 mt-3">KHÁCH 1</h4>
                           <label className="label-text mb-4">Chọn Nhân viên</label>
                           <Slider {...settings}>
-                            {staff.filter((item, index) => (
+                            {staff.map((item, index) => (
                               <div
                                 key={index}
                                 className="staff-content d-flex justify-content-center"
-                                onClick={() => setChecked1(item.id)}
+                                onClick={() => item.id !== checked2 && item.id !== checked3 ? setChecked1(item.id) : setShowModalStaff(true) }
                               >
                                 <div className={`${checked1 === item.id ? 'active' : ''} staff-options`}>
                                   <i
@@ -434,7 +439,7 @@ const BookingPage = () => {
                               <div
                                 key={index}
                                 className="staff-content d-flex justify-content-center"
-                                onClick={() => setChecked2(item.id)}
+                                onClick={() => item.id !== checked1 && item.id !== checked3 ? setChecked2(item.id) : setShowModalStaff(true)}
                               >
                                 <div className={`${checked2 === item.id ? 'active' : ''} staff-options`}>
                                   <i
@@ -540,8 +545,8 @@ const BookingPage = () => {
                             {staff.map((item, index) => (
                               <div
                                 key={index}
-                                className="staff-content d-flex justify-content-center"
-                                onClick={() => setChecked3(item.id)}
+                                className="staff-content d-flex justify-content-center "
+                                onClick={() => item.id !== checked1 && item.id !== checked2 ? setChecked3(item.id) : setShowModalStaff(true)}
                               >
                                 <div className={`${checked3 === item.id ? 'active' : ''} staff-options`}>
                                   <i
@@ -723,6 +728,19 @@ const BookingPage = () => {
         width={350}
       >
         <h3 className="text-center title pt-5">Bạn vui lòng đăng nhập để đặt lịch</h3>
+      </Modal>
+      <Modal
+        visible={showModalStaff}
+        onCancel={handleCancelModalStaff}
+        footer={
+            <Button type='primary' block className="modal-action-login" onClick={()=>setShowModalStaff(false)}>
+              Thoát
+            </Button>
+        }
+        centered
+        width={350}
+      >
+        <h4 className="text-center pt-5">Nhân viên đã được khách khác chọn</h4>
       </Modal>
     </>
   );

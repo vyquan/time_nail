@@ -10208,4 +10208,7 @@ body {
 .ant-select-selection-item-content{
   width: 95% ;
 }
+.disabled {
+  background: #ccc;
+}
 
