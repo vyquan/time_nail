@@ -183,7 +183,6 @@ const BookingPage = () => {
       },
     ],
   };
-
   const onFinish = (data) => {
     const dataSubmit = {
       user_id: dataUser.id,
@@ -212,10 +211,7 @@ const BookingPage = () => {
     dispatch(Booking(dataSubmit));
     setLoading(true);
     window.scrollTo(0, 0);
-    setTimeout(
-      () => history.push(AppRoutes.bookingResult), 
-      3000
-    );
+    setTimeout(() => history.push(AppRoutes.bookingResult), 3000);
     // console.log(dataSubmit);
   };
 
@@ -237,7 +233,6 @@ const BookingPage = () => {
             </div>
           </div>
         </section>
-
         <section className="listing-form section--padding">
           <div className="container">
             <div className="row">
@@ -251,7 +246,11 @@ const BookingPage = () => {
                     <div className="form-content contact-form-action">
                       <Form onFinish={onFinish} form={form} requiredMark={false} className="row" layout="vertical">
                         <div className="col-lg-6 responsive-column">
-                          <Form.Item name="name" label={<label className="label-text">Họ và tên</label>}>
+                          <Form.Item
+                            name="name"
+                            label={<label className="label-text">Họ và tên</label>}
+                            initialValue={dataUser.user ? dataUser.user.full_name : dataUser.full_name}
+                          >
                             <Input
                               size="large"
                               placeholder="Họ tên"
@@ -264,8 +263,9 @@ const BookingPage = () => {
                           <Form.Item
                             name="phone"
                             label={<label className="label-text">Số điện thoại</label>}
+                            initialValue={dataUser.user ? dataUser.user.phone : dataUser.phone}
                             rules={[
-                              // { required: true, message: 'Vui lòng nhập số điện thoại của bạn' },
+                              { required: true, message: 'Vui lòng nhập số điện thoại của bạn.' },
                               { pattern: RegexConstants.PHONE, message: 'Số điện thoại không đúng định dạng.' },
                             ]}
                           >
@@ -282,7 +282,7 @@ const BookingPage = () => {
                             name="date"
                             {...config}
                             label={<label className="label-text">Chọn ngày</label>}
-                            rules={[{ required: true, message: 'Vui lòng nhập ngày đặt!' }]}
+                            rules={[{ required: true, message: 'Vui lòng nhập ngày đặt.' }]}
                           >
                             <DatePicker
                               size="large"
@@ -301,7 +301,7 @@ const BookingPage = () => {
                           <Form.Item
                             name="time"
                             label={<label className="label-text w-100">Chọn khung giờ</label>}
-                            rules={[{ required: true, message: 'Vui lòng nhập giờ  đặt!' }]}
+                            rules={[{ required: true, message: 'Vui lòng nhập giờ  đặt.' }]}
                           >
                             <Select size="large" placeholder="Chọn giờ" className="w-100" options={time} />
                           </Form.Item>
@@ -329,7 +329,7 @@ const BookingPage = () => {
                           <h4 className="label-text mb-2 mt-3">KHÁCH 1</h4>
                           <label className="label-text mb-4">Chọn Nhân viên</label>
                           <Slider {...settings}>
-                            {staff.map((item, index) => (
+                            {staff.filter((item, index) => (
                               <div
                                 key={index}
                                 className="staff-content d-flex justify-content-center"
@@ -626,7 +626,6 @@ const BookingPage = () => {
                             <p>
                               Tổng giá Khách 3:{' '}
                               <span className="font-medium float-right">
-                                {' '}
                                 {totalPaymentGuest3?.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
                               </span>
                             </p>
@@ -642,13 +641,12 @@ const BookingPage = () => {
                           <Form.Item
                             help={errorhandle.message}
                             validateStatus={percent === null ? 'error' : ''}
-                            extra={percent !== null ? `Mã giảm giá: ${percent} %` : ``}
+                            extra={percent !== null ? `Mã giảm giá ${percent} %` : ``}
                             label={<label className="label-text">Voucher của cửa hàng</label>}
-                            rules={[{ message: errorhandle.message }]}
                           >
                             <Row gutter={12}>
                               <Col span={12}>
-                                <Form.Item name="code_discount" noStyle rules={[{ message: errorhandle.message }]}>
+                                <Form.Item name="code_discount" noStyle>
                                   <Input
                                     size="large"
                                     placeholder="Nhập Voucher"
@@ -666,7 +664,7 @@ const BookingPage = () => {
                         </div>
 
                         <div className="col-lg-12 responsive-column">
-                          <Form.Item name="message" label={<label className="label-text">Ghi chú</label>}>
+                          <Form.Item name="                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    " label={<label className="label-text">Ghi chú</label>}>
                             <Input.TextArea style={{ height: '100px' }} placeholder="VD: Mình cần tư vấn" />
                           </Form.Item>
                         </div>

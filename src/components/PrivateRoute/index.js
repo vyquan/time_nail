@@ -30,7 +30,7 @@ export const RouteLayout = ({
         return (
           <Fragment>
             <Helmet>
-              <title>{title ? title + ' - ' : ''} Object Admin</title>
+              <title>{title ? title + ' - ' : ''} Time Nails</title>
             </Helmet>
             {Layout ? (
               <Layout>

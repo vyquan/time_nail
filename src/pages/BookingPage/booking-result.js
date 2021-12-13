@@ -21,7 +21,7 @@ const BookingResult = () => {
           <div className="col-lg-6">
             <div className="image-box about-img-box">
               <img src="/assets/images/Rectangle-74.jpg" alt="about-img" className="img__item img__item-1" />
-              {/* <img src="/assets/images/Rectangle-74.jpg" alt="about-img" className="img__item img__item-2" /> */}
+              <img src="/assets/images/waterless-manicure.jpg" alt="about-img" className="img__item img__item-2" />
             </div>
           </div>
         </div>

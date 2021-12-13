@@ -26,15 +26,15 @@ const SidebarStaff = () => {
         <div className="sidebar-menu-wrap">
           <ul className="sidebar-menu list-items">
             <li>
-              <NavLink activeClassName="active-staff" to={AppRoutes.staffDashboard.profile}>
-                <i className="la la-user mr-2 text-color-2" />
-                Tài khoản
-              </NavLink>
-            </li>
-            <li>
               <NavLink activeClassName="active-staff" to={`/staff/list-booking/${data.user ? data.user.id : data.id}`}>
                 <i className="la la-list mr-2 text-color-2" />
                 Lịch đặt
+              </NavLink>
+            </li>
+            <li>
+              <NavLink activeClassName="active-staff" to={AppRoutes.staffDashboard.profile}>
+                <i className="la la-user mr-2 text-color-2" />
+                Tài khoản
               </NavLink>
             </li>
             <li>

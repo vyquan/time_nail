@@ -142,7 +142,7 @@ export const RootRouter = React.memo(() => {
         <Redirect path="*" to={AppRoutes.page404} /> */}
         {/* Profile Member */}
         <RouteLayout exact path="/client" >
-          <Redirect to={AppRoutes.accountClient.profile} layout={ProfileLayout} isPrivate={true}/>
+          <Redirect to={AppRoutes.accountClient.bookingHistory} layout={ProfileLayout} isPrivate={true}/>
         </RouteLayout>
         <RouteLayout
           path={AppRoutes.accountClient.profile}
