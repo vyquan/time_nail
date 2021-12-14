@@ -5,8 +5,8 @@ import { getAllService } from '../../redux/actions/allService';
 import { Discount } from '../../redux/actions/discount';
 import { getCombo } from '../../redux/actions/combo';
 import { getStaff } from '../../redux/actions/staff';
-import { Button, Col, DatePicker, Divider, Form, Input, Modal, Radio, Row, Select, Space, Spin } from 'antd';
-import { CheckCircleTwoTone } from '@ant-design/icons';
+import { Button, Col, Collapse, DatePicker, Divider, Form, Input, Modal, Radio, Row, Select, Space, Spin, TimePicker } from 'antd';
+import { CheckCircleTwoTone, CaretRightOutlined, UserOutlined } from '@ant-design/icons';
 import { settings, time } from './constant';
 import { isAuthenTicate } from '../Auth';
 import { RegexConstants } from '../../helpers/regex';
@@ -16,9 +16,11 @@ import { Booking } from '../../redux/actions/booking.js';
 import { Link, useHistory } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { convertMinsToHrsMins } from '../../helpers/format';
 
 const BookingPage = () => {
   const { Option } = Select;
+  const { Panel } = Collapse;
   const history = useHistory();
   const [form] = Form.useForm();
   const [guest, setGuest] = useState(1);
@@ -50,11 +52,12 @@ const BookingPage = () => {
     dispatch(getStaff());
     //eslint-disable-next-line
   }, []);
-
+  const timeDisabled = [0, 1, 2, 3, 4, 5, 6, 7, 21, 22, 23]
   //Handle Check Staff
-  const [checked1, setChecked1] = useState(0);
-  const [checked2, setChecked2] = useState(0);
-  const [checked3, setChecked3] = useState(0);
+  const idStaffDefault = 182;
+  const [checked1, setChecked1] = useState(idStaffDefault);
+  const [checked2, setChecked2] = useState(idStaffDefault);
+  const [checked3, setChecked3] = useState(idStaffDefault);
 
   //handle payment
   const [paymentServiceG1, setPaymentServiceG1] = useState([]);
@@ -308,7 +311,8 @@ const BookingPage = () => {
                             label={<label className="label-text w-100">Chọn khung giờ</label>}
                             rules={[{ required: true, message: 'Vui lòng nhập giờ  đặt.' }]}
                           >
-                            <Select size="large" placeholder="Chọn giờ" className="w-100" options={time} />
+                            <TimePicker className="w-100" size="large" format="HH:mm" disabledHours={() => timeDisabled} minuteStep={15} showNow={false} use12Hours={false}/>
+                            {/* <Select size="large" placeholder="Chọn giờ" className="w-100" options={time} /> */}
                           </Form.Item>
                         </div>
                         <Divider />
@@ -332,27 +336,45 @@ const BookingPage = () => {
 
                         <div className="col-lg-12 responsive-column section-tab check-mark-tab pb-4">
                           <h4 className="label-text mb-2 mt-3">KHÁCH 1</h4>
-                          <label className="label-text mb-4">Chọn Nhân viên</label>
-                          <Slider {...settings}>
-                            {staff.map((item, index) => (
-                              <div
-                                key={index}
-                                className="staff-content d-flex justify-content-center"
-                                onClick={() => item.id !== checked2 && item.id !== checked3 ? setChecked1(item.id) : setShowModalStaff(true) }
-                              >
-                                <div className={`${checked1 === item.id ? 'active' : ''} staff-options`}>
-                                  <i
-                                    className="la la-check icon-element"
-                                    style={{ display: checked1 === item.id ? 'block' : 'none' }}
-                                  ></i>
-                                  <img className="staff-img" src={item.avatar} alt="avatar" />
-                                  <div className="staff-bio text-center">
-                                    <h4 className="staff__title">{item.full_name}</h4>
+
+                          <Collapse
+                            ghost
+                            expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
+                            expandIconPosition="right"
+                          >
+                            <Panel
+                              header={
+                                <label className="label-text mb-4 d-flex align-items-center">
+                                  <UserOutlined className="mr-1" /> Chọn Nhân viên
+                                </label>
+                              }
+                            >
+                              <Slider {...settings}>
+                                {staff.map((item, index) => (
+                                  <div
+                                    key={index}
+                                    className="staff-content d-flex justify-content-center"
+                                    onClick={() =>
+                                      item.id !== checked2 && item.id !== checked3 || item.id === idStaffDefault
+                                        ? setChecked1(item.id)
+                                        : setShowModalStaff(true)
+                                    }
+                                  >
+                                    <div className={`${checked1 === item.id ? 'active' : ''} staff-options`}>
+                                      <i
+                                        className="la la-check icon-element"
+                                        style={{ display: checked1 === item.id ? 'block' : 'none' }}
+                                      ></i>
+                                      <img className="staff-img" src={item.avatar} alt="avatar" />
+                                      <div className="staff-bio text-center">
+                                        <h4 className="staff__title">{item.full_name}</h4>
+                                      </div>
+                                    </div>
                                   </div>
-                                </div>
-                              </div>
-                            ))}
-                          </Slider>
+                                ))}
+                              </Slider>
+                            </Panel>
+                          </Collapse>
                         </div>
                         <div className="col-lg-12 responsive-column">
                           <Form.Item name="serviceGuest1" label={<label className="label-text">Các dịch vụ lẻ</label>}>
@@ -422,7 +444,7 @@ const BookingPage = () => {
                             </p>
                             <p>
                               Thời gian ước tính:{' '}
-                              <span className="font-medium float-right">{totalTimeGuest1} phút</span>
+                              <span className="font-medium float-right">{convertMinsToHrsMins(totalTimeGuest1)}</span>
                             </p>
                           </div>
                         </div>
@@ -433,27 +455,44 @@ const BookingPage = () => {
                         >
                           <Divider />
                           <h4 className="label-text mb-2 mt-3">KHÁCH 2</h4>
-                          <label className="label-text mb-4">Chọn Nhân viên</label>
-                          <Slider {...settings}>
-                            {staff.map((item, index) => (
-                              <div
-                                key={index}
-                                className="staff-content d-flex justify-content-center"
-                                onClick={() => item.id !== checked1 && item.id !== checked3 ? setChecked2(item.id) : setShowModalStaff(true)}
-                              >
-                                <div className={`${checked2 === item.id ? 'active' : ''} staff-options`}>
-                                  <i
-                                    className="la la-check icon-element"
-                                    style={{ display: checked2 === item.id ? 'block' : 'none' }}
-                                  ></i>
-                                  <img className="staff-img" src={item.avatar} alt="avatar" />
-                                  <div className="staff-bio text-center">
-                                    <h4 className="staff__title">{item.full_name}</h4>
+                          <Collapse
+                            ghost
+                            expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
+                            expandIconPosition="right"
+                          >
+                            <Panel
+                              header={
+                                <label className="label-text mb-4 d-flex align-items-center">
+                                  <UserOutlined className="mr-1" /> Chọn Nhân viên
+                                </label>
+                              }
+                            >
+                              <Slider {...settings}>
+                                {staff.map((item, index) => (
+                                  <div
+                                    key={index}
+                                    className="staff-content d-flex justify-content-center"
+                                    onClick={() =>
+                                      item.id !== checked1 && item.id !== checked3 || item.id === idStaffDefault
+                                        ? setChecked2(item.id)
+                                        : setShowModalStaff(true)
+                                    }
+                                  >
+                                    <div className={`${checked2 === item.id ? 'active' : ''} staff-options`}>
+                                      <i
+                                        className="la la-check icon-element"
+                                        style={{ display: checked2 === item.id ? 'block' : 'none' }}
+                                      ></i>
+                                      <img className="staff-img" src={item.avatar} alt="avatar" />
+                                      <div className="staff-bio text-center">
+                                        <h4 className="staff__title">{item.full_name}</h4>
+                                      </div>
+                                    </div>
                                   </div>
-                                </div>
-                              </div>
-                            ))}
-                          </Slider>
+                                ))}
+                              </Slider>
+                            </Panel>
+                          </Collapse>
                         </div>
                         <div
                           className="col-lg-12 responsive-column"
@@ -529,7 +568,7 @@ const BookingPage = () => {
                             </p>
                             <p>
                               Thời gian ước tính:{' '}
-                              <span className="font-medium float-right">{totalTimeGuest2} phút</span>
+                              <span className="font-medium float-right">{convertMinsToHrsMins(totalTimeGuest2)}</span>
                             </p>
                           </div>
                         </div>
@@ -540,27 +579,44 @@ const BookingPage = () => {
                         >
                           <Divider />
                           <h4 className="label-text mb-2 mt-3">KHÁCH 3</h4>
-                          <label className="label-text mb-4">Chọn Nhân viên</label>
-                          <Slider {...settings}>
-                            {staff.map((item, index) => (
-                              <div
-                                key={index}
-                                className="staff-content d-flex justify-content-center "
-                                onClick={() => item.id !== checked1 && item.id !== checked2 ? setChecked3(item.id) : setShowModalStaff(true)}
-                              >
-                                <div className={`${checked3 === item.id ? 'active' : ''} staff-options`}>
-                                  <i
-                                    className="la la-check icon-element"
-                                    style={{ display: checked3 === item.id ? 'block' : 'none' }}
-                                  ></i>
-                                  <img className="staff-img" src={item.avatar} alt="avatar" />
-                                  <div className="staff-bio text-center">
-                                    <h4 className="staff__title">{item.full_name}</h4>
+                          <Collapse
+                            ghost
+                            expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
+                            expandIconPosition="right"
+                          >
+                            <Panel
+                              header={
+                                <label className="label-text mb-4 d-flex align-items-center">
+                                  <UserOutlined className="mr-1" /> Chọn Nhân viên
+                                </label>
+                              }
+                            >
+                              <Slider {...settings}>
+                                {staff.map((item, index) => (
+                                  <div
+                                    key={index}
+                                    className="staff-content d-flex justify-content-center "
+                                    onClick={() =>
+                                      item.id !== checked1 && item.id !== checked2 || item.id === idStaffDefault
+                                        ? setChecked3(item.id)
+                                        : setShowModalStaff(true)
+                                    }
+                                  >
+                                    <div className={`${checked3 === item.id ? 'active' : ''} staff-options`}>
+                                      <i
+                                        className="la la-check icon-element"
+                                        style={{ display: checked3 === item.id ? 'block' : 'none' }}
+                                      ></i>
+                                      <img className="staff-img" src={item.avatar} alt="avatar" />
+                                      <div className="staff-bio text-center">
+                                        <h4 className="staff__title">{item.full_name}</h4>
+                                      </div>
+                                    </div>
                                   </div>
-                                </div>
-                              </div>
-                            ))}
-                          </Slider>
+                                ))}
+                              </Slider>
+                            </Panel>
+                          </Collapse>
                         </div>
                         <div
                           className="col-lg-12 responsive-column"
@@ -636,7 +692,7 @@ const BookingPage = () => {
                             </p>
                             <p>
                               Thời gian ước tính:
-                              <span className="font-medium float-right">{totalTimeGuest3} phút</span>
+                              <span className="font-medium float-right">{convertMinsToHrsMins(totalTimeGuest3)}</span>
                             </p>
                           </div>
                         </div>
@@ -669,7 +725,10 @@ const BookingPage = () => {
                         </div>
 
                         <div className="col-lg-12 responsive-column">
-                          <Form.Item name="                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    " label={<label className="label-text">Ghi chú</label>}>
+                          <Form.Item
+                            name="                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    "
+                            label={<label className="label-text">Ghi chú</label>}
+                          >
                             <Input.TextArea style={{ height: '100px' }} placeholder="VD: Mình cần tư vấn" />
                           </Form.Item>
                         </div>
@@ -733,14 +792,15 @@ const BookingPage = () => {
         visible={showModalStaff}
         onCancel={handleCancelModalStaff}
         footer={
-            <Button type='primary' block className="modal-action-login" onClick={()=>setShowModalStaff(false)}>
-              Thoát
-            </Button>
+          <Button type="primary" block className="modal-action-login" onClick={() => setShowModalStaff(false)}>
+            Thoát
+          </Button>
         }
         centered
         width={350}
       >
         <h4 className="text-center pt-5">Nhân viên đã được khách khác chọn</h4>
+        <p className="text-center">Nếu bạn muốn chọn cùng 1 nhân viên bạn vui lòng note vào ghi chú </p>
       </Modal>
     </>
   );
