@@ -11,7 +11,7 @@ import { loginGoogle } from '../../redux/actions/auth';
 import { AppRoutes } from '../../helpers/app.routes';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { SpinnerCircularFixed } from 'spinners-react';
 const LoginPage = () => {
   const {
     register,
@@ -20,26 +20,40 @@ const LoginPage = () => {
   } = useForm();
   const [redirectToRef, setRedirectToRef] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   // set eye password
   const togglePasswordVisiblity = () => {
     setPasswordShow(passwordShow ? false : true);
   };
   const dispatch = useDispatch();
   const onSubmit = (data) => {
-    dispatch(loginAuth(data, setRedirectToRef));
+    setLoading(true);
+    dispatch(loginAuth(data, setRedirectToRef, setLoading));
   };
+  const showLoading = () => {
+    return (
+      loading && (
+        <div style={{ width: '50px', margin: 'auto' }}>
+          <SpinnerCircularFixed color="rgba(172, 57, 94, 1)" secondaryColor="rgba(172, 57, 133, 0.44)" />
+        </div>
+      )
+    );
+  };
+
 
   const data = isAuthenTicate();
   const redirectUser = () => {
-    if (redirectToRef) {
-      if (data.roles === 'Staff') {
-        return <Redirect to="/staff/profile" />;
-      } else {
-        return <Redirect to="/" />;
+    
+      if (redirectToRef) {
+        if (data.roles === 'Staff') {
+            return <Redirect to="/staff/profile" /> ;
+        } 
+        else {
+            return <Redirect to="/" />;
+        }
       }
-    }
   };
+ 
 
   const responseGoogle = (response) => {
     const uploads = new FormData();
@@ -47,7 +61,7 @@ const LoginPage = () => {
     uploads.append('full_name', response.profileObj.givenName);
     uploads.append('avatar', response.profileObj.imageUrl);
     uploads.append('google_id', response.googleId);
-    dispatch(loginGoogle(uploads));
+    dispatch(loginGoogle(uploads, setRedirectToRef));
   };
 
   return (
@@ -65,6 +79,7 @@ const LoginPage = () => {
             </div>
             <div className="modal-body">
               <div className="contact-form-action">
+              {showLoading()}
                 {redirectUser()}
                 <ToastContainer />
                 <form method="post" onSubmit={handleSubmit(onSubmit)}>

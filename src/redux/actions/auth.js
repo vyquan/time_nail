@@ -20,7 +20,7 @@ import {
   CHANGE_INFOR_STAFF_ERROR,
 } from '../constants/ContansLogin';
 
-export const loginAuth = (logins, setRedirectToRef) => async (dispatch) => {
+export const loginAuth = (logins, setRedirectToRef, setLoading) => async (dispatch) => {
   dispatch({ type: FETCH_LOGIN_REQEST });
   await authAPI
     .signin(logins)
@@ -32,6 +32,7 @@ export const loginAuth = (logins, setRedirectToRef) => async (dispatch) => {
           payload: response.data.error,
         });
         toast.error(response.data.error);
+        setLoading(false);
       } else {
         authenticate(response.data, () => {
           setRedirectToRef(true);
@@ -40,6 +41,7 @@ export const loginAuth = (logins, setRedirectToRef) => async (dispatch) => {
             payload: response.data,
           });
           toast.success(response.data.success);
+          setLoading(true);
         });
       }
     })
@@ -120,6 +122,7 @@ export const resetPassWord = (passNew, setLoading) => async (dispatch) => {
     if (data.status) {
       toast.success(data.status);
       setLoading(true);
+      setLoading(false);
     } else {
       toast.error(data.error);
       setLoading(false);
@@ -147,13 +150,11 @@ export const resetPasswordChangePass = (resetPass) => async (dispatch) => {
   }
 };
 // Login google
-export const loginGoogle = (googleLogin) => async (dispatch) => {
+export const loginGoogle = (googleLogin, setRedirectToRef) => async (dispatch) => {
   try {
     const data = await authAPI.loginGoogle(googleLogin);
     localStorage.setItem('token', JSON.stringify(data.data.user));
-    setTimeout(() => {
-      window.location = '/';
-    }, 1000);
+    setRedirectToRef(true);
     dispatch({ type: FETCH_LOGIN_GOOGLE, payload: data.data.user });
   } catch (error) {
     console.log(error);

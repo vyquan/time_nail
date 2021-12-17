@@ -8,7 +8,7 @@ export const AppRoutes = {
   booking: '/booking',
   bookingResult: '/booking-result',
   contact: '/contact',
-  feedback: '/feedback',
+  feedback: '/feedback/:id',
   resetPassWordClient: '/reset-password/:token',
   service: {
     list: '/services',

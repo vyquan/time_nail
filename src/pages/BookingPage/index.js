@@ -5,7 +5,7 @@ import { getAllService } from '../../redux/actions/allService';
 import { Discount } from '../../redux/actions/discount';
 import { getCombo } from '../../redux/actions/combo';
 import { checkUnavailable, getStaff } from '../../redux/actions/staff';
-import { Button, Col, Collapse, DatePicker, Divider, Form, Input, Modal, Radio, Row, Select, Space, Spin, TimePicker } from 'antd';
+import { Button, Col, Collapse, DatePicker, Divider, Form, Input, Modal, Radio, Row, Select, Spin, } from 'antd';
 import { CheckCircleTwoTone, CaretRightOutlined, UserOutlined } from '@ant-design/icons';
 import { settings, time } from './constant';
 import { isAuthenTicate } from '../Auth';
@@ -206,7 +206,6 @@ const BookingPage = () => {
       total_people: guest,
       code_discount: code_discount,
       total_bill: totalPaymentFinal,
-      total_time_execution: '120',
       note_bill: data.message,
       member_1: 1,
       staff_1: checked1,

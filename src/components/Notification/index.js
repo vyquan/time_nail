@@ -4,22 +4,16 @@ import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { AppRoutes } from '../../helpers/app.routes';
 import { isAuthenTicate, Signout } from '../../pages/Auth/index';
-import { notifiCation } from '../../redux/actions/notification';
+import { notifiCation, notifiCateOne, notifiCateAll } from '../../redux/actions/notification';
 const Notification = (props) => {
   const { setIsLogin } = props;
   const history = useHistory();
-  const [notifications, setNotifications] = useState([]);
-  const [open, setOpent] = useState(false);
   const data = useSelector((state) => state.notifiCation.notifiCation);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(notifiCation(setNotifications));
+    dispatch(notifiCation());
     //eslint-disable-next-line
   }, []);
-  const handleRead = () => {
-    setNotifications([]);
-    setOpent(true);
-  };
 
   return (
     <div className="notification-wrap d-flex align-items-center">
@@ -33,37 +27,49 @@ const Notification = (props) => {
             aria-haspopup="true"
             aria-expanded="false"
           >
-            <i className="la la-bell text-black" onClick={handleRead} />
-            {notifications.length > 0 && <span className="noti-count text-black">{notifications.length}</span>}
+            <i className="la la-bell text-black" />
+            {data.length > 0 && <span className="noti-count text-black">{data.length}</span>}
           </Link>
           <div className="dropdown-menu dropdown-reveal dropdown-menu-xl dropdown-menu-right">
             <div className="dropdown-header drop-reveal-header">
-              {notifications.length > 0 ? (
+              {data.length > 0 ? (
                 <h6 className="title">
-                  Bạn có <strong className="text-black">{notifications.length}</strong> thông báo
+                  Bạn có <strong className="text-black">{data.length}</strong> thông báo
                 </h6>
               ) : (
                 <h6 className="title">Bạn không có thông báo nào</h6>
               )}
             </div>
             <div className="list-group drop-reveal-list">
-              {open &&
+              {data &&
                 data.map((item, index) => {
                   return (
-                    <Link to="#" className="list-group-item list-group-item-action" key={index}>
-                      <div className="msg-body d-flex align-items-center">
+                    <Link
+                      to={`/client/booking-history/${isAuthenTicate.user ? isAuthenTicate.user.id : isAuthenTicate.id}`}
+                      className="list-group-item list-group-item-action"
+                      key={index}
+                    >
+                      <div
+                        className="msg-body d-flex align-items-center"
+                        onClick={() => dispatch(notifiCateOne(item.id))}
+                      >
                         <div className="msg-content w-100">
-                          <h3 className="title pb-1">{item.data.title}</h3>
-                          <p className="msg-text">{item.data.created_at}</p>
+                          <h3 className="title pb-1">{item.data.name}</h3>
+                          <p className="msg-text">{item.data.date}</p>
                         </div>
                       </div>
+                      {/* end msg-body */}
                     </Link>
                   );
                 })}
             </div>
-            <Link to="#" className="dropdown-item drop-reveal-btn text-center">
-              Xem tất cả
-            </Link>
+            <div
+              className="dropdown-item drop-reveal-btn text-center"
+              onClick={() => dispatch(notifiCateAll())}
+              style={{ cursor: 'pointer' }}
+            >
+              Đánh dấu là đã đọc
+            </div>
           </div>
           {/* end dropdown-menu */}
         </div>

@@ -38,5 +38,8 @@ export const HISTORY_BOOK_INFO = "HISTORY_BOOK_INFO";
 
 // Notification
 export const NOTIFICATION = "NOTIFICATION";
-
+// Notification one
+export const NOTIFICATION_ONE = "NOTIFICATION_ONE";
+// Notidication All
+export const NOTIFICATION_ALL = "NOTIFICATION_ALL";
 

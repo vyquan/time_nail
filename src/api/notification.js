@@ -1,7 +1,7 @@
 import { axiosClient } from './axiosClient';
 
 const NotificationAPI = {
-  get(id) {
+  All(id) {
     const url = `/all-notification/${id}`;
     return axiosClient.get(url);
   },

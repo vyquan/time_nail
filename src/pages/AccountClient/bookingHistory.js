@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
 import historyBookAPI from '../../api/historyBook';
 import { historyBookInfo } from '../../redux/actions/historyBook';
-import { Modal, Pagination } from 'antd';
+import { Button, Modal, Pagination } from 'antd';
 import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../helpers/app.routes';
 
@@ -72,32 +72,52 @@ const BookingHistory = React.memo(() => {
               <table className="table">
                 <thead>
                   <tr>
+                    <th scope="col">STT</th>
                     <th scope="col">Ngày</th>
                     <th scope="col">Thời gian</th>
-                    <th scope="col">Nhân viên</th>
-                    <th scope="col">Dịch vụ</th>
+                    <th scope="col">Số điện thoại</th>
+                    <th scope="col"></th>
                     <th scope="col">Trạng thái</th>
-                    <th scope="col">Xem thêm</th>
+                    <th scope="col">Chi tiết</th>
                   </tr>
                 </thead>
                 <tbody>
                   {curentPosts &&
                     curentPosts.map((item) => (
                       <tr key={item.id}>
+                        <td>{item.id}</td>
                         <td>{item.date_work}</td>
                         <td>{item.time_work}</td>
+                        <td>{item.phone}</td>
+                        
                         <td>
-                          <div className="table-content">
-                            <h3 className="title">Chu Thị Quỳnh</h3>
-                          </div>
+                          {item.status_bill === 4 ? (
+                            item.check_fb !== null ? (
+                              <Link
+                                to={`/feedback/${item.id}`}
+                                hidden
+                                style={{ textDecoration: 'underline'}}
+                              >
+                                Đánh giá dịch vụ
+                              </Link>
+                            ) : (
+                              <Link
+                                to={`/feedback/${item.id}`}
+                                style={{ textDecoration: 'underline'}}
+                              >
+                                Đánh giá dịch vụ
+                              </Link>
+                            )
+                          ) : (
+                            ''
+                          )}
                         </td>
-                        <td>Sơn móng</td>
                         <td>
                           {(() => {
                             if (item.status_bill === 1) {
                               return <span className="badge badge-warning py-1 px-2">Chờ xác nhận</span>;
                             } else if (item.status_bill === 2) {
-                              return <span className="badge badge-danger py-1 px-2">Xác nhận thành công</span>;
+                              return <span className="badge badge-primary py-1 px-2">Xác nhận thành công</span>;
                             } else if (item.status_bill === 3) {
                               return <span className="badge badge-info py-1 px-2">Đang làm</span>;
                             } else if (item.status_bill === 4) {
@@ -119,22 +139,15 @@ const BookingHistory = React.memo(() => {
                             onOk={handleOk}
                             onCancel={handleCancel}
                             width={800}
+                            footer={false}
                           >
                             <div className="row">
                               <div className="col-lg-12">
                                 <div className="card-item user-card card-item-list mt-4 mb-0">
                                   <div className="card-body">
-                                    <h3 className="card-title">Xem thêm </h3>
+                                    <h3 className="card-title">Chi tiết </h3>
                                     <div className="d-flex justify-content-between pt-3">
                                       <ul className="list-items list-items-2 flex-grow-1">
-                                        <li>
-                                          <span>Tổng thời gian:</span>
-                                          {data.total_time_execution} phút
-                                        </li>
-                                        <li>
-                                          <span>Số lượng người:</span>
-                                          {data.total_people} người
-                                        </li>
                                         <li>
                                           <span>Giá:</span>
                                           {data.total_bill?.toLocaleString('it-IT', {
@@ -143,19 +156,20 @@ const BookingHistory = React.memo(() => {
                                           })}
                                         </li>
                                         <li>
-                                          <span>Số điện thoại:</span>
-                                          {data.phone}
-                                        </li>
-                                        <li>
-                                          <span>Combo:</span>Sơn Móng + Sơn Gel Gelish+Chà Lớp Bóng Trên Móng{' '}
-                                        </li>
-                                        <li>
                                           <span>Mã giảm giá:</span>
-                                          <a href="#">{data.code_discount}</a>
+                                          {data.code_discount}
                                         </li>
                                         <li>
                                           <span>Mã hóa đơn:</span>
-                                          <a href="#">{data.code_bill}</a>
+                                          {data.code_bill}
+                                        </li>
+                                        <li>
+                                          <span>Feedback:</span>
+                                          {data.check_fb}
+                                        </li>
+                                        <li>
+                                          <span>Ghi chú hóa đơn:</span>
+                                          {data.note_bill}
                                         </li>
                                       </ul>
                                     </div>

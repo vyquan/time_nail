@@ -5,7 +5,7 @@ import { resetPassWord } from '../../redux/actions/auth';
 import { useDispatch } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { SpinnerRoundFilled } from 'spinners-react';
+import { SpinnerCircularFixed } from 'spinners-react';
 
 const ForgotPassword = () => {
   const {
@@ -25,7 +25,7 @@ const ForgotPassword = () => {
     return (
       loading && (
         <div style={{ width: '50px', margin: 'auto' }}>
-          <SpinnerRoundFilled color="rgba(172, 57, 90, 1)" />
+          <SpinnerCircularFixed color="rgba(172, 57, 94, 1)" secondaryColor="rgba(172, 57, 133, 0.44)"  />
         </div>
       )
     );
