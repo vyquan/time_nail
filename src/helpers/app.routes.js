@@ -7,7 +7,7 @@ export const AppRoutes = {
   changePassword: '/change-password',
   booking: '/booking',
   contact: '/contact',
-  feedback: '/feedback',
+  feedback: '/feedback/:id',
   resetPassWordClient: '/reset-password/:token',
   service: {
     list: '/services',

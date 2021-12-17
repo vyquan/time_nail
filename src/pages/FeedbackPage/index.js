@@ -6,6 +6,7 @@ import { isAuthenTicate } from '../Auth';
 import { Rate } from 'antd';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useParams } from 'react-router-dom';
 const FeedbackPage = () => {
   const {
     register,
@@ -20,16 +21,19 @@ const FeedbackPage = () => {
   });
   const dispatch = useDispatch();
   const data = isAuthenTicate();
-
+  const {id} = useParams();
+  console.log(id);
   const onSubmit = (data) => {
     const datas = new FormData();
     datas.append('number_star', data.number_star);
     datas.append('comment', data.comment);
     datas.append('user_id', data.user_id);
+    datas.append('bill_id', data.bill_id)
     dispatch(feedback(datas));
     reset('');
        //eslint-disable-next-line
   };
+
   return (
     <div>
       <section className="tour-detail-area padding-bottom-90px">
@@ -61,26 +65,28 @@ const FeedbackPage = () => {
                                   value={data.user ? data.user.id : data.id}
                                   {...register('user_id')}
                                 />
+                                  <input
+                                   type="hidden"
+                                  value={id}
+                                  {...register('bill_id')}
+                                />
                                 <div className="row">
-                                  <div className="rate-option p-2">
-                                    <div className="row">
-                                      <div className="col-lg-12 responsive-column mx-auto">
-                                        <div className="rate-option-item">
-                                          <label>Đánh giá</label>
+
+                                      <div className="col-12  responsive-column d-md-flex justify-content-center align-items-center">
+                                        <div className="rate-option-item text-center" >
+                                          <label className="label-text">Đánh giá</label>
                                           <br />
                                           <Controller
                                             name="number_star"
                                             control={control}
                                             rules={{ required: true }}
-                                            render={({ field }) => <Rate {...field} />}
+                                            render={({ field }) => <Rate {...field} defaultValue={5} style={{ fontSize: 60}} />}
                                           />
                                           <br />
                                           {errors.number_star && <span className="text-danger">Bạn chưa đánh giá</span>}
                                         </div>
                                       </div>
-                                      {/* col-lg-4 */}
-                                    </div>
-                                  </div>
+                               
                                   <div className="col-lg-12">
                                     <div className="input-box">
                                       <label className="label-text">Message</label>

@@ -12,6 +12,7 @@ const ListBooking = () => {
    // panigation
    const [total, setTotal] = useState("");
    const [totaltomorow, setTotaltomorow] = useState("");
+  
    const [page, setPage] = useState(1);
    const [pagefuture, setPagefuture] = useState(1);
    const [postPerPage] = useState(5);
@@ -68,7 +69,7 @@ const ListBooking = () => {
    const firstPage = (pagefuture - 1) * postPagefuture;
    const lastPage = firstPage + postPagefuture;
    const curentput = historyBook.future?.slice(firstPage, lastPage)
-
+  
    const [data, setData] = useState([]);
    const openDetails = id => e  => {
      e.preventDefault();
@@ -76,17 +77,17 @@ const ListBooking = () => {
     setData(foundToday);
     }
     const [datafuture, setDatfuture] = useState([]);
+ 
     const openDetail = id => e  => {
       e.preventDefault();
      const foundFuture = historyBook.future.find(element => element.id === id);
      setDatfuture(foundFuture);
      }
   return (
-    <div className="col-lg-12">
+     <div className="col-lg-12 ">
       <div className="form-box">
         <div className="form-title-wrap">
-          <div className="d-flex align-items-center justify-content-between">
-            <Tabs defaultActiveKey="1" onChange={callback}>
+          <Tabs defaultActiveKey="1" onChange={callback} size={1000}>
               <TabPane tab="Lịch đặt hôm nay" key="1">
                 {
                   historyBook.today && historyBook.today.length > 0 ? 
@@ -96,35 +97,31 @@ const ListBooking = () => {
                     <table className="table">
                       <thead>
                         <tr>
+                        <th scope="col">STT</th>
                           <th scope="col">Ngày</th>
                           <th scope="col">Thời gian</th>
-                          <th scope="col">Dịch vụ</th>
-                          <th scope="col">Combo</th>
+                          <th scope="col">Số điện thoại </th>
                           <th scope="col">Trang thái</th>
-                          <th scope="col">Xem thêm</th>
+                          <th scope="col">Chi tiết</th>
                         </tr>
                       </thead>
                       <tbody>
                         {
                          curentPosts &&
-                         curentPosts.map(item => (
+                         curentPosts.map((item) => (
                            <tr key={item.id}>
+                            <td >{item.id}</td>
                            <td >{item.date_work}</td>
                            <td >{item.time_work} </td>
-                           {/* <td>{item.total_time_execution} phút</td> */}
-                           <td >
-                            Tẩy lông chân tay
-                         </td> 
-                         <td  >
-                            Combo sơn móng tay mịn rất phù hợp với túi tiền 
-                         </td> 
+                       
+                           <td>{item.phone}</td>
                          <td >
                          {
                         (() => {
                           if(item.status_bill === 1) {
                            return <span className="badge badge-warning py-1 px-2">Chờ xác nhận</span>   
                           }else if(item.status_bill === 2) {
-                            return <span className="badge badge-danger py-1 px-2">Xác nhận thành công</span>   
+                            return <span className="badge badge-primary py-1 px-2">Xác nhận thành công</span>   
                           }else if(item.status_bill === 3) {
                             return <span className="badge badge-info py-1 px-2">Đang làm</span>   
                           }else if(item.status_bill === 4) {
@@ -147,16 +144,14 @@ const ListBooking = () => {
                 <div className="col-lg-12">
               <div className="card-item user-card card-item-list mt-4 mb-0">
                 <div className="card-body">
-                  <h3 className="card-title">Xem thêm </h3>
+                  <h3 className="card-title">Chi tiết</h3>
                   <div className="d-flex justify-content-between pt-3">
                     <ul className="list-items list-items-2 flex-grow-1">
-                      <li><span>Tổng thời gian:</span>{data.total_time_execution} phút</li>
-                      <li><span>Số lượng người:</span>{data.total_people} người</li>
-                      <li><span>Giá:</span>{data.total_bill?.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}</li>
-                      <li><span>Số điện thoại:</span>{data.phone}</li>
-                      <li><span>Combo:</span>Sơn Móng + Sơn Gel Gelish+Chà Lớp Bóng Trên Móng </li>
+                    <li><span>Giá:</span><a href="#">{item.total_bill?.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}</a></li>
                       <li><span>Mã giảm giá:</span><a href="#">{data.code_discount}</a></li>
                       <li><span>Mã hóa đơn:</span><a href="#">{data.code_bill}</a></li>
+                      <li><span>Feedback:</span>{data.check_fb}</li>
+                      <li><span>Ghi chú hóa đơn:</span>{data.note_bill}</li>
                     </ul>
                   </div>
                 </div>
@@ -198,41 +193,37 @@ const ListBooking = () => {
               </TabPane>
               <TabPane tab="Lịch đặt hôm sau" key="2">
                 {
-                   historyBook.today && historyBook.today.length > 0 ? 
+                   historyBook.future && historyBook.future.length > 0 ? 
                    (
                     <div className="form-contents">
                     <div className="table-form table-responsive">
                     <table className="table">
                       <thead>
                         <tr>
-                        <th scope="col">Ngày </th>
+                        <th scope="col">STT</th>
+                          <th scope="col">Ngày </th>
                           <th scope="col">Thời gian </th>
-                          <th scope="col">Dịch vụ</th>
-                          <th scope="col">Combo</th>
+                          <th scope="col">Số điện thoại </th>
                           <th scope="col">Trang thái</th>
-                          <th scope="col">Xem thêm</th>
+                          <th scope="col">Chi tiết</th>
                         </tr>
                       </thead>
                       <tbody>
                       {
                           curentput &&
-                          curentput.map(item => (
+                          curentput.map((item) => (
                               <tr key={item.id}>
+                                 <td >{item.id}</td>
                                 <td >{item.date_work}</td>
                                 <td >{item.time_work} </td>
-                                <td >
-                                 Tẩy lông chân
-                              </td> 
-                              <td  >
-                                 Combo sơn móng tay mịn rất phù hợp với túi tiền 
-                              </td> 
+                                <td>{item.phone}</td>
                               <td >
                               {
                               (() => {
                                 if(item.status_bill === 1) {
                                 return <span className="badge badge-warning py-1 px-2">Chờ xác nhận</span>   
                                 }else if(item.status_bill === 2) {
-                                  return <span className="badge badge-danger py-1 px-2">Xác nhận thành công</span>   
+                                  return <span className="badge badge-primary py-1 px-2">Xác nhận thành công</span>   
                                 }else if(item.status_bill === 3) {
                                   return <span className="badge badge-info py-1 px-2">Đang làm</span>   
                                 }else if(item.status_bill === 4) {
@@ -255,16 +246,14 @@ const ListBooking = () => {
                     <div className="col-lg-12">
                       <div className="card-item user-card card-item-list mt-4 mb-0">
                         <div className="card-body">
-                          <h3 className="card-title">Xem thêm </h3>
+                          <h3 className="card-title">Chi tiết</h3>
                           <div className="d-flex justify-content-between pt-3">
                             <ul className="list-items list-items-2 flex-grow-1">
-                              <li><span>Tổng thời gian:</span>{datafuture.total_time_execution} phút</li>
-                              <li><span>Số lượng người:</span>{datafuture.total_people} người</li>
-                              <li><span>Giá:</span>{datafuture.total_bill?.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}</li>
-                              <li><span>Số điện thoại:</span>{datafuture.phone}</li>
-                              <li><span>Combo:</span>Sơn Móng + Sơn Gel Gelish+Chà Lớp Bóng Trên Móng </li>
+                            <li><span>Giá:</span><a href="#">{item.total_bill?.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}</a></li>
                               <li><span>Mã giảm giá:</span><a href="#">{datafuture.code_discount}</a></li>
                               <li><span>Mã hóa đơn:</span><a href="#">{datafuture.code_bill}</a></li>
+                              <li><span>Feedback:</span>{datafuture.check_fb}</li>
+                                <li><span>Ghi chú hóa đơn:</span>{datafuture.note_bill}</li>
                             </ul>
                           </div>
                         </div>
@@ -283,7 +272,7 @@ const ListBooking = () => {
                    ) : (<>Chưa có lịch đặt cho những ngày tới</>)
                 }
             {
-                  historyBook.today && historyBook.today.length > 0 ? (
+                  historyBook.future && historyBook.future.length > 0 ? (
                     <div className='container'>
                     <div className='row'>
                     <div className='col-lg-6 col-md-6 col-sm-12 col-12 mt-3 show-left' style={{paddingLeft: "10px"}}>
@@ -293,9 +282,9 @@ const ListBooking = () => {
                      <nav aria-label="Page navigation example">
                      <Pagination
                      onChange={(value) => setPagefuture(value)}
-                     pageSize={pagefuture}
+                     pageSize={postPagefuture}
                      total={totaltomorow}
-                     current={page}
+                     current={pagefuture}
                      />
                      </nav>
                    </div>
@@ -303,15 +292,11 @@ const ListBooking = () => {
                      </div>
                     ) : ('')
                 }
-
-             
             </TabPane>
             </Tabs>
           </div>
         </div>
       </div>
-
-    </div>
   );
 };
 
