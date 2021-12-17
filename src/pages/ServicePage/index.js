@@ -18,7 +18,7 @@ const ServicePage = () => {
       <div>
         <section className="breadcrumb-area bread-bg">
           <div className="breadcrumb-wrap padding-right-100px padding-left-100px">
-            <div className="container">
+            <div className="container-fluid">
               <div className="row align-items-center">
                 <div className="col-lg-6">
                   <div className="breadcrumb-content">

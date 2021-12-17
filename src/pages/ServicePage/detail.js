@@ -53,7 +53,7 @@ const ServiceDetail = () => {
         </div>
       </section>
       <section className="booking-area padding-top-100px padding-bottom-70px">
-        <div className="container">
+        <div className="container-fluid">
           <div className="row">
             <div className="col-lg-12">
               <div className="form-box">

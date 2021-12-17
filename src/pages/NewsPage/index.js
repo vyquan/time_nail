@@ -17,8 +17,8 @@ const NewsPage = () => {
   return (
     <>
       <section className="breadcrumb-area bread-bg-9">
-        <div className="breadcrumb-wrap">
-          <div className="container">
+        <div className="breadcrumb-wrap padding-right-100px padding-left-100px">
+          <div className="container-fluid">
             <div className="row align-items-center">
               <div className="col-lg-6">
                 <div className="breadcrumb-content">

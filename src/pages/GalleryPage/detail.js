@@ -6,8 +6,8 @@ const GalleryDetail = () => {
   return (
     <div>
       <section className="breadcrumb-area bread-bg-10">
-        <div className="breadcrumb-wrap">
-          <div className="container">
+        <div className="breadcrumb-wrap padding-right-100px padding-left-100px">
+          <div className="container-fluid">
             <div className="row">
               <div className="col-lg-12">
                 <div className="breadcrumb-content text-center">

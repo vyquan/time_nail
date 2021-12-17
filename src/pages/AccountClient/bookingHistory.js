@@ -83,9 +83,9 @@ const BookingHistory = React.memo(() => {
                 </thead>
                 <tbody>
                   {curentPosts &&
-                    curentPosts.map((item) => (
+                    curentPosts.map((item, index) => (
                       <tr key={item.id}>
-                        <td>{item.id}</td>
+                        <td>{index+1}</td>
                         <td>{item.date_work}</td>
                         <td>{item.time_work}</td>
                         <td>{item.phone}</td>
