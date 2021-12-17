@@ -8,3 +8,12 @@ export const getStaff = () => async (dispatch) => {
     console.log(error);
   }
 };
+export const checkUnavailable = (checkUnavailable, setTimeUnavailable) => async (dispatch) => {
+  try {
+    const { data } = await StaffAPI.checkUnavailable(checkUnavailable);
+    dispatch({ type: 'CHECK_UNAVAILABLE', payload: data });
+    setTimeUnavailable(data);
+  } catch (error) {
+    console.log(error);
+  }
+};

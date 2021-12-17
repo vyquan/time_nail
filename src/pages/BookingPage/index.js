@@ -4,7 +4,7 @@ import Slider from 'react-slick';
 import { getAllService } from '../../redux/actions/allService';
 import { Discount } from '../../redux/actions/discount';
 import { getCombo } from '../../redux/actions/combo';
-import { getStaff } from '../../redux/actions/staff';
+import { checkUnavailable, getStaff } from '../../redux/actions/staff';
 import { Button, Col, Collapse, DatePicker, Divider, Form, Input, Modal, Radio, Row, Select, Space, Spin, TimePicker } from 'antd';
 import { CheckCircleTwoTone, CaretRightOutlined, UserOutlined } from '@ant-design/icons';
 import { settings, time } from './constant';
@@ -26,9 +26,7 @@ const BookingPage = () => {
   const [guest, setGuest] = useState(1);
   const [loading, setLoading] = useState(false);
   const allService = useSelector((state) => state.services.services);
-
   const combos = useSelector((state) => state.combos.combos);
-
   const staff = useSelector((state) => state.staff.staff);
   const [errorhandle, setErrorhandle] = useState({
     error: false,
@@ -50,15 +48,23 @@ const BookingPage = () => {
     dispatch(getAllService());
     dispatch(getCombo());
     dispatch(getStaff());
+    dispatch(checkUnavailable());
     //eslint-disable-next-line
   }, []);
-  const timeDisabled = [0, 1, 2, 3, 4, 5, 6, 7, 21, 22, 23]
+  // const timeDisabled = [0, 1, 2, 3, 4, 5, 6, 7, 21, 22, 23]
   //Handle Check Staff
   const idStaffDefault = 182;
   const [checked1, setChecked1] = useState(idStaffDefault);
   const [checked2, setChecked2] = useState(idStaffDefault);
   const [checked3, setChecked3] = useState(idStaffDefault);
 
+  const [timeUnavailable, setTimeUnavailable] = useState({});
+  const arrUnavailable = Object.values(timeUnavailable);
+
+ const handleCheckUnavailable = ()=> {
+   dispatch(checkUnavailable({date:'2021-11-28', time:'11:40' }, setTimeUnavailable))
+ }
+  
   //handle payment
   const [paymentServiceG1, setPaymentServiceG1] = useState([]);
   const [paymentServiceG2, setPaymentServiceG2] = useState([]);
@@ -168,14 +174,13 @@ const BookingPage = () => {
   const totalPayment = totalPaymentGuest1 + totalPaymentGuest2 + totalPaymentGuest3;
 
   //handle discount
-  const [data, setData] = useState([]);
+  const [dataDiscount, setDataDiscount] = useState([]);
   const [quoteIndex] = useState(0);
-  const code_discount = data[quoteIndex] ? data[quoteIndex].code_discount : null;
-  const percent = data[quoteIndex] ? data[quoteIndex].percent : null;
-
+  const code_discount = dataDiscount[quoteIndex] ? dataDiscount[quoteIndex].code_discount : null;
+  const percent = dataDiscount[quoteIndex] ? dataDiscount[quoteIndex].percent : null;
   const handleVoucher = () => {
     // setLoading(true);
-    dispatch(Discount({ code_discount: form.getFieldValue('code_discount') }, setErrorhandle, setData));
+    dispatch(Discount({ code_discount: form.getFieldValue('code_discount') }, setErrorhandle, setDataDiscount));
   };
 
   const discount = percent / 100;
@@ -190,7 +195,7 @@ const BookingPage = () => {
       },
     ],
   };
-  console.log(checked1, checked2);
+
   const onFinish = (data) => {
     const dataSubmit = {
       user_id: dataUser.id,
@@ -293,6 +298,7 @@ const BookingPage = () => {
                             rules={[{ required: true, message: 'Vui lòng nhập ngày đặt.' }]}
                           >
                             <DatePicker
+                              onChange={handleCheckUnavailable}
                               size="large"
                               placeholder="dd/mm/yyyy"
                               disabledDate={(current) => {
@@ -310,9 +316,10 @@ const BookingPage = () => {
                             name="time"
                             label={<label className="label-text w-100">Chọn khung giờ</label>}
                             rules={[{ required: true, message: 'Vui lòng nhập giờ  đặt.' }]}
+                            
                           >
-                            <TimePicker className="w-100" size="large" format="HH:mm" disabledHours={() => timeDisabled} minuteStep={15} showNow={false} use12Hours={false}/>
-                            {/* <Select size="large" placeholder="Chọn giờ" className="w-100" options={time} /> */}
+                            {/* <TimePicker className="w-100" size="large" format="HH:mm" disabledHours={() => timeDisabled} minuteStep={15} showNow={false} use12Hours={false}/> */}
+                            <Select onChange={handleCheckUnavailable} size="large" placeholder="Chọn giờ" className="w-100" options={time} />
                           </Form.Item>
                         </div>
                         <Divider />
@@ -355,7 +362,7 @@ const BookingPage = () => {
                                     key={index}
                                     className="staff-content d-flex justify-content-center"
                                     onClick={() =>
-                                      item.id !== checked2 && item.id !== checked3 || item.id === idStaffDefault
+                                      (item.id !== checked2 && item.id !== checked3 && arrUnavailable.indexOf(item.id) === -1) || item.id === idStaffDefault 
                                         ? setChecked1(item.id)
                                         : setShowModalStaff(true)
                                     }
@@ -473,7 +480,7 @@ const BookingPage = () => {
                                     key={index}
                                     className="staff-content d-flex justify-content-center"
                                     onClick={() =>
-                                      item.id !== checked1 && item.id !== checked3 || item.id === idStaffDefault
+                                      (item.id !== checked1 && item.id !== checked3 && arrUnavailable.indexOf(item.id) === -1) || item.id === idStaffDefault
                                         ? setChecked2(item.id)
                                         : setShowModalStaff(true)
                                     }
@@ -515,7 +522,7 @@ const BookingPage = () => {
                                         <span className="w-lg">{item.name_service}</span>
                                         <span className="w-sm">{item.total_time_work} phút</span>
                                         <span className="w-sm">
-                                          {item.price?.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}{' '}
+                                          {item.price?.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
                                         </span>
                                       </div>
                                     </Option>
@@ -561,13 +568,13 @@ const BookingPage = () => {
                           </Form.Item>
                           <div className="float-right">
                             <p>
-                              Tổng giá Khách 2:{' '}
+                              Tổng giá Khách 2:
                               <span className="font-medium float-right">
                                 {totalPaymentGuest2?.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
                               </span>
                             </p>
                             <p>
-                              Thời gian ước tính:{' '}
+                              Thời gian ước tính:
                               <span className="font-medium float-right">{convertMinsToHrsMins(totalTimeGuest2)}</span>
                             </p>
                           </div>
@@ -597,7 +604,7 @@ const BookingPage = () => {
                                     key={index}
                                     className="staff-content d-flex justify-content-center "
                                     onClick={() =>
-                                      item.id !== checked1 && item.id !== checked2 || item.id === idStaffDefault
+                                      (item.id !== checked1 && item.id !== checked2 && arrUnavailable.indexOf(item.id) === -1) || item.id === idStaffDefault
                                         ? setChecked3(item.id)
                                         : setShowModalStaff(true)
                                     }

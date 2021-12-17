@@ -5,5 +5,9 @@ const StaffAPI = {
     const url = `/list-staff`;
     return axiosClient.get(url);
   },
+  checkUnavailable(data){
+    const url = '/unavailable';
+    return axiosClient.post(url,data)
+  }
 };
 export default StaffAPI;
