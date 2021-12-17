@@ -163,10 +163,10 @@ const ListBooking = () => {
                                                 <span>Mã hóa đơn:</span>
                                                 <a href="#">{data.code_bill}</a>
                                               </li>
-                                              <li>
-                                                <span>Feedback:</span>
+                                              {/* <li>
+                                                <span>Đánh giá dịch vụ:</span>
                                                 {data.check_fb}
-                                              </li>
+                                              </li> */}
                                               <li>
                                                 <span>Ghi chú hóa đơn:</span>
                                                 {data.note_bill}

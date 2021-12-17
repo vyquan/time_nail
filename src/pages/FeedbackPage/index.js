@@ -51,7 +51,7 @@ const FeedbackPage = () => {
                   <div className="review-box">
                     <div className="single-content-item padding-top-40px">
                       <div className="comment-forum padding-top-40px">
-                        <Spin spinning={loading} tip="Đang gửi thông tin đặt lịch..." size="large">
+                        <Spin spinning={loading} tip="Đang gửi ..." size="large">
                           <div className="form-box">
                             <div className="form-title-wrap text-center">
                               <h3 className="title">Đánh giá dịch vụ</h3>

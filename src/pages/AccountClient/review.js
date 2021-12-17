@@ -23,8 +23,8 @@ useEffect(() => {
     <div className="col-lg-9">
       <div className="form-box">
         <div className="form-title-wrap">
-          <h3 className="title">Feedback</h3>
-          <p className="font-size-14">Showing {page} - {postPerPage} of {feedback.length} results</p>
+          <h3 className="title">Đánh giá dịch vụ</h3>
+          <p className="font-size-14">Đang xem {page} - {postPerPage} trong {feedback.length} mục</p>
         </div>
          {
            curentPosts.map(item => (

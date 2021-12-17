@@ -62,7 +62,7 @@ const BookingPage = () => {
   const arrUnavailable = Object.values(timeUnavailable);
 
  const handleCheckUnavailable = ()=> {
-   dispatch(checkUnavailable({date:'2021-11-28', time:'11:40' }, setTimeUnavailable))
+   dispatch(checkUnavailable({date:form.getFieldValue('date').format('YYYY-MM-DD'), time:form.getFieldValue }, setTimeUnavailable))
  }
   
   //handle payment

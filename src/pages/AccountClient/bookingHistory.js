@@ -197,7 +197,7 @@ const BookingHistory = React.memo(() => {
             <div className="row">
               <div className="col-lg-6 col-md-6 col-sm-12 col-12 show-left" style={{ paddingLeft: '40px' }}>
                 <p>
-                  Showing {page} to {postPerPage * page} of {HistoryBook.length} entries
+                  Đang xem {page} - {postPerPage * page} trong {HistoryBook.length} mục
                 </p>
               </div>
               <div className="col-lg-6 col-md-6 col-sm-12 col-12 show-right" style={{ paddingRight: '40px' }}>
