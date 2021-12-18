@@ -1,4 +1,4 @@
-import { HISTORY_BOOK_STAFF, HISTORY_BOOK_INFO, HISTORY_BILL_DETAIL } from '../constants/ContansLogin';
+import { HISTORY_BOOK_STAFF, HISTORY_BOOK_INFO, HISTORY_BILL_DETAIL, Cancel_Bill } from '../constants/ContansLogin';
 
 const initialState = {
   listbookHistory: [],
@@ -22,6 +22,11 @@ const hisToryBookReducer = (state = initialState, action) => {
         ...state,
         listbookHistory: action.payload,
       };
+    case Cancel_Bill:
+      return {
+        ...state,
+        listbookHistory: [...state.listbookHistory, action.payload]
+      }  
     default:
       return state;
   }

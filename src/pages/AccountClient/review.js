@@ -31,25 +31,30 @@ const Review = () => {
        }
        feedback_detail()
 },[])
+
   return (
     <div className="col-lg-9">
       <div className="form-box">
         <div className="form-title-wrap">
           <h3 className="title">Đánh giá dịch vụ</h3>
-          <p className="font-size-14">Đang xem {page} - {postPerPage} trong {feedback.length} mục</p>
+          {
+            feedback && feedback.length > 0 ?
+            (<p className="font-size-14">Đang xem {page} - {postPerPage} trong {feedback.length} mục</p>) : ('')
+          }
         </div>
-        {
+        {   
+           feedback && feedback.length > 0 ?
            curentPosts.map(item => (
             <div className="form-content" key={item.id}>
             <div className="comments-list">
               <div className="comment mb-0 pb-0 border-bottom-0">
-                {/* <div className="comment-avatar">
-                  <img className="avatar__img" alt="true" src={.avatar} />
-                </div> */}
+                <div className="comment-avatar">
+                  <img className="avatar__img" alt="true" src={item.avatar} />
+                </div>
                 <div className="comment-body">
                   <div className="meta-data">
-                    <h3 className="comment__author">{item.full_name}</h3>
-                    <div className="meta-data-inner d-flex">
+                    <h3 className="comment__author">{item.user.full_name}</h3>
+                    <div className="meta-data-inner ">
                       <span className="ratings d-flex align-items-center mr-1">
                        {
                          (() => {
@@ -88,11 +93,14 @@ const Review = () => {
                        }
                        
                       </span>
-                      <p className="comment__date">{item.address}</p>
+                    <div>
+                    <p className="comment__date"><strong>Ngày đánh giá: </strong>{new Date(item.created_at).toLocaleDateString()}</p>
+                    </div>
+                   
                     </div>
                   </div>
-                  <p className="comment-content mb-0">
-                   {item.comment}
+                  <p className="comment__date ">
+                  <strong>Nội dung: </strong>{item.comment}
                   </p>
                 </div>
               </div>
@@ -100,18 +108,25 @@ const Review = () => {
             </div>
             {/* end comments-list */}
           </div>  
-           ))
+           )) : (  <div className='container'>
+            Bạn chưa có phản hồi nào về chúng tôi
+          </div>)
          }
      
             <div className='container'>
             <nav aria-label="Page navigation example">
-            <Pagination
-            onChange={(value) => setPage(value)}
-            pageSize={postPerPage}
-            total={feedback.length}
-            current={page}
-            style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
-            />
+           {
+             feedback && feedback.length > 0 ?
+             (
+              <Pagination
+              onChange={(value) => setPage(value)}
+              pageSize={postPerPage}
+              total={feedback.length}
+              current={page}
+              style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
+              />
+             ) : ('')
+           }
             </nav>
             </div>
       </div>

@@ -44,3 +44,6 @@ export const NOTIFICATION_ONE = "NOTIFICATION_ONE";
 // Notidication All
 export const NOTIFICATION_ALL = "NOTIFICATION_ALL";
 
+// Cancel Bill
+export const Cancel_Bill = "Cancel_Bill";
+

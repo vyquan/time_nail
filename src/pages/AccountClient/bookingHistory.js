@@ -2,29 +2,26 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import historyBookAPI from '../../api/historyBook';
-import { historyBillDetail, historyBookInfo } from '../../redux/actions/historyBook';
-import { Button, Modal, Pagination } from 'antd';
+import { historyBillDetail, historyBookInfo, cancelBill } from '../../redux/actions/historyBook';
+import {  Modal, Pagination } from 'antd';
 import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../helpers/app.routes';
 
 const BookingHistory = React.memo(() => {
-  const [HistoryBook, setHistoryBook] = useState([]);
- 
-
-  const [isModalVisible, setIsModalVisible] = useState(false);
+const [HistoryBook, setHistoryBook] = useState([]);
+const [isModalVisible, setIsModalVisible] = useState(false);
   // panigation
-  const [total, setTotal] = useState('');
-  const [page, setPage] = useState(1);
-  const [postPerPage] = useState(5);
-  const dispatch = useDispatch();
-  const { id } = useParams();
+const [total, setTotal] = useState('');
+const [page, setPage] = useState(1);
+const [postPerPage] = useState(5);
+const dispatch = useDispatch();
+const { id } = useParams();
   useEffect(() => {
     const setHistoryss = async () => {
       try {
         const { data } = await historyBookAPI.getHistoryMember(id);
         setHistoryBook(data);
         setTotal(data.length);
-
         dispatch(historyBookInfo(id));
       } catch (error) {
         console.log(error);
@@ -51,34 +48,10 @@ const BookingHistory = React.memo(() => {
   const curentPosts = HistoryBook?.slice(firstPageIndex, lastPageIndex);
     
 
-     const {bill} = useSelector(state => state.listbookHistory.billDetail)
-    //  console.log(bill.check_fb)
-    // const dtass = Array.from(billDetail)
-    //  console.log(dtass.nguoi1.service.map(item => {
-    //    return (
-    //       <div key={item.id}>
-    //         <h3>{item.combo.name_combo}</h3>
-    //       </div>
-    //    )
-    //  }))
-   //  console.log(billDetail.bill.check_fb)
-      //  const datasss = Object.assign(billDetail)
-        // console.log( datasss.bill.map(item => {
-        //   return (
-        //     <div key={item.id}>
-        //          {item.total_bill}
-        //     </div>
-        //   )
-        // }))
+     const dataBill = useSelector(state => state.listbookHistory.billDetail)
       const showDetailBill = async (item) => {
           dispatch(historyBillDetail(item))
       }
-   
-     
-      // console.log(bookDetail.bill.code_bill)
- 
-  
-
   return (
     <div className="col-lg-9">
       <div className="form-box">
@@ -135,6 +108,17 @@ const BookingHistory = React.memo(() => {
                           ) : (
                             ''
                           )}
+                          {
+                            item.status_bill === 1 ? 
+                            (
+                              <div
+                                onClick={() => dispatch(cancelBill(item.id))}
+                              style={{ textDecoration: 'underline', cursor: 'pointer'}}
+                            >
+                              Hủy lịch đặt
+                            </div>
+                            ) : ('')
+                          }
                         </td>
                         <td>
                           {(() => {
@@ -151,7 +135,7 @@ const BookingHistory = React.memo(() => {
                             }
                           })()}
                         </td>
-                        <td onClick={() =>   showDetailBill(item.id)}>
+                        <td onClick={() => showDetailBill(item.id)}>
                           <div className="table-contents">
                             <a href="#/" onClick={showModal}>
                               <i className="la la-eye" />
@@ -165,52 +149,185 @@ const BookingHistory = React.memo(() => {
                             width={800}
                             footer={false}
                           >
-                            <div className="row">
-                              <div className="col-lg-12">
-                                <div className="card-item user-card card-item-list mt-4 mb-0">
+                          
+                                <div className="card-item user-card card-item-list mt-2 mb-0">
                                   <div className="card-body">
-                                    <h3 className="card-title">Chi tiết </h3>
-                                    <div className="d-flex justify-content-between pt-3">
-                                      {/* {
-                                        billDetail.bill &&
-                                        billDetail.bill.map(item => (
-                                        
-                                            <ul className="list-items list-items-2 flex-grow-1" key={item.id}>
-                                            <li>
-                                              <span>Giá:</span>
-                                              {item.total_bill?.toLocaleString('it-IT', {
-                                                style: 'currency',
-                                                currency: 'VND',
-                                              })}
-                                            </li>
-                                            <li>
-                                              <span>Mã giảm giá:</span>
-                                              {item.code_discount}
-                                            </li>
-                                            <li>
-                                              <span>Mã hóa đơn:</span>
-                                              {item.code_bill}
-                                            </li>
-                                            <li>
-                                              <span>Feedback:</span>
-                                              {item.check_fb}
-                                            </li>
-                                            <li>
-                                              <span>Ghi chú hóa đơn:</span>
-                                              {item.note_bill}
-                                            </li>
-                                          </ul>
-                                        
-                                        ))
-                                      } */}
-                                      
+                                                          
+                                    <ul className="list-items list-items-2 flex-grow-1" key={item.id}>
+                                        <li>
+                                          <span><strong>Trạng thái bill:</strong></span>
+                                          {
+                                            (() => {
+                                              if(dataBill.bill ? dataBill.bill.status_bill === 1 : '' ) {
+                                                return <span className='ml-2'>Chờ xác nhận</span>;
+                                              }
+                                              else if(dataBill.bill ? dataBill.bill.status_bill === 2 : '') {
+                                                return <span className='ml-2'>Xác nhận thành công</span>;
+                                              }
+                                              else if(dataBill.bill ? dataBill.bill.status_bill === 3 : '') {
+                                                return <span className='ml-2'>Đang làm</span>;
+                                              }
+                                              else if(dataBill.bill ? dataBill.bill.status_bill === 4 : '') {
+                                                return <span className='ml-2'>Hoàn thành</span>;
+                                              }
+                                              else if(dataBill.bill ? dataBill.bill.status_bill === 5 : '') {
+                                                return <span className='ml-2'>Hủy</span>;
+                                              }
+                                            })()
+                                          }
+                                        </li>
+                                        </ul>
+                                       <div className='person1'>
+                                       <h3 className='card-title'>Khách 1</h3>
+                                              {
+                                               (() => {
+                                                 if(dataBill.nguoi1  && dataBill.nguoi1.staff) {
+                                                   return <div className='d-flex justify-content-between '>
+                                                     <div>
+                                                      <h6 className='ml-2'><strong>Combo:</strong></h6>
+                                                       {
+                                                         dataBill.nguoi1.combo === null ? 
+                                                         ('')
+                                                         :
+                                                       dataBill.nguoi1.combo.map(item => (
+                                                        <div key={item.id} className='ml-2'>
+                                                        <span>{ item.name_combo}.</span>
+                                                       </div>
+                                                       )) 
+                                                     }
+                                                     </div>
+                                            
+                                                    <div>
+                                                    <h6 className='ml-2'><strong>Dịch vụ:</strong></h6>
+                                                      {
+                                                        dataBill.nguoi1.service === null ? 
+                                                        ('')
+                                                        :
+                                                      dataBill.nguoi1.service.map(item => (
+                                                       <div key={item.id} className='ml-2'>
+                                                       <span>{ item.name_service}.</span>
+                                                      </div>
+                                                      )) 
+                                                    }
+                                                    </div>
+                                                    
+                                                      
+                                                    <div>
+                                                    <h6 className='ml-2'><strong>Nhân viên:</strong></h6>
+                                                       <div className='ml-2'>
+                                                       <p>{ dataBill.nguoi1.staff.full_name}.</p>
+                                                      </div>
+                                                    </div>
+                                                   </div>
+                                                 }
 
-                                    </div>
+                                               })()
+                                            }    
+                                       </div>
+                                       {
+                                         dataBill.nguoi2  === null  ? ('') 
+                                         :
+                                          (
+                                            <div className='person2 mt-2'>         
+                                          <h3 className='card-title'>Khách 2</h3>
+                                        
+                                              {
+                                               (() => {
+                                                 if(dataBill.nguoi2  && dataBill.nguoi2.staff ) {
+                                                   return <div className='d-flex justify-content-between  '>
+                                                     <div>
+                                                      <h6 className='ml-2'><strong>Combo:</strong></h6>
+                                                       {
+                                                      dataBill.nguoi2.combo === null ? ('')
+                                                      :
+                                                       dataBill.nguoi2.combo.map(item => (
+                                                        <div key={item.id} className='ml-2'>
+                                                        <span>{ item.name_combo}.</span>
+                                                       </div>
+                                                       )) 
+                                                     }
+                                                     </div>
+                                                   
+                                                     <div>
+                                                     <h6 className='ml-2'><strong>Dịch vụ:</strong></h6>
+                                                      { 
+                                                      dataBill.nguoi2.service === null ? ('')
+                                                      :
+                                                      dataBill.nguoi2.service.map(item => (
+                                                       <div key={item.id} className='ml-2'>
+                                                       <span>{ item.name_service}.</span>
+                                                      </div>
+                                                      )) 
+                                                    }
+                                                     </div>
+                                                    
+                                                      
+                                                    <div>
+                                                    <h6 className='ml-2'><strong>Nhân viên:</strong></h6>
+                                                       <div className='ml-2'>
+                                                       <p>{ dataBill.nguoi1.staff.full_name}.</p>
+                                                      </div>
+                                                    </div>
+                                                   </div>
+                                                 }
+
+                                               })()
+                                            }    
+                                       </div>
+                                          )
+                                       }
+                                         {
+                                         dataBill.nguoi3 === null ? ('') 
+                                         :
+                                          (
+                                            <div className='person3 mt-2'>
+                                            <h3 className='card-title'>Khách 3</h3>
+                                                   {
+                                                    (() => {
+                                                      if(dataBill.nguoi3   && dataBill.nguoi3.staff) {
+                                                        return <div className='d-flex justify-content-between  '>
+                                                          <div>
+                                                           <h6 className='ml-2'><strong>Combo:</strong></h6>
+                                                            {
+                                                              dataBill.nguoi3.combo === null ?
+                                                              ('')
+                                                              :
+                                                            dataBill.nguoi3.combo.map(item => (
+                                                             <div key={item.id} className='ml-2'>
+                                                             <span>{ item.name_combo}.</span>
+                                                            </div>
+                                                            ))
+                                                          }
+                                                          </div>
+                                                          <div>
+                                                          <h6 className='ml-2'><strong>Dịch vụ:</strong></h6>
+                                                           {
+                                                             dataBill.nguoi3.service === null ?('')
+                                                             :
+                                                           dataBill.nguoi3.service.map(item => (
+                                                            <div key={item.id} className='ml-2'>
+                                                            <span>{ item.name_service}.</span>
+                                                           </div>
+                                                           ))
+                                                         }
+                                                          </div>
+                                                           
+                                                         <div>
+                                                         <h6 className='ml-2'><strong>Nhân viên:</strong></h6>
+                                                            <div className='ml-2'>
+                                                            <p>{ dataBill.nguoi3.staff.full_name}.</p>
+                                                           </div>
+                                                         </div>
+                                                        </div>
+                                                      }
+     
+                                                    })()
+                                                 }    
+                                            </div>    
+                                          )
+                                       }
                                   </div>
-                                </div>
-                                {/* end card-item */}
-                              </div>
-                              {/* end col-lg-12 */}
+                            
                             </div>
                           </Modal>
                         </td>

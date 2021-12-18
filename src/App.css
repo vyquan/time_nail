@@ -1735,7 +1735,8 @@ body {
 }
 .list-items-2 li span {
   display: inline-block;
-  width: 150px;
+  /* width: 150px; */
+  
   color: #0d233e;
   font-weight: 500;
 }
@@ -2937,7 +2938,7 @@ body {
   outline: 0;
 }
 .form-title-wrap {
-  padding: 45px;
+  padding: 28px;
   border-bottom: 1px solid rgba(128, 137, 150, 0.1);
 }
 .form-content {

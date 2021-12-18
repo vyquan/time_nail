@@ -1,5 +1,5 @@
 import historyBookAPI from '../../api/historyBook';
-import { HISTORY_BOOK_STAFF, HISTORY_BOOK_INFO, HISTORY_BILL_DETAIL } from '../constants/ContansLogin';
+import { HISTORY_BOOK_STAFF, HISTORY_BOOK_INFO, HISTORY_BILL_DETAIL , Cancel_Bill } from '../constants/ContansLogin';
 
 export const historyBookInfo = (id) => async (dispatch) => {
   try {
@@ -39,3 +39,16 @@ export const historyBookStaff = (id) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const cancelBill = (id) => async (dispatch) => {
+  try {
+    const {data} = await historyBookAPI.CancelBill(id);
+    console.log(data);
+    dispatch({
+      type: Cancel_Bill,
+      payload: data
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}
