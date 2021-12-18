@@ -81,7 +81,7 @@ const CarouseService = () => {
                     </div>
                     <div className="card-body text-center">
                       <h3 className="card-title">
-                        <Link to={`/cate-service/${item.id}`}>{item.name_cate_service}</Link>
+                        <Link to={`/services/${item.id}`}>{item.name_cate_service}</Link>
                       </h3>
                       <div className="card-rating">
                         <span className="rating__text">{item.note}</span>

@@ -3,7 +3,7 @@ import serviceReducer from './service';
 import comboReducer from './combo';
 import settingReducer from './setting';
 import contactReducer from './contact';
-import gallerytReducer from './gallery';
+import galleryReducer from './gallery';
 import authReducer from './auth';
 import registerReducer from './authRegister';
 import newsReducer from './news';
@@ -19,7 +19,7 @@ const rootReducer = combineReducers({
     combos: comboReducer,
     setting: settingReducer,
     contact: contactReducer,
-    gallery: gallerytReducer,
+    gallery: galleryReducer,
     login: authReducer,
     register: registerReducer,
     news: newsReducer,

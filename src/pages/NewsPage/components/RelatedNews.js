@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getNews } from '../../../redux/actions/news';
 import { Link } from 'react-router-dom';
 
-const RelatedNews = () => {
+const RelatedNews = ({id}) => {
   const news = useSelector((state) => state.news.news);
   let data = Array.from(news);
   const dispatch = useDispatch();
@@ -13,13 +13,19 @@ const RelatedNews = () => {
   }, []);
   return (
     <>
-      <h2 className="title">Bài viết liên quan</h2>
-      <div className="row pt-4">
+      <div className="row">
+            <div className="col-lg-12">
+              <div className="section-heading text-center">
+                <h2 className="sec__title">TIN TỨC KHÁC</h2>
+              </div>
+            </div>
+          </div>
+      <div className="row padding-top-60px">
         {data.slice(0,3).map((item, index) => (
           <div className="col-lg-4 responsive-column" key={index}>
             <div className="card-item blog-card">
               <div className="card-img">
-                <img src="/assets/images/blog-img.jpg" alt="blog-img" />
+                <img src={item.image} alt="blog-img" />
               </div>
               <div className="card-footer d-flex align-items-center justify-content-center text-center">
                 <div className="post-share">

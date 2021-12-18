@@ -5,9 +5,9 @@ import { getAllService } from '../../redux/actions/allService';
 import { Discount } from '../../redux/actions/discount';
 import { getCombo } from '../../redux/actions/combo';
 import { checkUnavailable, getStaff } from '../../redux/actions/staff';
-import { Button, Col, Collapse, DatePicker, Divider, Form, Input, Modal, Radio, Row, Select, Spin, } from 'antd';
+import { Button, Col, Collapse, DatePicker, Divider, Form, Input, Modal, Radio, Row, Select, Spin } from 'antd';
 import { CheckCircleTwoTone, CaretRightOutlined, UserOutlined } from '@ant-design/icons';
-import { settings, time } from './constant';
+import { time } from './constant';
 import { isAuthenTicate } from '../Auth';
 import { RegexConstants } from '../../helpers/regex';
 import { AppRoutes } from '../../helpers/app.routes';
@@ -51,20 +51,33 @@ const BookingPage = () => {
     dispatch(checkUnavailable());
     //eslint-disable-next-line
   }, []);
-  // const timeDisabled = [0, 1, 2, 3, 4, 5, 6, 7, 21, 22, 23]
+
   //Handle Check Staff
   const idStaffDefault = 182;
   const [checked1, setChecked1] = useState(idStaffDefault);
   const [checked2, setChecked2] = useState(idStaffDefault);
   const [checked3, setChecked3] = useState(idStaffDefault);
-
   const [timeUnavailable, setTimeUnavailable] = useState({});
   const arrUnavailable = Object.values(timeUnavailable);
+  const [dateWork, setDateWork] = useState();
 
- const handleCheckUnavailable = ()=> {
-   dispatch(checkUnavailable({date:form.getFieldValue('date').format('YYYY-MM-DD'), time:form.getFieldValue }, setTimeUnavailable))
- }
-  
+  const handleCheckUnavailable = () => {
+    if (form.getFieldValue('date')) {
+      setDateWork(form.getFieldValue('date'));
+      dispatch(
+        checkUnavailable(
+          { date: form.getFieldValue('date').format('YYYY-MM-DD'), time: form.getFieldValue('time') },
+          setTimeUnavailable,
+        ),
+      );
+    } else {
+      return;
+    }
+  };
+  const today = new Date();
+  const currentTime = today.getHours() + ':' + today.getMinutes();
+  const currentDay = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
   //handle payment
   const [paymentServiceG1, setPaymentServiceG1] = useState([]);
   const [paymentServiceG2, setPaymentServiceG2] = useState([]);
@@ -195,10 +208,59 @@ const BookingPage = () => {
       },
     ],
   };
-
+  const settings = {
+    dots: false,
+    arrows: true,
+    infinite: true,
+    slidesToScroll: 5,
+    slidesToShow: 5,
+    autoplay: false,
+    cssEase: 'linear',
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          infinite: true,
+          dots: true,
+          arrows: false,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+          arrows: false,
+        },
+      },
+      {
+        breakpoint: 320,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          infinite: true,
+          dots: true,
+          arrows: false,
+        },
+      },
+    ],
+  };
   const onFinish = (data) => {
     const dataSubmit = {
-      user_id: dataUser.id,
+      user_id: dataUser.id || dataUser.user.id,
       name: data.name,
       phone: data.phone,
       date_work: data.date.format('YYYY-MM-DD'),
@@ -257,7 +319,7 @@ const BookingPage = () => {
                     </div>
                     <div className="form-content contact-form-action">
                       <Form onFinish={onFinish} form={form} requiredMark={false} className="row" layout="vertical">
-                        <div className="col-lg-6 responsive-column">
+                        <div className="col-lg-6 ">
                           <Form.Item
                             name="name"
                             label={<label className="label-text">Họ và tên</label>}
@@ -271,7 +333,7 @@ const BookingPage = () => {
                           </Form.Item>
                         </div>
 
-                        <div className="col-lg-6 responsive-column">
+                        <div className="col-lg-6 ">
                           <Form.Item
                             name="phone"
                             label={<label className="label-text">Số điện thoại</label>}
@@ -289,7 +351,7 @@ const BookingPage = () => {
                           </Form.Item>
                         </div>
 
-                        <div className="col-lg-6 responsive-column">
+                        <div className="col-lg-6 ">
                           <Form.Item
                             name="date"
                             {...config}
@@ -310,19 +372,54 @@ const BookingPage = () => {
                           </Form.Item>
                         </div>
 
-                        <div className="col-lg-6 responsive-column">
+                        <div className="col-lg-6 ">
                           <Form.Item
                             name="time"
                             label={<label className="label-text w-100">Chọn khung giờ</label>}
                             rules={[{ required: true, message: 'Vui lòng nhập giờ  đặt.' }]}
-                            
                           >
-                            {/* <TimePicker className="w-100" size="large" format="HH:mm" disabledHours={() => timeDisabled} minuteStep={15} showNow={false} use12Hours={false}/> */}
-                            <Select onChange={handleCheckUnavailable} size="large" placeholder="Chọn giờ" className="w-100" options={time} />
+                            <Select
+                              onChange={handleCheckUnavailable}
+                              size="large"
+                              placeholder="Chọn giờ"
+                              className="w-100"
+                            >
+                              {time.map((time, i) => {
+                                const str1 = currentTime.split(':');
+                                const str2 = time.value.split(':');
+                                const totalSeconds1 = parseInt(str1[0] * 3600 + str1[1]);
+                                const totalSeconds2 = parseInt(str2[0] * 3600 + str2[1]);
+                                // compare them
+
+                                if (form.getFieldValue('date')) {
+                                  if (form.getFieldValue('date').format('YYYY-MM-DD') === currentDay) {
+                                    if (totalSeconds1 < totalSeconds2) {
+                                      return (
+                                        <Option key={i} value={time.value}>
+                                          {time.label}
+                                        </Option>
+                                      );
+                                    }
+                                  } else {
+                                    return (
+                                      <Option key={i} value={time.value}>
+                                        {time.label}
+                                      </Option>
+                                    );
+                                  }
+                                } else {
+                                  return (
+                                    <Option key={i} value={time.value}>
+                                      {time.label}
+                                    </Option>
+                                  );
+                                }
+                              })}
+                            </Select>
                           </Form.Item>
                         </div>
                         <Divider />
-                        <div className="col-lg-12 mb-2 responsive-column ">
+                        <div className="col-lg-12 mb-2  ">
                           <Form.Item name="total_people" label={<h4 className="label-text mb-2">SỐ KHÁCH</h4>}>
                             <Radio.Group
                               name="total_people"
@@ -340,7 +437,7 @@ const BookingPage = () => {
                           </Form.Item>
                         </div>
 
-                        <div className="col-lg-12 responsive-column section-tab check-mark-tab pb-4">
+                        <div className="col-lg-12  section-tab check-mark-tab pb-4">
                           <h4 className="label-text mb-2 mt-3">KHÁCH 1</h4>
 
                           <Collapse
@@ -359,9 +456,19 @@ const BookingPage = () => {
                                 {staff.map((item, index) => (
                                   <div
                                     key={index}
-                                    className="staff-content d-flex justify-content-center"
+                                    className={`${
+                                      (item.id !== checked2 &&
+                                        item.id !== checked3 &&
+                                        arrUnavailable.indexOf(item.id) === -1) ||
+                                      item.id === idStaffDefault
+                                        ? 'cursor-pointern'
+                                        : 'cursor-not-allowed disabled'
+                                    } staff-content d-flex justify-content-center pt-2 pb-2`}
                                     onClick={() =>
-                                      (item.id !== checked2 && item.id !== checked3 && arrUnavailable.indexOf(item.id) === -1) || item.id === idStaffDefault 
+                                      (item.id !== checked2 &&
+                                        item.id !== checked3 &&
+                                        arrUnavailable.indexOf(item.id) === -1) ||
+                                      item.id === idStaffDefault
                                         ? setChecked1(item.id)
                                         : setShowModalStaff(true)
                                     }
@@ -382,7 +489,7 @@ const BookingPage = () => {
                             </Panel>
                           </Collapse>
                         </div>
-                        <div className="col-lg-12 responsive-column">
+                        <div className="col-lg-12 ">
                           <Form.Item name="serviceGuest1" label={<label className="label-text">Các dịch vụ lẻ</label>}>
                             <Select
                               size="large"
@@ -409,7 +516,7 @@ const BookingPage = () => {
                             </Select>
                           </Form.Item>
                         </div>
-                        <div className="col-lg-12 responsive-column">
+                        <div className="col-lg-12 ">
                           <Form.Item
                             name="combosGuest1"
                             label={<label className="label-text">Chọn các gói Combo</label>}
@@ -456,7 +563,7 @@ const BookingPage = () => {
                         </div>
 
                         <div
-                          className="col-lg-12 responsive-column section-tab check-mark-tab pb-4"
+                          className="col-lg-12  section-tab check-mark-tab pb-4"
                           style={{ display: guest === 2 || guest === 3 ? ' block' : 'none' }}
                         >
                           <Divider />
@@ -477,9 +584,12 @@ const BookingPage = () => {
                                 {staff.map((item, index) => (
                                   <div
                                     key={index}
-                                    className="staff-content d-flex justify-content-center"
+                                    className="staff-content d-flex justify-content-center cursor-pointer"
                                     onClick={() =>
-                                      (item.id !== checked1 && item.id !== checked3 && arrUnavailable.indexOf(item.id) === -1) || item.id === idStaffDefault
+                                      (item.id !== checked1 &&
+                                        item.id !== checked3 &&
+                                        arrUnavailable.indexOf(item.id) === -1) ||
+                                      item.id === idStaffDefault
                                         ? setChecked2(item.id)
                                         : setShowModalStaff(true)
                                     }
@@ -500,10 +610,7 @@ const BookingPage = () => {
                             </Panel>
                           </Collapse>
                         </div>
-                        <div
-                          className="col-lg-12 responsive-column"
-                          style={{ display: guest === 2 || guest === 3 ? ' block' : 'none' }}
-                        >
+                        <div className="col-lg-12 " style={{ display: guest === 2 || guest === 3 ? ' block' : 'none' }}>
                           <Form.Item name="serviceGuest2" label={<label className="label-text">Các dịch vụ lẻ</label>}>
                             <Select
                               size="large"
@@ -530,10 +637,7 @@ const BookingPage = () => {
                             </Select>
                           </Form.Item>
                         </div>
-                        <div
-                          className="col-lg-12 responsive-column"
-                          style={{ display: guest === 2 || guest === 3 ? ' block' : 'none' }}
-                        >
+                        <div className="col-lg-12 " style={{ display: guest === 2 || guest === 3 ? ' block' : 'none' }}>
                           <Form.Item
                             name="combosGuest2"
                             label={<label className="label-text">Chọn các gói Combo</label>}
@@ -580,7 +684,7 @@ const BookingPage = () => {
                         </div>
 
                         <div
-                          className="col-lg-12 responsive-column section-tab check-mark-tab pb-4"
+                          className="col-lg-12  section-tab check-mark-tab pb-4"
                           style={{ display: guest === 3 ? ' block' : 'none' }}
                         >
                           <Divider />
@@ -601,9 +705,12 @@ const BookingPage = () => {
                                 {staff.map((item, index) => (
                                   <div
                                     key={index}
-                                    className="staff-content d-flex justify-content-center "
+                                    className="staff-content d-flex justify-content-center cursor-pointer "
                                     onClick={() =>
-                                      (item.id !== checked1 && item.id !== checked2 && arrUnavailable.indexOf(item.id) === -1) || item.id === idStaffDefault
+                                      (item.id !== checked1 &&
+                                        item.id !== checked2 &&
+                                        arrUnavailable.indexOf(item.id) === -1) ||
+                                      item.id === idStaffDefault
                                         ? setChecked3(item.id)
                                         : setShowModalStaff(true)
                                     }
@@ -624,10 +731,7 @@ const BookingPage = () => {
                             </Panel>
                           </Collapse>
                         </div>
-                        <div
-                          className="col-lg-12 responsive-column"
-                          style={{ display: guest === 3 ? ' block' : 'none' }}
-                        >
+                        <div className="col-lg-12 " style={{ display: guest === 3 ? ' block' : 'none' }}>
                           <Form.Item name="serviceGuest3" label={<label className="label-text">Các dịch vụ lẻ</label>}>
                             <Select
                               size="large"
@@ -654,10 +758,7 @@ const BookingPage = () => {
                             </Select>
                           </Form.Item>
                         </div>
-                        <div
-                          className="col-lg-12 responsive-column"
-                          style={{ display: guest === 3 ? ' block' : 'none' }}
-                        >
+                        <div className="col-lg-12 " style={{ display: guest === 3 ? ' block' : 'none' }}>
                           <Form.Item
                             name="combosGuest3"
                             label={<label className="label-text">Chọn các gói Combo</label>}
@@ -703,7 +804,7 @@ const BookingPage = () => {
                           </div>
                         </div>
 
-                        <div className="col-lg-12 responsive-column">
+                        <div className="col-lg-12 ">
                           <Divider />
                           <Form.Item
                             help={errorhandle.message}
@@ -730,7 +831,7 @@ const BookingPage = () => {
                           </Form.Item>
                         </div>
 
-                        <div className="col-lg-12 responsive-column">
+                        <div className="col-lg-12 ">
                           <Form.Item
                             name="                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    "
                             label={<label className="label-text">Ghi chú</label>}
@@ -805,7 +906,7 @@ const BookingPage = () => {
         centered
         width={350}
       >
-        <h4 className="text-center pt-5">Nhân viên đã được khách khác chọn</h4>
+        <h4 className="text-center pt-5 pb-3">Nhân viên được khách khác chọn</h4>
         <p className="text-center">Nếu bạn muốn chọn cùng 1 nhân viên bạn vui lòng note vào ghi chú </p>
       </Modal>
     </>

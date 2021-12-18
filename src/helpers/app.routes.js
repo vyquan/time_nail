@@ -20,7 +20,7 @@ export const AppRoutes = {
   },
   gallery: {
     list: '/gallery',
-    detail: '/gallerys',
+    detail: '/gallery/:id',
   },
   news: {
     list: '/news',

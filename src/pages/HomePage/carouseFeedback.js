@@ -14,7 +14,7 @@ const CarouseFeedback = () => {
   const settings = {
     dots: true,
     arrows: false,
-    infinite: false,
+    infinite: true,
     speed: 2000,
     slidesToShow: 1,
     slidesToScroll: 1,

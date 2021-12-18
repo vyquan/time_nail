@@ -10211,4 +10211,15 @@ body {
 .disabled {
   background: #ccc;
 }
-
+.cursor-pointer{
+  cursor: pointer;
+}
+.cursor-not-allowed{
+  cursor: not-allowed;
+}
+.disabled {
+  background-color: #e8e8e8;
+  color: #a3a3a3;
+  opacity: 0.4;
+  border-radius: 5px;
+}

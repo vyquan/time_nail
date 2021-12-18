@@ -8,3 +8,11 @@ export const Gallery = () => async (dispatch) => {
     console.log(error);
   }
 };
+export const getIdGallery = (id) => async (dispatch) => {
+  try {
+    const { data } = await GalleryAPI.get(id);
+    dispatch({ type: 'ID-GALLERY', payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -6,7 +6,7 @@ const GalleryAPI = {
     return axiosClient.get(url);
   },
   get(id) {
-    const url = `/gallery/show/${id}`;
+    const url = `/gallery-category/show/${id}`;
     return axiosClient.get(url);
   },
 };

@@ -72,17 +72,17 @@ const NewsPage = () => {
               </div>
             ))}
           </div>
-          <div className="row">
+          {/* <div className="row">
             <div className="col-lg-12">
               <div className="btn-box mt-3 text-center">
                 <button type="button" className="theme-btn">
                   <i className="la la-refresh mr-1" />
                   XEM THÊM
                 </button>
-                {/* <p className="font-size-13 pt-2">Showing 1 - 6 of 24 Cruises</p> */}
+                <p className="font-size-13 pt-2">Showing 1 - 6 of 24 Cruises</p>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
     </>

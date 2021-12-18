@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { getIdNews } from '../../redux/actions/news';
 import NewsAPI from '../../api/newsAPI';
 import { AppRoutes } from '../../helpers/app.routes';
-import TagCloud from './components/TagCloud';
+// import TagCloud from './components/TagCloud';
 import RelatedNews from './components/RelatedNews';
 import Moment from 'react-moment';
 
@@ -58,7 +58,7 @@ const NewsDetail = () => {
       <section className="card-area section--padding">
         <div className="container">
           <div className="row">
-            <div className="col-lg-8">
+            <div className="col-lg-12">
               <div className="card-item blog-card blog-card-layout-2 blog-single-card mb-5">
                 <div className="card-body px-0 pb-0">
                   <h1 className="card-titles">{news.title}</h1>
@@ -105,7 +105,7 @@ const NewsDetail = () => {
               <div className="post-author-wrap"></div>
             </div>
 
-            <div className="col-lg-4">
+            {/* <div className="col-lg-4">
               <div className="sidebar mb-0">
                 <div className="sidebar-widget">
                   <div className="tab-content" id="myTabContent">
@@ -198,9 +198,9 @@ const NewsDetail = () => {
                 </div>
                 <TagCloud/>
               </div>
-            </div>
+            </div> */}
           </div>
-          <RelatedNews/>
+          <RelatedNews id={id}/>
         </div>
       </section>
       

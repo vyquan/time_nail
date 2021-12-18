@@ -27,8 +27,8 @@ const ServiceDetail = () => {
   return (
     <div>
       <section className="breadcrumb-area bread-bg-4">
-        <div className="breadcrumb-wrap">
-          <div className="container">
+        <div className="breadcrumb-wrap padding-right-100px padding-left-100px">
+          <div className="container-fluid">
             <div className="row align-items-center">
               <div className="col-lg-6">
                 <div className="breadcrumb-content">
@@ -53,7 +53,7 @@ const ServiceDetail = () => {
         </div>
       </section>
       <section className="booking-area padding-top-100px padding-bottom-70px">
-        <div className="container-fluid">
+        <div className="container">
           <div className="row">
             <div className="col-lg-12">
               <div className="form-box">
