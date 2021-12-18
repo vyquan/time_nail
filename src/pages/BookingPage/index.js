@@ -584,7 +584,14 @@ const BookingPage = () => {
                                 {staff.map((item, index) => (
                                   <div
                                     key={index}
-                                    className="staff-content d-flex justify-content-center cursor-pointer"
+                                    className={`${
+                                      (item.id !== checked1 &&
+                                        item.id !== checked3 &&
+                                        arrUnavailable.indexOf(item.id) === -1) ||
+                                      item.id === idStaffDefault
+                                        ? 'cursor-pointern'
+                                        : 'cursor-not-allowed disabled'
+                                    } staff-content d-flex justify-content-center pt-2 pb-2`}
                                     onClick={() =>
                                       (item.id !== checked1 &&
                                         item.id !== checked3 &&
@@ -705,7 +712,14 @@ const BookingPage = () => {
                                 {staff.map((item, index) => (
                                   <div
                                     key={index}
-                                    className="staff-content d-flex justify-content-center cursor-pointer "
+                                    className={`${
+                                      (item.id !== checked1 &&
+                                        item.id !== checked2 &&
+                                        arrUnavailable.indexOf(item.id) === -1) ||
+                                      item.id === idStaffDefault
+                                        ? 'cursor-pointern'
+                                        : 'cursor-not-allowed disabled'
+                                    } staff-content d-flex justify-content-center pt-2 pb-2`}
                                     onClick={() =>
                                       (item.id !== checked1 &&
                                         item.id !== checked2 &&
