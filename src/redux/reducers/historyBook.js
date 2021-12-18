@@ -10,7 +10,7 @@ const hisToryBookReducer = (state = initialState, action) => {
     case HISTORY_BOOK_INFO:
       return {
         ...state,
-        listbookHistory: action.payload,
+        listbookHistory: [...state.listbookHistory, action.payload]
       };
      case HISTORY_BILL_DETAIL:
        return {
@@ -25,7 +25,7 @@ const hisToryBookReducer = (state = initialState, action) => {
     case Cancel_Bill:
       return {
         ...state,
-        listbookHistory: [...state.listbookHistory, action.payload]
+        listbookHistory: state.listbookHistory.findIndex(item => item.status_bill !== action.payload.status_bill)
       }  
     default:
       return state;

@@ -16,9 +16,9 @@ const Notification = (props) => {
   }, []);
 
   return (
-    <div className="notification-wrap d-flex align-items-center">
+    <div className="notification-wrap d-flex align-items-center" >
       <div className="notification-item mr-2">
-        <div className="dropdown">
+        <div className="dropdown" >
           <Link
             to="#"
             className="dropdown-toggle drop-reveal-toggle-icon"
@@ -26,6 +26,7 @@ const Notification = (props) => {
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false"
+            
           >
             <i className="la la-bell text-black" />
             {data.length > 0 && <span className="noti-count text-black">{data.length}</span>}
@@ -40,7 +41,7 @@ const Notification = (props) => {
                 <h6 className="title">Bạn không có thông báo nào</h6>
               )}
             </div>
-            <div className="list-group drop-reveal-list">
+            <div className="list-group drop-reveal-list" >
               {data &&
                 data.map((item, index) => {
                   return (

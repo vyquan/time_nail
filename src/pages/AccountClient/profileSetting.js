@@ -21,7 +21,9 @@ const ProfileSetting = () => {
     uploads.append('id', data.id);
     uploads.append('full_name', data.full_name);
     uploads.append('email', data.email);
-    uploads.append('avatar', data.avatar[0]);
+    if(data.avatar[0]) {
+      uploads.append('avatar', data.avatar[0]);
+    }
     uploads.append('phone', data.phone);
     uploads.append('address', data.address);
     dispatch(userInfo(uploads));
