@@ -9,17 +9,17 @@ const notifiCationReducer = (state = initialState, action) => {
       case NOTIFICATION:
       return {
             ...state,
-            notifiCation: action.payload
+            notifiCation:  [...action.payload]
       }
       case NOTIFICATION_ONE:
-          return {
+          return { 
               ...state,
-            notifiCation: action.payload
+            notifiCation: [...action.payload]
           }
        case NOTIFICATION_ALL:
          return {
           ...state,
-          notifiCation: action.payload
+          notifiCation: [...action.payload]
          }   
       default:
           return state

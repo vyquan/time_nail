@@ -75,8 +75,8 @@ const CarouseFeedback = () => {
                     <div>
                       <img className="author-img" src={item.avatar} alt="true" />
                       <div className="author-bio text-center">
-                        <h4 className="author__title">{item.user.full_name}</h4>
-                        <span className="author__meta">{item.user.address}</span>
+                        <h4 className="author__title">{item.full_name}</h4>
+                        <span className="author__meta">{item.address}</span>
                       </div>
                     </div>
                   </div>

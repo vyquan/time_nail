@@ -30,7 +30,7 @@ export const AppRoutes = {
     bookingHistory: '/client/booking-history/:id',
     changePassword: '/client/change-password',
     changePasswordClient: '/client/changePasswordClient',
-    review: '/client/review',
+    review: '/client/review/:id',
     profile: '/client/profile',
     // resetPassWordClient: '/reset-password/:token'
   },

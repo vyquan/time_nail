@@ -1,4 +1,4 @@
-import {FEEDBACK, GET_FEEDBACK} from '../constants/ContansLogin';
+import {FEEDBACK, GET_FEEDBACK, GET_FEEDBACK_DETAIL} from '../constants/ContansLogin';
 const initialState = {
     message: "",
     feedback: []
@@ -13,6 +13,10 @@ const FeedbackReducer = (state = initialState, action) => {
        }
       case FEEDBACK:
         return { ...state, message: action.payload};
+      case  GET_FEEDBACK_DETAIL:
+        return {...state,
+          feedback: action.payload
+        }
         default: 
         return state;
     }

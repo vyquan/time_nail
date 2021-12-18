@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import historyBookAPI from '../../api/historyBook';
-import { historyBookInfo } from '../../redux/actions/historyBook';
+import { historyBillDetail, historyBookInfo } from '../../redux/actions/historyBook';
 import { Button, Modal, Pagination } from 'antd';
 import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../helpers/app.routes';
 
 const BookingHistory = React.memo(() => {
   const [HistoryBook, setHistoryBook] = useState([]);
+ 
+
   const [isModalVisible, setIsModalVisible] = useState(false);
   // panigation
   const [total, setTotal] = useState('');
@@ -22,6 +24,7 @@ const BookingHistory = React.memo(() => {
         const { data } = await historyBookAPI.getHistoryMember(id);
         setHistoryBook(data);
         setTotal(data.length);
+
         dispatch(historyBookInfo(id));
       } catch (error) {
         console.log(error);
@@ -46,14 +49,35 @@ const BookingHistory = React.memo(() => {
   const firstPageIndex = (page - 1) * postPerPage;
   const lastPageIndex = firstPageIndex + postPerPage;
   const curentPosts = HistoryBook?.slice(firstPageIndex, lastPageIndex);
-  const [data, setData] = useState([]);
+    
 
-  const openDetails = (id) => (e) => {
-    e.preventDefault();
-    const found = HistoryBook.find((element) => element.id === id);
-    console.log(found);
-    setData(found);
-  };
+     const {bill} = useSelector(state => state.listbookHistory.billDetail)
+    //  console.log(bill.check_fb)
+    // const dtass = Array.from(billDetail)
+    //  console.log(dtass.nguoi1.service.map(item => {
+    //    return (
+    //       <div key={item.id}>
+    //         <h3>{item.combo.name_combo}</h3>
+    //       </div>
+    //    )
+    //  }))
+   //  console.log(billDetail.bill.check_fb)
+      //  const datasss = Object.assign(billDetail)
+        // console.log( datasss.bill.map(item => {
+        //   return (
+        //     <div key={item.id}>
+        //          {item.total_bill}
+        //     </div>
+        //   )
+        // }))
+      const showDetailBill = async (item) => {
+          dispatch(historyBillDetail(item))
+      }
+   
+     
+      // console.log(bookDetail.bill.code_bill)
+ 
+  
 
   return (
     <div className="col-lg-9">
@@ -83,9 +107,9 @@ const BookingHistory = React.memo(() => {
                 </thead>
                 <tbody>
                   {curentPosts &&
-                    curentPosts.map((item) => (
+                    curentPosts.map((item, index) => (
                       <tr key={item.id}>
-                        <td>{item.id}</td>
+                        <td>{index + 1}</td>
                         <td>{item.date_work}</td>
                         <td>{item.time_work}</td>
                         <td>{item.phone}</td>
@@ -127,7 +151,7 @@ const BookingHistory = React.memo(() => {
                             }
                           })()}
                         </td>
-                        <td onClick={openDetails(item.id)}>
+                        <td onClick={() =>   showDetailBill(item.id)}>
                           <div className="table-contents">
                             <a href="#/" onClick={showModal}>
                               <i className="la la-eye" />
@@ -147,31 +171,40 @@ const BookingHistory = React.memo(() => {
                                   <div className="card-body">
                                     <h3 className="card-title">Chi tiết </h3>
                                     <div className="d-flex justify-content-between pt-3">
-                                      <ul className="list-items list-items-2 flex-grow-1">
-                                        <li>
-                                          <span>Giá:</span>
-                                          {data.total_bill?.toLocaleString('it-IT', {
-                                            style: 'currency',
-                                            currency: 'VND',
-                                          })}
-                                        </li>
-                                        <li>
-                                          <span>Mã giảm giá:</span>
-                                          {data.code_discount}
-                                        </li>
-                                        <li>
-                                          <span>Mã hóa đơn:</span>
-                                          {data.code_bill}
-                                        </li>
-                                        <li>
-                                          <span>Feedback:</span>
-                                          {data.check_fb}
-                                        </li>
-                                        <li>
-                                          <span>Ghi chú hóa đơn:</span>
-                                          {data.note_bill}
-                                        </li>
-                                      </ul>
+                                      {/* {
+                                        billDetail.bill &&
+                                        billDetail.bill.map(item => (
+                                        
+                                            <ul className="list-items list-items-2 flex-grow-1" key={item.id}>
+                                            <li>
+                                              <span>Giá:</span>
+                                              {item.total_bill?.toLocaleString('it-IT', {
+                                                style: 'currency',
+                                                currency: 'VND',
+                                              })}
+                                            </li>
+                                            <li>
+                                              <span>Mã giảm giá:</span>
+                                              {item.code_discount}
+                                            </li>
+                                            <li>
+                                              <span>Mã hóa đơn:</span>
+                                              {item.code_bill}
+                                            </li>
+                                            <li>
+                                              <span>Feedback:</span>
+                                              {item.check_fb}
+                                            </li>
+                                            <li>
+                                              <span>Ghi chú hóa đơn:</span>
+                                              {item.note_bill}
+                                            </li>
+                                          </ul>
+                                        
+                                        ))
+                                      } */}
+                                      
+
                                     </div>
                                   </div>
                                 </div>
