@@ -9,6 +9,10 @@ const feedbackAPI = {
     const url = `/feedback`;
     return axiosClient.post(url, feedback);
   },
+  getDetail(id) {
+    const url = `/feedback/show/${id}`;
+    return axiosClient.get(url);
+  }
 };
 
 export default feedbackAPI;

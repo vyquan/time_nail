@@ -1,7 +1,7 @@
 import feedbackAPI from '../../api/feedback';
-import { FEEDBACK, GET_FEEDBACK } from '../constants/ContansLogin';
+import { FEEDBACK, GET_FEEDBACK, GET_FEEDBACK_DETAIL } from '../constants/ContansLogin';
 import { toast } from 'react-toastify';
-
+import { isAuthenTicate } from '../../pages/Auth';
 
 export const feedback = (Feedback) => async (dispatch) => {
   try {
@@ -28,5 +28,19 @@ export const feedback = (Feedback) => async (dispatch) => {
        })
    } catch (error) {
      console.log(error);
+   }
+ }
+
+ //get FeedBack detail
+
+ export const getFeedback_Detail = (id) => async (dispatch) => {
+   try {
+     const {data} = await feedbackAPI.getDetail(id);
+     dispatch({
+       type: GET_FEEDBACK_DETAIL,
+       payload: data
+     })
+   } catch (error) {
+     console.log(error)
    }
  }

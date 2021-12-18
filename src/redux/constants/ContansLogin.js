@@ -29,17 +29,21 @@ export const CHANGE_INFOR_STAFF_ERROR = "CHANGE_INFOR_STAFF_ERROR";
 // feedback
 export const FEEDBACK = "FEEDBACK";
 export const GET_FEEDBACK = "GET_FEEDBACK";
+export const GET_FEEDBACK_DETAIL = "GET_FEEDBACK_DETAIL";
 export const DISCOUNT = "ADD_DISCOUNT";
 export const BOOKING = "ADD_BOOKING";
 // historyBookStaff
 export const HISTORY_BOOK_STAFF = "HISTORY_BOOK_STAFF";
 // historyInfo
 export const HISTORY_BOOK_INFO = "HISTORY_BOOK_INFO";
-
+export const HISTORY_BILL_DETAIL = "HISTORY_BILL_DETAIL";
 // Notification
 export const NOTIFICATION = "NOTIFICATION";
 // Notification one
 export const NOTIFICATION_ONE = "NOTIFICATION_ONE";
 // Notidication All
 export const NOTIFICATION_ALL = "NOTIFICATION_ALL";
+
+// Cancel Bill
+export const Cancel_Bill = "Cancel_Bill";
 

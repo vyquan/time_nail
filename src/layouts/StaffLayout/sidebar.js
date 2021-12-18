@@ -18,7 +18,7 @@ const SidebarStaff = () => {
               <img src={data.user.avatar} alt="true" />
             </div>
             <div className="author-bio">
-              <h4 className="author__title">{data.user.full_name}</h4>
+              <h4 className="author__title">{ data.user.full_name}</h4>
               <span className="author__meta">Nhân viên</span>
             </div>
           </div>

@@ -45,7 +45,7 @@ const Notification = (props) => {
                 data.map((item, index) => {
                   return (
                     <Link
-                      to={`/client/booking-history/${isAuthenTicate.user ? isAuthenTicate.user.id : isAuthenTicate.id}`}
+                      to={`/client/booking-history/${isAuthenTicate().user ? isAuthenTicate().user.id : isAuthenTicate().id}`}
                       className="list-group-item list-group-item-action"
                       key={index}
                     >
@@ -54,8 +54,8 @@ const Notification = (props) => {
                         onClick={() => dispatch(notifiCateOne(item.id))}
                       >
                         <div className="msg-content w-100">
-                          <h3 className="title pb-1">{item.data.name}</h3>
-                          <p className="msg-text">{item.data.date}</p>
+                          <h3 className="title pb-1">{item.data.title}</h3>
+                          <p className="msg-text">{item.data.message}</p>
                         </div>
                       </div>
                       {/* end msg-body */}

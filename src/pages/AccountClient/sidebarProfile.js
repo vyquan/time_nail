@@ -43,7 +43,7 @@ const SidebarProfile = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink activeClassName="active-sidebar" to={AppRoutes.accountClient.review}>
+              <NavLink activeClassName="active-sidebar" to={`/client/review/${data.user ? data.user.id : data.id}`}>
                 <i className="la la-star mr-2 text-color-5" />
                 Đánh giá dịch vụ
               </NavLink>
