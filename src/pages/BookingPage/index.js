@@ -53,7 +53,7 @@ const BookingPage = () => {
   }, []);
 
   //Handle Check Staff
-  const idStaffDefault = 182;
+  const idStaffDefault = 198;
   const [checked1, setChecked1] = useState(idStaffDefault);
   const [checked2, setChecked2] = useState(idStaffDefault);
   const [checked3, setChecked3] = useState(idStaffDefault);

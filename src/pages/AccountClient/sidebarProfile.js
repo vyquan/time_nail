@@ -14,7 +14,7 @@ const SidebarProfile = () => {
               {data.user ? (
                 <img src={data.user.avatar} alt="true" />
               ) : (
-                <img src={`http://localhost:8000/storage/${data.avatar}`} alt="true" />
+                <img src={data.avatar} alt="true" />
               )}
             </div>
             <div className="author-bio">
