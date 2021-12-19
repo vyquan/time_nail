@@ -5,6 +5,7 @@ import {getFeedback} from '../../redux/actions/feedback';
 const CarouseFeedback = () => {
 
     const feedback = useSelector(state => state.feedback.feedback);
+    console.log(feedback)
     const dispatch = useDispatch();
     useEffect(() => {
        dispatch(getFeedback());
@@ -73,8 +74,10 @@ const CarouseFeedback = () => {
                   </div>
                   <div className="author-content d-flex justify-content-center">
                     <div>
-                      <img className="author-img" src={item.avatar} alt="true" />
+                    <img className="author-img" src={item.user.avatar.includes('https') ? item.user.avatar : 'http://localhost:8000/storage/'+item.user.avatar} alt="true" />
+
                       <div className="author-bio text-center">
+                
                         <h4 className="author__title">{item.full_name}</h4>
                         <span className="ratings d-flex align-items-center mr-1">
                        {
@@ -112,6 +115,7 @@ const CarouseFeedback = () => {
                            
                          })()
                        }
+                      
                        
                       </span>
                         <span className="author__meta">{item.address}</span>
