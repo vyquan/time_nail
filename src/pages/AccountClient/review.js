@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {getFeedback_Detail} from '../../redux/actions/feedback';
-import { useDispatch, useSelector } from 'react-redux'; 
+import { useDispatch } from 'react-redux'; 
 import { Pagination} from 'antd';
 import { useParams } from 'react-router-dom';
 import feedbackAPI from '../../api/feedback';

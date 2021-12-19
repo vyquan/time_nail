@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
@@ -45,7 +45,9 @@ const Notification = (props) => {
                 data.map((item, index) => {
                   return (
                     <Link
-                      to={`/client/booking-history/${isAuthenTicate().user ? isAuthenTicate().user.id : isAuthenTicate().id}`}
+                      to={`/client/booking-history/${
+                        isAuthenTicate().user ? isAuthenTicate().user.id : isAuthenTicate().id
+                      }`}
                       className="list-group-item list-group-item-action"
                       key={index}
                     >

@@ -51,6 +51,13 @@ const BookingHistory = React.memo(() => {
   const showDetailBill = async (item) => {
     dispatch(historyBillDetail(item));
   };
+
+  const canbile = (item) => {
+    const canel = window.confirm('Bạn có chắc chắn muốn hủy không');
+    if (canel) {
+      dispatch(cancelBill(item));
+    }
+  };
   return (
     <div className="col-lg-9">
       <div className="form-box">
@@ -102,13 +109,19 @@ const BookingHistory = React.memo(() => {
                           )}
                           {item.status_bill === 1 ? (
                             <div
-                              onClick={() => dispatch(cancelBill(item.id))}
+                              onClick={() => canbile(item.id)}
                               style={{ textDecoration: 'underline', cursor: 'pointer' }}
                             >
                               Hủy lịch đặt
                             </div>
                           ) : (
-                            ''
+                            <div
+                              hidden
+                              onClick={() => dispatch(cancelBill(item.id))}
+                              style={{ textDecoration: 'underline', cursor: 'pointer' }}
+                            >
+                              Hủy lịch đặt
+                            </div>
                           )}
                         </td>
                         <td>
@@ -138,7 +151,9 @@ const BookingHistory = React.memo(() => {
                             onOk={handleOk}
                             onCancel={handleCancel}
                             width={800}
-                            footer={false}
+                            height={100}
+                            footer={true}
+                            style={{ width: '100%', resize: 'none' }}
                           >
                             <div className="card-item user-card card-item-list mt-2 mb-0">
                               <div className="card-body">
@@ -147,22 +162,59 @@ const BookingHistory = React.memo(() => {
                                     <span>
                                       <strong>Trạng thái bill:</strong>
                                     </span>
+
                                     {(() => {
                                       if (dataBill.bill ? dataBill.bill.status_bill === 1 : '') {
-                                        return <span className="ml-2">Chờ xác nhận</span>;
+                                        return <span className="ml-2">Chờ xác nhận.</span>;
                                       } else if (dataBill.bill ? dataBill.bill.status_bill === 2 : '') {
-                                        return <span className="ml-2">Xác nhận thành công</span>;
+                                        return <span className="ml-2">Xác nhận thành công.</span>;
                                       } else if (dataBill.bill ? dataBill.bill.status_bill === 3 : '') {
-                                        return <span className="ml-2">Đang làm</span>;
+                                        return <span className="ml-2">Đang làm.</span>;
                                       } else if (dataBill.bill ? dataBill.bill.status_bill === 4 : '') {
-                                        return <span className="ml-2">Hoàn thành</span>;
+                                        return <span className="ml-2">Hoàn thành.</span>;
                                       } else if (dataBill.bill ? dataBill.bill.status_bill === 5 : '') {
-                                        return <span className="ml-2">Hủy</span>;
+                                        return <span className="ml-2">Hủy.</span>;
                                       }
                                     })()}
                                   </li>
+                                  {(() => {
+                                    if (dataBill.bill && dataBill.bill.status_bill) {
+                                      return (
+                                        <>
+                                          <li>
+                                            <span>
+                                              <strong>Ngày làm: </strong>
+                                              {dataBill.bill.date_work}.
+                                            </span>
+                                          </li>
+                                          <li>
+                                            <span>
+                                              <strong>Giờ làm: </strong>
+                                              {dataBill.bill.time_work}.
+                                            </span>
+                                          </li>
+                                          <li>
+                                            <span>
+                                              <strong>Tổng tiền: </strong>
+                                              {dataBill.bill.total_bill.toLocaleString('it-IT', {
+                                                style: 'currency',
+                                                currency: 'VND',
+                                              })}
+                                              .
+                                            </span>
+                                          </li>
+                                          <li>
+                                            <span>
+                                              <strong>Ghi chú: </strong>
+                                              {dataBill.bill.note_bill}.
+                                            </span>
+                                          </li>
+                                        </>
+                                      );
+                                    }
+                                  })()}
                                 </ul>
-                                <div className="person1">
+                                <div className="person1 mt-3">
                                   <h3 className="card-title">Khách 1</h3>
                                   {(() => {
                                     if (dataBill.nguoi1 && dataBill.nguoi1.staff) {
@@ -176,7 +228,16 @@ const BookingHistory = React.memo(() => {
                                               ? ''
                                               : dataBill.nguoi1.combo.map((item) => (
                                                   <div key={item.id} className="ml-2">
-                                                    <span>{item.name_combo}.</span>
+                                                    <p>{item.name_combo}.</p>
+                                                    <p> {item.total_time_work} phút.</p>
+                                                    <p>
+                                                      {' '}
+                                                      {item.total_price.toLocaleString('it-IT', {
+                                                        style: 'currency',
+                                                        currency: 'VND',
+                                                      })}
+                                                      .
+                                                    </p>
                                                   </div>
                                                 ))}
                                           </div>
@@ -189,7 +250,16 @@ const BookingHistory = React.memo(() => {
                                               ? ''
                                               : dataBill.nguoi1.service.map((item) => (
                                                   <div key={item.id} className="ml-2">
-                                                    <span>{item.name_service}.</span>
+                                                    <p>{item.name_service}.</p>
+                                                    <p> {item.total_time_work} phút.</p>
+                                                    <p>
+                                                      {' '}
+                                                      {item.price.toLocaleString('it-IT', {
+                                                        style: 'currency',
+                                                        currency: 'VND',
+                                                      })}
+                                                      .
+                                                    </p>
                                                   </div>
                                                 ))}
                                           </div>
@@ -225,7 +295,16 @@ const BookingHistory = React.memo(() => {
                                                 ? ''
                                                 : dataBill.nguoi2.combo.map((item) => (
                                                     <div key={item.id} className="ml-2">
-                                                      <span>{item.name_combo}.</span>
+                                                      <p>{item.name_combo}.</p>
+                                                      <p> {item.total_time_work} phút.</p>
+                                                      <p>
+                                                        {' '}
+                                                        {item.total_price.toLocaleString('it-IT', {
+                                                          style: 'currency',
+                                                          currency: 'VND',
+                                                        })}
+                                                        .
+                                                      </p>
                                                     </div>
                                                   ))}
                                             </div>
@@ -239,6 +318,15 @@ const BookingHistory = React.memo(() => {
                                                 : dataBill.nguoi2.service.map((item) => (
                                                     <div key={item.id} className="ml-2">
                                                       <span>{item.name_service}.</span>
+                                                      <p> {item.total_time_work} phút.</p>
+                                                      <p>
+                                                        {' '}
+                                                        {item.price.toLocaleString('it-IT', {
+                                                          style: 'currency',
+                                                          currency: 'VND',
+                                                        })}
+                                                        .
+                                                      </p>
                                                     </div>
                                                   ))}
                                             </div>
@@ -274,7 +362,16 @@ const BookingHistory = React.memo(() => {
                                                 ? ''
                                                 : dataBill.nguoi3.combo.map((item) => (
                                                     <div key={item.id} className="ml-2">
-                                                      <span>{item.name_combo}.</span>
+                                                      <p>{item.name_combo}.</p>
+                                                      <p> {item.total_time_work} phút.</p>
+                                                      <p>
+                                                        {' '}
+                                                        {item.total_price.toLocaleString('it-IT', {
+                                                          style: 'currency',
+                                                          currency: 'VND',
+                                                        })}
+                                                        .
+                                                      </p>
                                                     </div>
                                                   ))}
                                             </div>
@@ -286,7 +383,16 @@ const BookingHistory = React.memo(() => {
                                                 ? ''
                                                 : dataBill.nguoi3.service.map((item) => (
                                                     <div key={item.id} className="ml-2">
-                                                      <span>{item.name_service}.</span>
+                                                      <p>{item.name_service}.</p>
+                                                      <p> {item.total_time_work} phút.</p>
+                                                      <p>
+                                                        {' '}
+                                                        {item.price.toLocaleString('it-IT', {
+                                                          style: 'currency',
+                                                          currency: 'VND',
+                                                        })}
+                                                        .
+                                                      </p>
                                                     </div>
                                                   ))}
                                             </div>

@@ -128,6 +128,7 @@ const ListBooking = () => {
                             onOk={handleOk}
                             onCancel={handleCancel}
                             width={800}
+                            height={100}
                             footer={false}
                           >
                             <div className="row">
@@ -158,6 +159,27 @@ const ListBooking = () => {
                                             })()
                                           }
                                         </li>
+                                        {
+                                              (() => {
+                                                if(dataBill.bill && dataBill.bill.status_bill) {
+                                                  return (
+                                                   <>
+                                                    <li>
+                                                    <span><strong>Ngày làm: </strong>{dataBill.bill.date_work}.</span>
+                                                    </li>
+                                                    <li>
+                                                    <span><strong>Giờ làm: </strong>{dataBill.bill.time_work}.</span>
+                                                    </li>
+                                                    <li>
+                                                    <span><strong>Tổng tiền: </strong>{dataBill.bill.total_bill.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}.</span>
+                                                    </li>
+                                                    <li>
+                                                    <span><strong>Ghi chú: </strong>{dataBill.bill.note_bill}.</span>
+                                                    </li></>
+                                                  )
+                                                }
+                                              })()
+                                            }
                                         </ul>
                                        <div className='person1'>
                                        <h3 className='card-title'>Khách 1</h3>
@@ -173,7 +195,9 @@ const ListBooking = () => {
                                                          :
                                                        dataBill.nguoi1.combo.map(item => (
                                                         <div key={item.id} className='ml-2'>
-                                                        <span>{ item.name_combo}.</span>
+                                                        <p>{ item.name_combo}.</p>
+                                                        <p> {  item.total_time_work} phút.</p>
+                                                        <p> {  item.total_price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}.</p>
                                                        </div>
                                                        ))
                                                      }
@@ -186,7 +210,9 @@ const ListBooking = () => {
                                                         :
                                                       dataBill.nguoi1.service.map(item => (
                                                        <div key={item.id} className='ml-2'>
-                                                       <span>{ item.name_service}.</span>
+                                                       <p>{ item.name_service}.</p>
+                                                       <p> {  item.total_time_work} phút.</p>
+                                                        <p> {  item.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}.</p>
                                                       </div>
                                                       ))
                                                     }
@@ -222,7 +248,9 @@ const ListBooking = () => {
                                                           :
                                                        dataBill.nguoi2.combo.map(item => (
                                                         <div key={item.id} className='ml-2'>
-                                                        <span>{ item.name_combo}.</span>
+                                                        <p>{ item.name_combo}.</p>
+                                                        <p> {  item.total_time_work} phút.</p>
+                                                        <p> {  item.total_price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}.</p>
                                                        </div>
                                                        ))
                                                      }
@@ -235,7 +263,9 @@ const ListBooking = () => {
                                                         :
                                                       dataBill.nguoi2.service.map(item => (
                                                        <div key={item.id} className='ml-2'>
-                                                       <span>{ item.name_service}.</span>
+                                                       <p>{ item.name_service}.</p>
+                                                       <p> {  item.total_time_work} phút.</p>
+                                                        <p> {  item.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}.</p>
                                                       </div>
                                                       ))
                                                     }
@@ -273,7 +303,9 @@ const ListBooking = () => {
                                                               :
                                                             dataBill.nguoi3.combo.map(item => (
                                                              <div key={item.id} className='ml-2'>
-                                                             <span>{ item.name_combo}.</span>
+                                                             <p>{ item.name_combo}.</p>
+                                                             <p> {  item.total_time_work} phút.</p>
+                                                            <p> {  item.total_price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}.</p>
                                                             </div>
                                                             ))
                                                           }
@@ -286,7 +318,9 @@ const ListBooking = () => {
                                                           :
                                                            dataBill.nguoi3.service.map(item => (
                                                             <div key={item.id} className='ml-2'>
-                                                            <span>{ item.name_service}.</span>
+                                                            <p>{ item.name_service}.</p>
+                                                            <p> {  item.total_time_work} phút.</p>
+                                                             <p> {  item.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}.</p>
                                                            </div>
                                                            ))
                                                          }
@@ -400,6 +434,7 @@ const ListBooking = () => {
                             onOk={handleOkFuture}
                             onCancel={handleCancelFuture}
                             width={800}
+                            height={100}
                             footer={false}
                           >
                             <div className="row">
@@ -430,6 +465,27 @@ const ListBooking = () => {
                                             })()
                                           }
                                         </li>
+                                        {
+                                              (() => {
+                                                if(dataBill.bill && dataBill.bill.status_bill) {
+                                                  return (
+                                                   <>
+                                                    <li>
+                                                    <span><strong>Ngày làm: </strong>{dataBill.bill.date_work}.</span>
+                                                    </li>
+                                                    <li>
+                                                    <span><strong>Giờ làm: </strong>{dataBill.bill.time_work}.</span>
+                                                    </li>
+                                                    <li>
+                                                    <span><strong>Tổng tiền: </strong>{dataBill.bill.total_bill.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}.</span>
+                                                    </li>
+                                                    <li>
+                                                    <span><strong>Ghi chú: </strong>{dataBill.bill.note_bill}.</span>
+                                                    </li></>
+                                                  )
+                                                }
+                                              })()
+                                            }
                                         </ul>
                                        <div className='person1'>
                                        <h3 className='card-title'>Khách 1</h3>
@@ -445,7 +501,9 @@ const ListBooking = () => {
                                                          :
                                                        dataBill.nguoi1.combo.map(item => (
                                                         <div key={item.id} className='ml-2'>
-                                                        <span>{ item.name_combo}.</span>
+                                                        <p>{ item.name_combo}.</p>
+                                                        <p> {  item.total_time_work} phút.</p>
+                                                        <p> {  item.total_price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}.</p>
                                                        </div>
                                                        ))
                                                      }
@@ -458,7 +516,9 @@ const ListBooking = () => {
                                                         :
                                                       dataBill.nguoi1.service.map(item => (
                                                        <div key={item.id} className='ml-2'>
-                                                       <span>{ item.name_service}.</span>
+                                                       <p>{ item.name_service}.</p>
+                                                       <p> {  item.total_time_work} phút.</p>
+                                                       <p> {  item.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}.</p>
                                                       </div>
                                                       ))
                                                     }
@@ -494,7 +554,9 @@ const ListBooking = () => {
                                                           :
                                                        dataBill.nguoi2.combo.map(item => (
                                                         <div key={item.id} className='ml-2'>
-                                                        <span>{ item.name_combo}.</span>
+                                                        <p>{ item.name_combo}.</p>
+                                                        <p> {  item.total_time_work} phút.</p>
+                                                        <p> {  item.total_price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}.</p>
                                                        </div>
                                                        ))
                                                      }
@@ -507,7 +569,9 @@ const ListBooking = () => {
                                                         :
                                                       dataBill.nguoi2.service.map(item => (
                                                        <div key={item.id} className='ml-2'>
-                                                       <span>{ item.name_service}.</span>
+                                                       <p>{ item.name_service}.</p>
+                                                       <p> {  item.total_time_work} phút.</p>
+                                                       <p> {  item.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}.</p>
                                                       </div>
                                                       ))
                                                     }
@@ -545,7 +609,9 @@ const ListBooking = () => {
                                                               :
                                                             dataBill.nguoi3.combo.map(item => (
                                                              <div key={item.id} className='ml-2'>
-                                                             <span>{ item.name_combo}.</span>
+                                                             <p>{ item.name_combo}.</p>
+                                                             <p> {  item.total_time_work} phút.</p>
+                                                             <p> {  item.total_price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}.</p>
                                                             </div>
                                                             ))
                                                           }
@@ -558,7 +624,9 @@ const ListBooking = () => {
                                                           :
                                                            dataBill.nguoi3.service.map(item => (
                                                             <div key={item.id} className='ml-2'>
-                                                            <span>{ item.name_service}.</span>
+                                                            <p>{ item.name_service}.</p>
+                                                            <p> {  item.total_time_work} phút.</p>
+                                                            <p> {  item.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}.</p>
                                                            </div>
                                                            ))
                                                          }
@@ -572,7 +640,6 @@ const ListBooking = () => {
                                                          </div>
                                                         </div>
                                                       }
-     
                                                     })()
                                                  }    
                                             </div>    
@@ -628,5 +695,4 @@ const ListBooking = () => {
     </div>
   );
 };
-
 export default ListBooking;

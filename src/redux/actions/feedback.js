@@ -1,7 +1,6 @@
 import feedbackAPI from '../../api/feedback';
 import { FEEDBACK, GET_FEEDBACK, GET_FEEDBACK_DETAIL } from '../constants/ContansLogin';
 import { toast } from 'react-toastify';
-import { isAuthenTicate } from '../../pages/Auth';
 
 export const feedback = (Feedback) => async (dispatch) => {
   try {
