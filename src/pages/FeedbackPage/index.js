@@ -75,7 +75,7 @@ const FeedbackPage = () => {
                                   <div className="row">
                                     <div className="col-12  responsive-column d-md-flex justify-content-center align-items-center">
                                       <div className="rate-option-item text-center">
-                                        <label className="label-text">Đánh giá</label>
+                                        <p className="label-text">Phản hồi của bạn sẽ giúp chúng mình cải thiện < br/> chất lượng dịch vụ tốt hơn</p>
                                         <br />
                                         <Controller
                                           name="number_star"
@@ -84,13 +84,13 @@ const FeedbackPage = () => {
                                           render={({ field }) => <Rate {...field} style={{ fontSize: 60 }} />}
                                         />
                                         <br />
-                                        {errors.number_star && <span className="text-danger">Bạn chưa đánh giá</span>}
+                                        {errors.number_star && <span className="text-danger">Bạn chưa chọn số sao</span>}
                                       </div>
                                     </div>
 
                                     <div className="col-lg-12">
                                       <div className="input-box">
-                                        <label className="label-text">Message</label>
+                                        <label className="label-text">Cảm nhận:</label>
                                         <div className="form-group">
                                           <span className="la la-pencil form-icon" />
                                           <textarea
@@ -100,7 +100,7 @@ const FeedbackPage = () => {
                                             {...register('comment', { required: true })}
                                           />
                                           {errors.comment && (
-                                            <span className="text-danger">Bạm chưa gửi thông tin</span>
+                                            <span className="text-danger">Vui lòng nhập cảm nhận của bạn.</span>
                                           )}
                                         </div>
                                       </div>

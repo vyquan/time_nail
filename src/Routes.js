@@ -162,7 +162,7 @@ export const routes = [
     path: AppRoutes.accountClient.changePassword,
     exact,
     title: AppTitle.accountClient,
-    component: Page.ChangePassword,
+    component: Page.ChangePasswordClient,
     layout: ProfileLayout,
     isPrivate: true,
   },

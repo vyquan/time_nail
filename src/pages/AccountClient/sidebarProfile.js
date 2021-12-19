@@ -39,7 +39,7 @@ const SidebarProfile = () => {
                 to={`/client/booking-history/${data.user ? data.user.id : data.id}`}
               >
                 <i className="la la-history mr-2" />
-                Lịch Sử Làm Nails
+                Lịch đặt của tôi
               </NavLink>
             </li>
             <li>
