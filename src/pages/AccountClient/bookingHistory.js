@@ -59,6 +59,7 @@ const BookingHistory = React.memo(() => {
   const handelCancelBile = () => {
     dispatch(cancelBill(idCancel));
     setShowModalConfirm(false);
+     window.location.reload()
   };
   return (
     <>
