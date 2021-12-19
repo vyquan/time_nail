@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Slider from 'react-slick';
-import {getFeedback} from '../../redux/actions/feedback';
+import { getFeedback } from '../../redux/actions/feedback';
 const CarouseFeedback = () => {
-
-    const feedback = useSelector(state => state.feedback.feedback);
-    const dispatch = useDispatch();
-    useEffect(() => {
-       dispatch(getFeedback());
-       //eslint-disable-next-line
-    },[])
+  const feedback = useSelector((state) => state.feedback.feedback);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getFeedback());
+    //eslint-disable-next-line
+  }, []);
 
   const settings = {
     dots: true,
@@ -63,25 +62,26 @@ const CarouseFeedback = () => {
           <div className="col-lg-12">
             <Slider {...settings}>
               {
-              // feedback && feedback.user === 4 ?
-              feedback.slice(0,3).map((item, index) => (
-                <div key={index} className="testimonial-card">
-                  <div className="testi-desc-box text-center">
-                    <p className="testi__desc">
-                      <i className="la la-quote-left"></i> {item.comment} <i className="la la-quote-right"></i>
-                    </p>
-                  </div>
-                  <div className="author-content d-flex justify-content-center">
-                    <div>
-                      <img className="author-img" src={item.avatar} alt="true" />
-                      <div className="author-bio text-center">
-                        <h4 className="author__title">{item.full_name}</h4>
-                        <span className="author__meta">{item.address}</span>
+                // feedback && feedback.user === 4 ?
+                feedback.slice(0, 3).map((item, index) => (
+                  <div key={index} className="testimonial-card">
+                    <div className="testi-desc-box text-center">
+                      <p className="testi__desc">
+                        <i className="la la-quote-left"></i> {item.comment} <i className="la la-quote-right"></i>
+                      </p>
+                    </div>
+                    <div className="author-content d-flex justify-content-center">
+                      <div>
+                        <img className="author-img" src={item.avatar} alt="true" />
+                        <div className="author-bio text-center">
+                          <h4 className="author__title">{item.full_name}</h4>
+                          <span className="author__meta">{item.address}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))
+              }
             </Slider>
           </div>
         </div>

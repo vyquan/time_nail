@@ -51,9 +51,9 @@ const BookingPage = () => {
     dispatch(checkUnavailable());
     //eslint-disable-next-line
   }, []);
-
+  // ID nhân viên mặc định
+  const idStaffDefault = 198;
   //Handle Check Staff
-  const idStaffDefault = 182;
   const [checked1, setChecked1] = useState(idStaffDefault);
   const [checked2, setChecked2] = useState(idStaffDefault);
   const [checked3, setChecked3] = useState(idStaffDefault);
@@ -191,7 +191,7 @@ const BookingPage = () => {
   const [quoteIndex] = useState(0);
   const code_discount = dataDiscount[quoteIndex] ? dataDiscount[quoteIndex].code_discount : null;
   const percent = dataDiscount[quoteIndex] ? dataDiscount[quoteIndex].percent : null;
-  
+
   const handleVoucher = () => {
     // setLoading(true);
     dispatch(Discount({ code_discount: form.getFieldValue('code_discount') }, setErrorhandle, setDataDiscount));
@@ -798,7 +798,7 @@ const BookingPage = () => {
 
                         <div className="col-lg-12 ">
                           <Form.Item
-                            name="                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    "
+                            name="message"
                             label={<label className="label-text">Ghi chú</label>}
                           >
                             <Input.TextArea style={{ height: '100px' }} placeholder="VD: Mình cần tư vấn" />
