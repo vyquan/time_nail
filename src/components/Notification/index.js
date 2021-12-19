@@ -119,33 +119,6 @@ const Notification = (props) => {
               )}
 
               {isAuthenTicate().roles === 'Staff' ? null : null}
-              {/* {
-                isAuthenTicate().roles === 'Staff' ? (null) : (
-                  <Link to={AppRoutes.feedback} className="list-group-item list-group-item-action">
-                  <div className="msg-body">
-                    <div className="msg-content">
-                      <h3 className="title">
-                        <i className="la la-shopping-cart mr-2" />
-                        Feedback
-                      </h3>
-                    </div>
-                  </div>
-                </Link>
-                )
-              } */}
-              {isAuthenTicate().roles === 'Staff' ? (
-                <Link to={AppRoutes.staffDashboard.profile} className="list-group-item list-group-item-action">
-                  <div className="msg-body">
-                    <div className="msg-content">
-                      <h3 className="title">
-                        <i className="la la-shopping-cart mr-2" />
-                        Staff
-                      </h3>
-                    </div>
-                  </div>
-                </Link>
-              ) : null}
-
               <div className="section-block" />
               <Link
                 to="/"

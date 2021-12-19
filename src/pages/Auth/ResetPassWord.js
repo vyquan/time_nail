@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
-
+import { useHistory } from 'react-router-dom';
 import { resetPasswordChangePass } from '../../redux/actions/auth';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,12 +14,15 @@ const ResetPassWord = () => {
     reset,
     formState: { errors },
   } = useForm();
+  const history = useHistory();
   const dispatch = useDispatch();
   const { token } = useParams();
-  console.log(token);
   const onSubmit = (data) => {
     dispatch(resetPasswordChangePass(data));
     reset();
+    setTimeout(() => {
+          history.push('/login')
+    },3000)
   };
 
   return (

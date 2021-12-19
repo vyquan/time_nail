@@ -39,7 +39,7 @@ const Review = () => {
           <h3 className="title">Đánh giá dịch vụ</h3>
           {
             feedback && feedback.length > 0 ?
-            (<p className="font-size-14">Đang xem {page} - {postPerPage} trong {feedback.length} mục</p>) : ('')
+            (<p className="font-size-14">Đang xem {page} trong {feedback.length} mục</p>) : ('')
           }
         </div>
         {   

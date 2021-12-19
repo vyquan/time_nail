@@ -171,6 +171,9 @@ const ListBooking = () => {
                                                     <span><strong>Giờ làm: </strong>{dataBill.bill.time_work}.</span>
                                                     </li>
                                                     <li>
+                                                    <span><strong>Số điện thoại: </strong>{dataBill.bill.phone}.</span>
+                                                    </li>
+                                                    <li>
                                                     <span><strong>Tổng tiền: </strong>{dataBill.bill.total_bill.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}.</span>
                                                     </li>
                                                     <li>
@@ -362,7 +365,7 @@ const ListBooking = () => {
                   <div className="row">
                     <div className="col-lg-6 col-md-6 col-sm-12 col-12 mt-3 show-left" style={{ paddingLeft: '10px' }}>
                       <p>
-                        Showing {page} to {postPerPage * page} of {historyBook.today.length} entries
+                        Đang xem {page} trong {historyBook.today.length} mục
                       </p>
                     </div>
                     <div
@@ -475,6 +478,9 @@ const ListBooking = () => {
                                                     </li>
                                                     <li>
                                                     <span><strong>Giờ làm: </strong>{dataBill.bill.time_work}.</span>
+                                                    </li>
+                                                    <li>
+                                                    <span><strong>Số điện thoại: </strong>{dataBill.bill.phone}.</span>
                                                     </li>
                                                     <li>
                                                     <span><strong>Tổng tiền: </strong>{dataBill.bill.total_bill.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}.</span>
@@ -667,7 +673,7 @@ const ListBooking = () => {
                   <div className="row">
                     <div className="col-lg-6 col-md-6 col-sm-12 col-12 mt-3 show-left" style={{ paddingLeft: '10px' }}>
                       <p>
-                        Showing {pagefuture} to {pagefuture * postPagefuture} of {historyBook.future.length} entries
+                        Đang xem {pagefuture} trong {historyBook.future.length} mục
                       </p>
                     </div>
                     <div

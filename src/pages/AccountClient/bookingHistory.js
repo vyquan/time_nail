@@ -52,12 +52,13 @@ const { id } = useParams();
       const showDetailBill = async (item) => {
           dispatch(historyBillDetail(item))
       }
-
+      // const history = useHistory();
        const canbile = (item) => {
            const canel = window.confirm('Bạn có chắc chắn muốn hủy không');
            if(canel) {
             dispatch(cancelBill(item))
            }
+          // window.location.reload()
        }
   return (
     <div className="col-lg-9">
@@ -205,6 +206,9 @@ const { id } = useParams();
                                                     </li>
                                                     <li>
                                                     <span><strong>Giờ làm: </strong>{dataBill.bill.time_work}.</span>
+                                                    </li>
+                                                    <li>
+                                                    <span><strong>Số điện thoại: </strong>{dataBill.bill.phone}.</span>
                                                     </li>
                                                     <li>
                                                     <span><strong>Tổng tiền: </strong>{dataBill.bill.total_bill.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}.</span>
@@ -399,7 +403,7 @@ const { id } = useParams();
             <div className="row">
               <div className="col-lg-6 col-md-6 col-sm-12 col-12 show-left" style={{ paddingLeft: '40px' }}>
                 <p>
-                  Đang xem {page} - {postPerPage * page} trong {HistoryBook.length} mục
+                  Đang xem {page} trong {HistoryBook.length} mục
                 </p>
               </div>
               <div className="col-lg-6 col-md-6 col-sm-12 col-12 show-right" style={{ paddingRight: '40px' }}>

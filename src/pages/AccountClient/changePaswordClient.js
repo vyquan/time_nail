@@ -76,7 +76,7 @@ const ChangePasswordClient = () => {
                         {...register('password', { required: true })}
                       />
                       <i
-                        className={passwordShow ? 'fas fa-eye-slash' : 'fas fa-eye'}
+                        className={passwordShow ? 'fas fa-eye' : 'fas fa-eye-slash' }
                         onClick={togglePasswordVisiblity}
                       ></i>
                       {errors.password && <span className="text-danger">Bạn cần nhập mật khẩu hiện tại</span>}
@@ -99,7 +99,7 @@ const ChangePasswordClient = () => {
                         placeholder="Mật khẩu mới"
                         {...register('new_password', { required: true })}
                       />
-                      <i className={passretype ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={togglePasswordrettype}></i>
+                      <i className={passretype ? 'fas fa-eye' : 'fas fa-eye-slash' } onClick={togglePasswordrettype}></i>
                       {errors.new_password && <span className="text-danger">Bạn cần nhập mật khẩu mới </span>}
                     </div>
                   </div>
@@ -120,7 +120,7 @@ const ChangePasswordClient = () => {
                         placeholder="Mật khẩu mới một lần nữa"
                         {...register('re_password', { required: true })}
                       />
-                      <i className={passwords ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={togglePassword}></i>
+                      <i className={passwords ? 'fas fa-eye' : 'fas fa-eye-slash' } onClick={togglePassword}></i>
                       {errors.re_password && (
                         <span className="text-danger">Bạn cần nhập mật khẩu mới một lần nữa </span>
                       )}
