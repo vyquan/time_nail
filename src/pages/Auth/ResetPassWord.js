@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
@@ -14,15 +14,21 @@ const ResetPassWord = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const history = useHistory();
+  const [passwordShow, setPasswordShow] = useState(false);
+  const [passretype, setPasswordtype] = useState(false);
   const dispatch = useDispatch();
   const { token } = useParams();
+
+   // set eye password
+   const togglePasswordVisiblity = () => {
+    setPasswordShow(passwordShow ? false : true);
+  };
+  const togglePasswordrettype = () => {
+    setPasswordtype(passretype ? false : true);
+  };
   const onSubmit = (data) => {
     dispatch(resetPasswordChangePass(data));
     reset();
-    setTimeout(() => {
-          history.push('/login')
-    },3000)
   };
 
   return (
@@ -64,11 +70,15 @@ const ResetPassWord = () => {
                       <span className="la la-lock form-icon" />
                       <input
                         className="form-control"
-                        type="password"
+                        type={passwordShow ? 'text' : 'password'}
                         name="text"
                         placeholder="Mật khẩu"
                         {...register('password', { required: true })}
                       />
+                                   <i
+                        className={passwordShow ? 'fas fa-eye' : 'fas fa-eye-slash'}
+                        onClick={togglePasswordVisiblity}
+                      ></i>
                       {errors.password && <span className="text-danger">Bạn chưa nhập Password</span>}
                     </div>
                   </div>
@@ -78,11 +88,15 @@ const ResetPassWord = () => {
                       <span className="la la-lock form-icon" />
                       <input
                         className="form-control"
-                        type="password"
+                        type={passretype ? 'text' : 'password'}
                         name="text"
                         placeholder="Mật khẩu"
                         {...register('password_confirmation', { required: true })}
                       />
+                      <i
+                        className={passretype ? 'fas fa-eye' : 'fas fa-eye-slash'}
+                        onClick={togglePasswordrettype}
+                      ></i>
                       {errors.password_confirmation && (
                         <span className="text-danger">Bạn chưa nhập Password_confirmation</span>
                       )}
