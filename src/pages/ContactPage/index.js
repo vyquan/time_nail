@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { Contact } from '../../redux/actions/contact';
 import Swal from 'sweetalert2';
+import Address from './address';
+import Map from './map';
 
 const ContactPage = () => {
   const {
@@ -152,90 +154,11 @@ const ContactPage = () => {
                 </div>
               </div>
             </div>
-
-            <div className="col-lg-4">
-              <div className="form-box">
-                <div className="form-title-wrap">
-                  <h3 className="title">Liên Hệ Với Chúng Tôi</h3>
-                </div>
-
-                <div className="form-content">
-                  <div className="address-book">
-                    <ul className="list-items contact-address">
-                      <li>
-                        <i className="la la-map-marker icon-element" />
-                        <h5 className="title font-size-16 pb-1">Địa Chỉ </h5>
-                        <p className="map__desc">
-                          Cao đẳng FPT Polytechnic, Đường Trịnh Văn Bô, Phường Phương Canh, Quận Nam Từ Liêm, TP Hà Nội
-                        </p>
-                      </li>
-                      <li>
-                        <i className="la la-phone icon-element" />
-                        <h5 className="title font-size-16 pb-1">Điện Thoại</h5>
-                        <p className="map__desc">Telephone: 2800 256 508</p>
-                        <p className="map__desc">Mobile: 666 777 888</p>
-                      </li>
-                      <li>
-                        <i className="la la-envelope-o icon-element" />
-                        <h5 className="title font-size-16 pb-1">Email</h5>
-                        <p className="map__desc">needhelp@trizen.com</p>
-                        <p className="map__desc">inquiry@trizen.com</p>
-                      </li>
-                    </ul>
-                    <ul className="social-profile text-center">
-                      <li>
-                        <a href="#/">
-                          <i className="lab la-facebook-f" />
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#/">
-                          <i className="lab la-twitter" />
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#/">
-                          <i className="lab la-instagram" />
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#/">
-                          <i className="lab la-linkedin-in" />
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#/">
-                          <i className="lab la-youtube" />
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Address />
           </div>
         </div>
       </section>
-
-      <section className="map-area padding-bottom-100px">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="map-container">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d36731.1752731323!2d105.76307168400422!3d21.033016869053537!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1633422810838!5m2!1sen!2sus"
-                  width={1170}
-                  height={450}
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  title="This is a unique title"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Map />
     </div>
   );
 };

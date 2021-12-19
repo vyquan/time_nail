@@ -114,7 +114,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="row align-items-center">
+          {/* <div className="row align-items-center">
             <div className="col-lg-12">
               <div className="term-box footer-item">
                 <ul className="list-items list--items d-flex align-items-center">
@@ -130,7 +130,7 @@ const Footer = () => {
                 </ul>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div className="section-block mt-4" />
