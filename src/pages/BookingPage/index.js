@@ -794,7 +794,6 @@ const BookingPage = () => {
                           <Divider />
                           <Form.Item
                             help={errorhandle.message}
-                            validateStatus={percent === null ? '' : ''}
                             extra={percent !== null ? `Mã giảm giá ${percent} %` : ``}
                             label={<label className="label-text">Voucher của cửa hàng</label>}
                           >
