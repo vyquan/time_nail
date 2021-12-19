@@ -43,22 +43,22 @@ const Footer = () => {
                 </h4>
                 <ul className="list-items list--items">
                   <li>
-                    <Link to="/">Về chúng tôi</Link>
+                    <Link to={AppRoutes.home}>Trang chủ</Link>
                   </li>
                   <li>
-                    <Link to="services.html">Dịch vụ</Link>
+                    <Link to={AppRoutes.service}>Dịch vụ</Link>
                   </li>
                   <li>
-                    <Link to="/">Việc làm</Link>
+                    <Link to={AppRoutes.comboService}>Combo</Link>
                   </li>
                   <li>
-                    <Link to="/">Tin tức</Link>
+                    <Link to={AppRoutes.news}>Tin tức</Link>
                   </li>
                   <li>
-                    <Link to="/">Hỗ trợ</Link>
+                    <Link to={AppRoutes.contact}>Liên hệ</Link>
                   </li>
                   <li>
-                    <Link to="/">Quảng cáo</Link>
+                    <Link to={AppRoutes.booking}>Đặt lịch</Link>
                   </li>
                 </ul>
               </div>
@@ -85,48 +85,8 @@ const Footer = () => {
                 <h4 className="title curve-shape pb-3 margin-bottom-20px" data-text="curvs">
                   Theo dõi ngay
                 </h4>
-                <p className="footer__desc pb-3">Đăng ký để cập nhật và &amp; khuyến mãi mới nhất</p>
-                <div className="contact-form-action">
-                  <form action="#">
-                    <div className="input-box">
-                      <label className="label-text">Nhập địa chỉ email</label>
-                      <div className="form-group mb-0">
-                        <span className="la la-envelope form-icon" />
-                        <input className="form-control" type="email" name="email" placeholder="Địa chỉ email" />
-                        <button className="theme-btn theme-btn-small submit-btn" type="submit">
-                          Go
-                        </button>
-                        <span className="font-size-14 pt-1">
-                          <i className="la la-lock mr-1" />
-                          Chúng tôi cam kết bảo mật thông tin của bạn.
-                        </span>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="row align-items-center">
-            <div className="col-lg-8">
-              <div className="term-box footer-item">
-                <ul className="list-items list--items d-flex align-items-center">
-                  <li>
-                    <Link to="/">Điều khoản &amp; điều kiện</Link>
-                  </li>
-                  <li>
-                    <Link to="/">Chính sách bảo mật</Link>
-                  </li>
-                  <li>
-                    <Link to="/">Trung tâm trợ giúp</Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="col-lg-4">
-              <div className="footer-social-box text-right">
+                <p className="footer__desc pb-3">Theo dõi để cập nhật &amp; nhận khuyến mãi mới nhất</p>
+                <div className="footer-social-box">
                 <ul className="social-profile">
                   <li>
                     <Link to="/">
@@ -150,6 +110,25 @@ const Footer = () => {
                   </li>
                 </ul>
               </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="row align-items-center">
+            <div className="col-lg-12">
+              <div className="term-box footer-item">
+                <ul className="list-items list--items d-flex align-items-center">
+                  <li>
+                    <Link to="/">Điều khoản &amp; điều kiện</Link>
+                  </li>
+                  <li>
+                    <Link to="/">Chính sách bảo mật</Link>
+                  </li>
+                  <li>
+                    <Link to="/">Trung tâm trợ giúp</Link>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -160,8 +139,8 @@ const Footer = () => {
             <div className="col-lg-7">
               <div className="copy-right padding-top-30px">
                 <p className="copy__desc">
-                  © Copyright Time Nails 2020. Made with
-                  <span className="la la-heart" /> by <Link to="/">Time Nails</Link>
+                  © Copyright Times Nail 2020. Made with
+                  <span className="la la-heart" /> by <Link to="/">Times Nail</Link>
                 </p>
               </div>
             </div>

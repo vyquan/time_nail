@@ -34,7 +34,7 @@ const RelatedNews = ({ id }) => {
                 <div className="card-footer d-flex align-items-center justify-content-center text-center">
                   <div className="post-share">
                     <h3 className="card-title line-height-26">
-                      <Link to={`/news-detail/${item.id}`} style={{ color: '#000', textTransform: 'uppercase' }}>
+                      <Link to={`/news/${item.id}`} style={{ color: '#000', textTransform: 'uppercase' }}>
                         {item.title}
                       </Link>
                     </h3>

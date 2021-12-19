@@ -5,3 +5,7 @@ export const convertMinsToHrsMins = (mins) => {
     m = m < 10 ? '0' + m : m; // (or alternatively) m = String(m).padStart(2, '0')
     return `${h}:${m}'`;
   }
+  export const truncateString = (str, length, lastText) => {
+    return str && str?.length > length ? str.substring(0, length) + (lastText || '...') : str;
+  };
+  
