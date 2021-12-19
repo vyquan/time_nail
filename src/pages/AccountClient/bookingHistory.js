@@ -59,6 +59,7 @@ const BookingHistory = React.memo(() => {
   const handelCancelBile = () => {
     dispatch(cancelBill(idCancel));
     setShowModalConfirm(false);
+     window.location.reload()
   };
   return (
     <>
@@ -331,7 +332,7 @@ const BookingHistory = React.memo(() => {
                                                   <strong>Nhân viên:</strong>
                                                 </h6>
                                                 <div className="ml-2">
-                                                  <p>{dataBill.nguoi1.staff.full_name}</p>
+                                                  <p>{dataBill.nguoi2.staff.full_name}</p>
                                                 </div>
                                               </div>
                                             </div>

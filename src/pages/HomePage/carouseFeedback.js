@@ -75,6 +75,51 @@ const CarouseFeedback = () => {
                         <img className="author-img" src={item.avatar} alt="true" />
                         <div className="author-bio text-center">
                           <h4 className="author__title">{item.full_name}</h4>
+                          <span className="ratings d-flex align-items-center mr-1">
+                            {(() => {
+                              if (item.number_star === 5) {
+                                return (
+                                  <>
+                                    <i className="la la-star" />
+                                    <i className="la la-star" />
+                                    <i className="la la-star" />
+                                    <i className="la la-star" />
+                                    <i className="la la-star" />
+                                  </>
+                                );
+                              } else if (item.number_star === 4) {
+                                return (
+                                  <>
+                                    <i className="la la-star" />
+                                    <i className="la la-star" />
+                                    <i className="la la-star" />
+                                    <i className="la la-star" />
+                                  </>
+                                );
+                              } else if (item.number_star === 3) {
+                                return (
+                                  <>
+                                    <i className="la la-star" />
+                                    <i className="la la-star" />
+                                    <i className="la la-star" />
+                                  </>
+                                );
+                              } else if (item.number_star === 2) {
+                                return (
+                                  <>
+                                    <i className="la la-star" />
+                                    <i className="la la-star" />
+                                  </>
+                                );
+                              } else if (item.number_star === 1) {
+                                return (
+                                  <>
+                                    <i className="la la-star" />
+                                  </>
+                                );
+                              }
+                            })()}
+                          </span>
                           <span className="author__meta">{item.address}</span>
                         </div>
                       </div>

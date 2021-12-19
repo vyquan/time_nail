@@ -91,7 +91,7 @@ const Notification = (props) => {
                 {isAuthenTicate().user ? (
                   <img src={isAuthenTicate().user.avatar} alt="team-img" />
                 ) : (
-                  <img src={`http://localhost:8000/storage/${isAuthenTicate().avatar}`} alt="team-img" />
+                  <img src={isAuthenTicate().avatar} alt="team-img" />
                 )}
               </div>
               <span className="font-size-14 text-black font-weight-bold">
