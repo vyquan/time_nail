@@ -19,6 +19,7 @@ import {
   CHANGE_INFOR_STAFF_SUCCESS,
   CHANGE_INFOR_STAFF_ERROR,
 } from '../constants/ContansLogin';
+import { useHistory } from 'react-router-dom';
 
 export const loginAuth = (logins, setRedirectToRef, setLoading) => async (dispatch) => {
   dispatch({ type: FETCH_LOGIN_REQEST });
@@ -141,9 +142,9 @@ export const resetPasswordChangePass = (resetPass) => async (dispatch) => {
         payload: response.data,
       });
       toast.success(response.data.message);
-      // setTimeout(() => {
-      //   window.location = '/login';
-      // }, 1000);
+      setTimeout(() => {
+      window.location = '/login'
+      }, 2000);
     });
   } catch (error) {
     toast.error(error.response.data.message);

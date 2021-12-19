@@ -76,7 +76,7 @@ const CarouseFeedback = () => {
 
                       <div className="author-bio text-center">
                 
-                        <h4 className="author__title">{item.full_name}</h4>
+                        <h4 className="author__title">{item.user.full_name}</h4>
                         <span className="ratings d-flex align-items-center mr-1">
                        {
                          (() => {
@@ -114,7 +114,6 @@ const CarouseFeedback = () => {
                          })()
                        }
                       </span>
-                        <span className="author__meta">{item.address}</span>
                       </div>
                     </div>
                   </div>
