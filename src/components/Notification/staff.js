@@ -36,7 +36,7 @@ const Staff = (props) => {
                 <div className="msg-body">
                   <div className="msg-content">
                     <h3 className="title">
-                      <i className="la la-shopping-cart mr-2" />
+                      <i className="la la-home mr-2" />
                       Trang chủ
                     </h3>
                   </div>

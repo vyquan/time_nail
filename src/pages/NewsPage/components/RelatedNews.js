@@ -4,6 +4,8 @@ import { getNews } from '../../../redux/actions/news';
 import { Link } from 'react-router-dom';
 
 const RelatedNews = ({id}) => {
+  const idParam = id;
+console.log(idParam);
   const news = useSelector((state) => state.news.news);
   let data = Array.from(news);
   const dispatch = useDispatch();

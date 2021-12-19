@@ -6,6 +6,7 @@ import { historyBillDetail, historyBookInfo, cancelBill } from '../../redux/acti
 import { Modal, Pagination } from 'antd';
 import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../helpers/app.routes';
+import { MoreOutlined } from '@ant-design/icons';
 
 const BookingHistory = React.memo(() => {
   const [HistoryBook, setHistoryBook] = useState([]);
@@ -139,12 +140,13 @@ const BookingHistory = React.memo(() => {
                             }
                           })()}
                         </td>
-                        <td onClick={() => showDetailBill(item.id)}>
-                          <div className="table-contents">
-                            <a href="#/" onClick={showModal}>
-                              <i className="la la-eye" />
-                            </a>
+                        <td>
+                          <div onClick={() => showDetailBill(item.id)}>
+                            <div className="table-contents" onClick={showModal}>
+                            <MoreOutlined />
+                            </div>
                           </div>
+                          
                           <Modal
                             title="Chi tiết"
                             visible={isModalVisible}
@@ -214,13 +216,13 @@ const BookingHistory = React.memo(() => {
                                     }
                                   })()}
                                 </ul>
-                                <div className="person1 mt-3">
-                                  <h3 className="card-title">Khách 1</h3>
+                                <div className="person1 mt-2 border-top">
+                                  <h3 className="card-title mt-2">Khách 1</h3>
                                   {(() => {
                                     if (dataBill.nguoi1 && dataBill.nguoi1.staff) {
                                       return (
-                                        <div className="d-flex justify-content-between ">
-                                          <div>
+                                        <div className="d-flex justify-content-between">
+                                          <div className="w-40">
                                             <h6 className="ml-2">
                                               <strong>Combo:</strong>
                                             </h6>
@@ -242,7 +244,7 @@ const BookingHistory = React.memo(() => {
                                                 ))}
                                           </div>
 
-                                          <div>
+                                          <div className="w-40">
                                             <h6 className="ml-2">
                                               <strong>Dịch vụ:</strong>
                                             </h6>
@@ -264,12 +266,12 @@ const BookingHistory = React.memo(() => {
                                                 ))}
                                           </div>
 
-                                          <div>
+                                          <div className="w-20">
                                             <h6 className="ml-2">
                                               <strong>Nhân viên:</strong>
                                             </h6>
                                             <div className="ml-2">
-                                              <p>{dataBill.nguoi1.staff.full_name}.</p>
+                                              <p>{dataBill.nguoi1.staff.full_name}</p>
                                             </div>
                                           </div>
                                         </div>
@@ -280,14 +282,14 @@ const BookingHistory = React.memo(() => {
                                 {dataBill.nguoi2 === null ? (
                                   ''
                                 ) : (
-                                  <div className="person2 mt-2">
-                                    <h3 className="card-title">Khách 2</h3>
+                                  <div className="person2 mt-2 border-top">
+                                    <h3 className="card-title mt-2">Khách 2</h3>
 
                                     {(() => {
                                       if (dataBill.nguoi2 && dataBill.nguoi2.staff) {
                                         return (
                                           <div className="d-flex justify-content-between  ">
-                                            <div>
+                                            <div className="w-40">
                                               <h6 className="ml-2">
                                                 <strong>Combo:</strong>
                                               </h6>
@@ -309,7 +311,7 @@ const BookingHistory = React.memo(() => {
                                                   ))}
                                             </div>
 
-                                            <div>
+                                            <div className="w-40">
                                               <h6 className="ml-2">
                                                 <strong>Dịch vụ:</strong>
                                               </h6>
@@ -331,12 +333,12 @@ const BookingHistory = React.memo(() => {
                                                   ))}
                                             </div>
 
-                                            <div>
+                                            <div className="w-20">
                                               <h6 className="ml-2">
                                                 <strong>Nhân viên:</strong>
                                               </h6>
                                               <div className="ml-2">
-                                                <p>{dataBill.nguoi1.staff.full_name}.</p>
+                                                <p>{dataBill.nguoi1.staff.full_name}</p>
                                               </div>
                                             </div>
                                           </div>
@@ -348,13 +350,13 @@ const BookingHistory = React.memo(() => {
                                 {dataBill.nguoi3 === null ? (
                                   ''
                                 ) : (
-                                  <div className="person3 mt-2">
-                                    <h3 className="card-title">Khách 3</h3>
+                                  <div className="person3 mt-2 border-top">
+                                    <h3 className="card-title mt-2">Khách 3</h3>
                                     {(() => {
                                       if (dataBill.nguoi3 && dataBill.nguoi3.staff) {
                                         return (
                                           <div className="d-flex justify-content-between  ">
-                                            <div>
+                                            <div className="w-40">
                                               <h6 className="ml-2">
                                                 <strong>Combo:</strong>
                                               </h6>
@@ -375,7 +377,7 @@ const BookingHistory = React.memo(() => {
                                                     </div>
                                                   ))}
                                             </div>
-                                            <div>
+                                            <div className="w-40">
                                               <h6 className="ml-2">
                                                 <strong>Dịch vụ:</strong>
                                               </h6>
@@ -397,12 +399,12 @@ const BookingHistory = React.memo(() => {
                                                   ))}
                                             </div>
 
-                                            <div>
+                                            <div className="w-20">
                                               <h6 className="ml-2">
                                                 <strong>Nhân viên:</strong>
                                               </h6>
                                               <div className="ml-2">
-                                                <p>{dataBill.nguoi3.staff.full_name}.</p>
+                                                <p>{dataBill.nguoi3.staff.full_name}</p>
                                               </div>
                                             </div>
                                           </div>

@@ -56,6 +56,14 @@ export const routes = [
     layout: MainLayout,
   },
   {
+    path: AppRoutes.bookingResult,
+    exact,
+    title: AppTitle.bookingResult,
+    component: Page.BookingResult,
+    layout: MainLayout,
+    isPrivate: true,
+  },
+  {
     path: AppRoutes.service.list,
     exact,
     title: AppTitle.service,
