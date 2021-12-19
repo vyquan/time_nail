@@ -1,16 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Slider from 'react-slick';
-import {getFeedback} from '../../redux/actions/feedback';
+import { getFeedback } from '../../redux/actions/feedback';
 const CarouseFeedback = () => {
-
-    const feedback = useSelector(state => state.feedback.feedback);
-    console.log(feedback)
-    const dispatch = useDispatch();
-    useEffect(() => {
-       dispatch(getFeedback());
-       //eslint-disable-next-line
-    },[])
+  const feedback = useSelector((state) => state.feedback.feedback);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getFeedback());
+    //eslint-disable-next-line
+  }, []);
 
   const settings = {
     dots: true,
@@ -65,7 +63,7 @@ const CarouseFeedback = () => {
             <Slider {...settings}>
               {
               // feedback && feedback.user === 4 ?
-              feedback.slice(0,3).map((item, index) => (
+              feedback.slice(0,5).map((item, index) => (
                 <div key={index} className="testimonial-card">
                   <div className="testi-desc-box text-center">
                     <p className="testi__desc">
@@ -115,17 +113,18 @@ const CarouseFeedback = () => {
                            
                          })()
                        }
-                      
-                       
                       </span>
                         <span className="author__meta">{item.address}</span>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                  </div>
+                ))
+              } 
+               
             </Slider>
-          </div>
+            </div>
+        
         </div>
       </div>
     </section>
