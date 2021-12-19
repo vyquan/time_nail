@@ -101,11 +101,11 @@ const ComboServiceDetail = () => {
                           ))}
                       </tbody>
                     </table>
-                    <span style={{ color: 'black' }}>Tổng thời gian: {totalMinute} phút</span>
-                    <br />
-                    <span style={{ color: 'black' }}>
-                      Tổng tiền: {totalPrice.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
-                    </span>
+                    <div>
+                      <p className="text-right" style={{ color: 'black' }}>Tổng thời gian: {totalMinute} phút</p>
+                      <p className="text-right" style={{ color: 'black' }}>Tổng tiền: {totalPrice.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                    </p>
+                    </div>
                   </div>
                 </div>
               </div>

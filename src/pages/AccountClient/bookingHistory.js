@@ -56,10 +56,11 @@ const BookingHistory = React.memo(() => {
     dispatch(historyBillDetail(item));
   };
 
+  
   const handelCancelBile = () => {
-    dispatch(cancelBill(idCancel));
     setShowModalConfirm(false);
-     window.location.reload()
+    historyBookAPI.CancelBill(idCancel).then(result => {dispatch(historyBookInfo(id));window.location.reload()})
+    // window.location.reload()
   };
   return (
     <>

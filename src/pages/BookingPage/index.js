@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Slider from 'react-slick';
-import { getAllService } from '../../redux/actions/allService';
 import { Discount } from '../../redux/actions/discount';
-import { getCombo } from '../../redux/actions/combo';
 import { checkUnavailable, getStaff } from '../../redux/actions/staff';
 import { Button, Col, Collapse, DatePicker, Divider, Form, Input, Modal, Radio, Row, Select, Spin } from 'antd';
 import { CheckCircleTwoTone, CaretRightOutlined, UserOutlined } from '@ant-design/icons';
@@ -17,6 +15,8 @@ import { Link, useHistory } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { convertMinsToHrsMins } from '../../helpers/format';
+import AllServiceAPI from '../../api/allServiceAPI';
+import ComboAPI from '../../api/comboAPI';
 
 const BookingPage = () => {
   const { Option } = Select;
@@ -25,8 +25,6 @@ const BookingPage = () => {
   const [form] = Form.useForm();
   const [guest, setGuest] = useState(1);
   const [loading, setLoading] = useState(false);
-  const allService = useSelector((state) => state.services.services);
-  const combos = useSelector((state) => state.combos.combos);
   const staff = useSelector((state) => state.staff.staff);
   const [errorhandle, setErrorhandle] = useState({
     error: false,
@@ -44,13 +42,36 @@ const BookingPage = () => {
   const handleCancelModal = () => {
     history.goBack();
   };
+
+  const [allService, setAllService] = useState([])
   useEffect(() => {
-    dispatch(getAllService());
-    dispatch(getCombo());
-    dispatch(getStaff());
-    dispatch(checkUnavailable());
-    //eslint-disable-next-line
+    const getAllService = async () => {
+      try {
+        const { data: allService } = await AllServiceAPI.getAll();
+        setAllService(allService);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getAllService();
   }, []);
+
+  const [combos, setCombos] = useState([])
+  useEffect(() => {
+    const getCombos = async () => {
+      try {
+        const { data: combos } = await ComboAPI.getAll();
+        setCombos(combos);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getCombos();
+  }, []);
+
+  useEffect(() => {
+    dispatch(getStaff());
+  },[]);
   // ID nhân viên mặc định
   const idStaffDefault = 198;
   //Handle Check Staff
@@ -503,12 +524,12 @@ const BookingPage = () => {
                             <p>
                               Tổng giá Khách 1:{' '}
                               <span className="font-medium float-right">
-                                {totalPaymentGuest1?.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                              &nbsp;{totalPaymentGuest1?.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
                               </span>
                             </p>
                             <p>
                               Thời gian ước tính:{' '}
-                              <span className="font-medium float-right">{convertMinsToHrsMins(totalTimeGuest1)}</span>
+                              <span className="font-medium float-right">&nbsp;{convertMinsToHrsMins(totalTimeGuest1)}</span>
                             </p>
                           </div>
                         </div>
@@ -631,12 +652,12 @@ const BookingPage = () => {
                             <p>
                               Tổng giá Khách 2:
                               <span className="font-medium float-right">
-                                {totalPaymentGuest2?.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                              &nbsp;{totalPaymentGuest2?.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
                               </span>
                             </p>
                             <p>
                               Thời gian ước tính:
-                              <span className="font-medium float-right">{convertMinsToHrsMins(totalTimeGuest2)}</span>
+                              <span className="font-medium float-right">&nbsp;{convertMinsToHrsMins(totalTimeGuest2)}</span>
                             </p>
                           </div>
                         </div>
@@ -759,12 +780,12 @@ const BookingPage = () => {
                             <p>
                               Tổng giá Khách 3:{' '}
                               <span className="font-medium float-right">
-                                {totalPaymentGuest3?.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                              &nbsp;{totalPaymentGuest3?.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
                               </span>
                             </p>
                             <p>
                               Thời gian ước tính:
-                              <span className="font-medium float-right">{convertMinsToHrsMins(totalTimeGuest3)}</span>
+                              <span className="font-medium float-right">&nbsp;{convertMinsToHrsMins(totalTimeGuest3)}</span>
                             </p>
                           </div>
                         </div>
@@ -773,7 +794,6 @@ const BookingPage = () => {
                           <Divider />
                           <Form.Item
                             help={errorhandle.message}
-                            validateStatus={percent === null ? 'error' : ''}
                             extra={percent !== null ? `Mã giảm giá ${percent} %` : ``}
                             label={<label className="label-text">Voucher của cửa hàng</label>}
                           >
@@ -809,7 +829,7 @@ const BookingPage = () => {
                             <li style={{ display: percent === null ? 'none' : 'block' }}>
                               Tổng:
                               <span className="font-medium float-right" style={{ opacity: 0.7 }}>
-                                {totalPayment?.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                              &nbsp;{totalPayment?.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
                               </span>
                             </li>
                             <li style={{ display: percent === null ? 'none' : 'block' }}>
@@ -822,7 +842,7 @@ const BookingPage = () => {
                               <h3 className="total-bill">
                                 Tổng giá:{' '}
                                 <span className="font-medium float-right">
-                                  {totalPaymentFinal?.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                                &nbsp;{totalPaymentFinal?.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
                                 </span>
                               </h3>
                             </li>
