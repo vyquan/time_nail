@@ -63,7 +63,7 @@ const CarouseFeedback = () => {
             <Slider {...settings}>
               {
                 // feedback && feedback.user === 4 ?
-                feedback.slice(0, 3).map((item, index) => (
+                feedback.slice(0, 5).map((item, index) => (
                   <div key={index} className="testimonial-card">
                     <div className="testi-desc-box text-center">
                       <p className="testi__desc">

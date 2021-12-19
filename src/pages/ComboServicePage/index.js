@@ -22,7 +22,7 @@ const ComboService = () => {
               <div className="col-lg-6">
                 <div className="breadcrumb-content">
                   <div className="section-heading">
-                    <h2 className="sec__title text-white">Combo tại TIME NAILS</h2>
+                    <h2 className="sec__title text-white">Combo tại TIMES NAIL</h2>
                   </div>
                 </div>
               </div>

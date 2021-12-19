@@ -6,6 +6,7 @@ import comboAPI from '../../api/comboAPI';
 import CallToAction from '../../components/client/callToAction';
 import { AppRoutes } from '../../helpers/app.routes';
 import { useEffect } from 'react';
+import { truncateString } from '../../helpers/format';
 const ComboServiceDetail = () => {
   const { id } = useParams();
   const [combo, setcombo] = useState([]);
@@ -48,7 +49,7 @@ const ComboServiceDetail = () => {
                 <div className="col-lg-6">
                   <div className="breadcrumb-content">
                     <div className="section-heading">
-                      <h2 className="sec__title text-white">{combo.name_combo}</h2>
+                      <h2 className="sec__title text-white">{truncateString(combo.name_combo || '', 20)}</h2>
                     </div>
                   </div>
                 </div>

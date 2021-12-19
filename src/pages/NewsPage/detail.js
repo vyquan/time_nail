@@ -7,6 +7,7 @@ import { AppRoutes } from '../../helpers/app.routes';
 // import TagCloud from './components/TagCloud';
 import RelatedNews from './components/RelatedNews';
 import Moment from 'react-moment';
+import { truncateString } from '../../helpers/format';
 
 const NewsDetail = () => {
   const { id } = useParams();
@@ -46,7 +47,7 @@ const NewsDetail = () => {
                       <Link to={AppRoutes.home}>Trang chủ</Link>
                     </li>
                     <li>
-                      <Link to={AppRoutes.news}>{news.title}</Link>
+                      <Link to={AppRoutes.news} className="text-uppercase">{truncateString(news.title || '', 20)}</Link>
                     </li>
                   </ul>
                 </div>
@@ -61,7 +62,7 @@ const NewsDetail = () => {
             <div className="col-lg-12">
               <div className="card-item blog-card blog-card-layout-2 blog-single-card mb-5">
                 <div className="card-body px-0 pb-0">
-                  <h1 className="card-titles">{news.title}</h1>
+                  <h1 className="card-titles text-uppercase">{news.title}</h1>
                   <p className="card-meta pb-3">
                     <span className="post__author">
                       By- 

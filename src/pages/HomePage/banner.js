@@ -35,7 +35,7 @@ const BannerSlider = () => {
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: false,
     speed: 3000,
     autoplaySpeed: 4000,
     cssEase: 'linear',
