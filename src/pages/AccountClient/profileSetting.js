@@ -5,8 +5,9 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { userInfo } from '../../redux/actions/auth';
 import { isAuthenTicate } from '../Auth';
+import { RegexConstants } from '../../helpers/regex';
 const ProfileSetting = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, formState: { errors }, handleSubmit } = useForm();
   const dispatch = useDispatch();
   const data = isAuthenTicate();
   const [image, setImage] = useState(null);
@@ -75,8 +76,11 @@ const ProfileSetting = () => {
                         className="form-control"
                         type="text"
                         defaultValue={data.user ? data.user.full_name : data.full_name || data.givenName}
-                        {...register('full_name')}
+                        {...register('full_name',{
+                          required: true
+                        })}
                       />
+                        {errors.full_name && <span className='text-danger'>Bạn chưa nhập tên</span>}
                     </div>
                   </div>
                 </div>
@@ -89,8 +93,17 @@ const ProfileSetting = () => {
                         className="form-control"
                         type="text"
                         defaultValue={data.user ? data.user.email : data.email}
-                        {...register('email')}
+                        {...register('email',{
+                          required: true,
+                          pattern: {
+                            value: RegexConstants.EMAIL
+                          }
+                        })}
                       />
+                   
+                      {errors?.email?.type === "pattern" && (
+                          <p className='text-danger'>Email không đúng định dạng</p>
+                        )}
                     </div>
                   </div>
                 </div>
@@ -103,8 +116,16 @@ const ProfileSetting = () => {
                         className="form-control"
                         type="text"
                         defaultValue={data.user ? data.user.phone : data.phone}
-                        {...register('phone')}
+                        {...register('phone', {
+                          required: true,
+                          pattern: {
+                            value: RegexConstants.PHONE
+                        },
+                        })}
                       />
+                      {errors?.phone?.type === "pattern" && (
+                          <p className='text-danger'>Số điện thoại không đúng định dạng</p>
+                        )}
                     </div>
                   </div>
                 </div>
@@ -117,8 +138,11 @@ const ProfileSetting = () => {
                         className="form-control"
                         type="text"
                         defaultValue={data.user ? data.user.address : data.address}
-                        {...register('address')}
+                        {...register('address', {
+                          required: true,
+                        })}
                       />
+                        {errors.address && <span className='text-danger'>Bạn chưa nhập địa chỉ</span>}
                     </div>
                   </div>
                 </div>

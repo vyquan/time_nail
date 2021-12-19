@@ -408,7 +408,7 @@ const ListBooking = () => {
                   <div className="row">
                     <div className="col-lg-6 col-md-6 col-sm-12 col-12 mt-3 show-left" style={{ paddingLeft: '10px' }}>
                       <p>
-                        Showing {page} to {postPerPage * page} of {historyBook.today.length} entries
+                        Đang xem {page} trong {historyBook.today.length} mục
                       </p>
                     </div>
                     <div
@@ -761,7 +761,7 @@ const ListBooking = () => {
                   <div className="row">
                     <div className="col-lg-6 col-md-6 col-sm-12 col-12 mt-3 show-left" style={{ paddingLeft: '10px' }}>
                       <p>
-                        Showing {pagefuture} to {pagefuture * postPagefuture} of {historyBook.future.length} entries
+                        Đang xem {pagefuture} trong {historyBook.future.length} mục
                       </p>
                     </div>
                     <div

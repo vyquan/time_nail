@@ -141,9 +141,9 @@ export const resetPasswordChangePass = (resetPass) => async (dispatch) => {
         payload: response.data,
       });
       toast.success(response.data.message);
-      setTimeout(() => {
-        window.location = '/login';
-      }, 1000);
+      // setTimeout(() => {
+      //   window.location = '/login';
+      // }, 1000);
     });
   } catch (error) {
     toast.error(error.response.data.message);

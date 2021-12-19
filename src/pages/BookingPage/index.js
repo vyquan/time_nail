@@ -7,7 +7,7 @@ import { getCombo } from '../../redux/actions/combo';
 import { checkUnavailable, getStaff } from '../../redux/actions/staff';
 import { Button, Col, Collapse, DatePicker, Divider, Form, Input, Modal, Radio, Row, Select, Spin } from 'antd';
 import { CheckCircleTwoTone, CaretRightOutlined, UserOutlined } from '@ant-design/icons';
-import { time } from './constant';
+import { time, settings } from './constant';
 import { isAuthenTicate } from '../Auth';
 import { RegexConstants } from '../../helpers/regex';
 import { AppRoutes } from '../../helpers/app.routes';
@@ -191,6 +191,7 @@ const BookingPage = () => {
   const [quoteIndex] = useState(0);
   const code_discount = dataDiscount[quoteIndex] ? dataDiscount[quoteIndex].code_discount : null;
   const percent = dataDiscount[quoteIndex] ? dataDiscount[quoteIndex].percent : null;
+  
   const handleVoucher = () => {
     // setLoading(true);
     dispatch(Discount({ code_discount: form.getFieldValue('code_discount') }, setErrorhandle, setDataDiscount));
@@ -205,56 +206,6 @@ const BookingPage = () => {
         type: 'object',
         required: true,
         message: 'Please select time!',
-      },
-    ],
-  };
-  const settings = {
-    dots: false,
-    arrows: true,
-    infinite: true,
-    slidesToScroll: 5,
-    slidesToShow: 5,
-    autoplay: false,
-    cssEase: 'linear',
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 4,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          infinite: true,
-          dots: true,
-          arrows: false,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
-          arrows: false,
-        },
-      },
-      {
-        breakpoint: 320,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          infinite: true,
-          dots: true,
-          arrows: false,
-        },
       },
     ],
   };

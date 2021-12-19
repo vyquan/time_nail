@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AppRoutes } from '../../helpers/app.routes';
 import { changePassWord } from '../../redux/actions/auth';
 import { isAuthenTicate } from '../Auth';
 
@@ -60,8 +62,8 @@ const ChangePasswordClient = () => {
             >
               <input type="hidden" value={data.user ? data.user.id : data.id} {...register('id')} />
               <div className="row">
-                <div className="col-lg-6 responsive-column">
-                  <div className="input-box">
+                <div className="col-lg-12 responsive-column  d-flex justify-content-center d-flex justify-content-center">
+                  <div className="input-box w-password">
                     <label className="label-text">
                       <font style={{ verticalAlign: 'inherit' }}>
                         <font style={{ verticalAlign: 'inherit' }}>Mật khẩu hiện tại</font>
@@ -76,19 +78,22 @@ const ChangePasswordClient = () => {
                         {...register('password', { required: true })}
                       />
                       <i
-                        className={passwordShow ? 'fas fa-eye-slash' : 'fas fa-eye'}
+                        className={passwordShow ? 'fas fa-eye' : 'fas fa-eye-slash' }
                         onClick={togglePasswordVisiblity}
                       ></i>
                       {errors.password && <span className="text-danger">Bạn cần nhập mật khẩu hiện tại</span>}
+                      <p className="forgot-password float-right">
+                        <Link to={AppRoutes.forgotPassword}>Quên mật khẩu?</Link>
+                      </p>
                     </div>
                   </div>
                 </div>
 
-                <div className="col-lg-6 responsive-column">
-                  <div className="input-box">
+                <div className="col-lg-12 responsive-column  d-flex justify-content-center">
+                  <div className="input-box w-password">
                     <label className="label-text">
                       <font style={{ verticalAlign: 'inherit' }}>
-                        <font style={{ verticalAlign: 'inherit' }}>mật khẩu mới</font>
+                        <font style={{ verticalAlign: 'inherit' }}>Mật khẩu mới</font>
                       </font>
                     </label>
                     <div className="form-group">
@@ -99,17 +104,17 @@ const ChangePasswordClient = () => {
                         placeholder="Mật khẩu mới"
                         {...register('new_password', { required: true })}
                       />
-                      <i className={passretype ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={togglePasswordrettype}></i>
+                      <i className={passretype ? 'fas fa-eye' : 'fas fa-eye-slash' } onClick={togglePasswordrettype}></i>
                       {errors.new_password && <span className="text-danger">Bạn cần nhập mật khẩu mới </span>}
                     </div>
                   </div>
                 </div>
 
-                <div className="col-lg-6 responsive-column">
-                  <div className="input-box">
+                <div className="col-lg-12 responsive-column  d-flex justify-content-center">
+                  <div className="input-box w-password">
                     <label className="label-text">
                       <font style={{ verticalAlign: 'inherit' }}>
-                        <font style={{ verticalAlign: 'inherit' }}>Mật khẩu mới một lần nữa</font>
+                        <font style={{ verticalAlign: 'inherit' }}>Xác nhận mật khẩu</font>
                       </font>
                     </label>
                     <div className="form-group">
@@ -117,10 +122,10 @@ const ChangePasswordClient = () => {
                       <input
                         className="form-control"
                         type={passwords ? 'text' : 'password'}
-                        placeholder="Mật khẩu mới một lần nữa"
+                        placeholder="Nhập lại mật khẩu mới "
                         {...register('re_password', { required: true })}
                       />
-                      <i className={passwords ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={togglePassword}></i>
+                      <i className={passwords ? 'fas fa-eye' : 'fas fa-eye-slash' } onClick={togglePassword}></i>
                       {errors.re_password && (
                         <span className="text-danger">Bạn cần nhập mật khẩu mới một lần nữa </span>
                       )}
@@ -128,11 +133,11 @@ const ChangePasswordClient = () => {
                   </div>
                 </div>
 
-                <div className="col-lg-12">
-                  <div className="btn-box">
+                <div className="col-lg-12 d-flex justify-content-center">
+                  <div className="btn-box w-password">
                     <button className="theme-btn" type="submit">
                       <font style={{ verticalAlign: 'inherit' }}>
-                        <font style={{ verticalAlign: 'inherit' }}>Đổi mật khẩu</font>
+                        <font style={{ verticalAlign: 'inherit' }}>Đổi Mật Khẩu</font>
                       </font>
                     </button>
                   </div>

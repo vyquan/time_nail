@@ -55,7 +55,7 @@ const GalleryPage = () => {
             </div>
           </div>
           <div className="row padding-top-60px">
-            {getGallery.map((item) => (
+            {getGallery && getGallery.length > 0 ? getGallery.map((item) => (
               <div className="col-lg-4 responsive-column" key={item.id}>
                 <div className="card-item flight-card">
                   <div className="card-img">
@@ -75,7 +75,7 @@ const GalleryPage = () => {
                   </div>
                 </div>
               </div>
-            ))}
+            )):''}
           </div>
 
           {/* <div className="row">

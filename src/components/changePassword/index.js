@@ -60,8 +60,8 @@ const ChangePassword = () => {
             >
               <input type="hidden" value={data.user ? data.user.id : data.id} {...register('id')} />
               <div className="row">
-                <div className="col-lg-6 responsive-column">
-                  <div className="input-box">
+                <div className="col-lg-12 responsive-column d-flex justify-content-center">
+                  <div className="input-box w-password">
                     <label className="label-text">
                       <font style={{ verticalAlign: 'inherit' }}>
                         <font style={{ verticalAlign: 'inherit' }}>Mật khẩu hiện tại</font>
@@ -76,7 +76,7 @@ const ChangePassword = () => {
                         {...register('password', { required: true })}
                       />
                       <i
-                        className={passwordShow ? 'fas fa-eye-slash' : 'fas fa-eye'}
+                        className={passwordShow ? 'fas fa-eye' : 'fas fa-eye-slash' }
                         onClick={togglePasswordVisiblity}
                       ></i>
                       {errors.password && <span className="text-danger">Bạn cần nhập mật khẩu hiện tại</span>}
@@ -84,11 +84,11 @@ const ChangePassword = () => {
                   </div>
                 </div>
 
-                <div className="col-lg-6 responsive-column">
-                  <div className="input-box">
+                <div className="col-lg-12 responsive-column d-flex justify-content-center">
+                  <div className="input-box w-password">
                     <label className="label-text">
                       <font style={{ verticalAlign: 'inherit' }}>
-                        <font style={{ verticalAlign: 'inherit' }}>mật khẩu mới</font>
+                        <font style={{ verticalAlign: 'inherit' }}>Mật khẩu mới</font>
                       </font>
                     </label>
                     <div className="form-group">
@@ -99,17 +99,17 @@ const ChangePassword = () => {
                         placeholder="Mật khẩu mới"
                         {...register('new_password', { required: true })}
                       />
-                      <i className={passretype ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={togglePasswordrettype}></i>
+                      <i className={passretype ? 'fas fa-eye' : 'fas fa-eye-slash'} onClick={togglePasswordrettype}></i>
                       {errors.new_password && <span className="text-danger">Bạn cần nhập mật khẩu mới</span>}
                     </div>
                   </div>
                 </div>
 
-                <div className="col-lg-6 responsive-column">
-                  <div className="input-box">
+                <div className="col-lg-12 responsive-column d-flex justify-content-center">
+                  <div className="input-box w-password">
                     <label className="label-text">
                       <font style={{ verticalAlign: 'inherit' }}>
-                        <font style={{ verticalAlign: 'inherit' }}>Mật khẩu mới một lần nữa</font>
+                        <font style={{ verticalAlign: 'inherit' }}>Xác nhận mật khẩu</font>
                       </font>
                     </label>
                     <div className="form-group">
@@ -117,22 +117,22 @@ const ChangePassword = () => {
                       <input
                         className="form-control"
                         type={passwords ? 'text' : 'password'}
-                        placeholder="Mật khẩu mới một lần nữa"
+                        placeholder="Nhập lại mật khẩu mới"
                         {...register('re_password', { required: true })}
                       />
-                      <i className={passwords ? 'fas fa-eye-slash' : 'fas fa-eye'} onClick={togglePassword}></i>
+                      <i className={passwords ? 'fas fa-eye' : 'fas fa-eye-slash'} onClick={togglePassword}></i>
                       {errors.new_password && (
-                        <span className="text-danger">Bạn cần nhập mật khẩu mới thêm lần nữa</span>
+                        <span className="text-danger">Bạn cần nhập lại mật khẩu mới</span>
                       )}
                     </div>
                   </div>
                 </div>
 
-                <div className="col-lg-12">
+                <div className="col-lg-12 d-flex justify-content-center">
                   <div className="btn-box">
                     <button className="theme-btn" type="submit">
                       <font style={{ verticalAlign: 'inherit' }}>
-                        <font style={{ verticalAlign: 'inherit' }}>Đổi mật khẩu</font>
+                        <font style={{ verticalAlign: 'inherit' }}>Đổi Mật Khẩu</font>
                       </font>
                     </button>
                   </div>

@@ -19,7 +19,7 @@ const CarouseFeedback = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     initialSlide: 0,
-    autoplay: true,
+    autoplay: false,
     cssEase: 'linear',
     autoplaySpeed: 2000,
     responsive: [

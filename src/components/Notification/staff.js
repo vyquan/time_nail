@@ -32,18 +32,6 @@ const Staff = (props) => {
             </div>
 
             <div className="list-group drop-reveal-list user-drop-reveal-list">
-              <Link to="/" className="list-group-item list-group-item-action">
-                <div className="msg-body">
-                  <div className="msg-content">
-                    <h3 className="title">
-                      <i className="la la-home mr-2" />
-                      Trang chủ
-                    </h3>
-                  </div>
-                </div>
-                {/* end msg-body */}
-              </Link>
-
               <div className="section-block" />
               <Link
                 to="/"

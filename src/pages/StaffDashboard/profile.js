@@ -5,8 +5,9 @@ import { staffInfo } from '../../redux/actions/auth';
 import { useDispatch } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { RegexConstants } from '../../helpers/regex';
 const ProfileStaff = () => {
-  const { register, handleSubmit} = useForm();
+  const { register, formState: { errors }, handleSubmit } = useForm();
    const dispatch = useDispatch();
   const data = isAuthenTicate();
   const [image, setImage] = useState(null)
@@ -25,6 +26,8 @@ const ProfileStaff = () => {
     }
     uploads.append("phone", data.phone);
     uploads.append("address", data.address)
+    uploads.append('experience_staff',data.experience_staff)
+    uploads.append('description_staff', data.description_staff)
       dispatch(staffInfo(uploads));
    }
 
@@ -69,7 +72,10 @@ const ProfileStaff = () => {
                       <span className="la la-user form-icon" />
                 <input className="form-control" type="text"
                  defaultValue={data.user.full_name} 
-                 {...register("full_name")}/>
+                 {...register("full_name",{
+                   required: true
+                 })}/>
+                   {errors.full_name && <span className='text-danger'>Bạn chưa nhập họ tên</span>}
                     </div>
                   </div>
                 </div>
@@ -82,6 +88,9 @@ const ProfileStaff = () => {
                       <input className="form-control" type="text"  
                       defaultValue={data.user.email} 
                       {...register("email")} />
+                          {errors?.email?.type === "pattern" && (
+                                <p className='text-danger'>Email không đúng định dạng</p>
+                              )}
                     </div>
                   </div>
                 </div>
@@ -92,7 +101,14 @@ const ProfileStaff = () => {
                       <span className="la la-phone form-icon" />
                       <input className="form-control" type="text" 
                       defaultValue={data.user.phone}
-                      {...register("phone")} />
+                      {...register("phone",{required: true,
+                        pattern: {
+                          value: RegexConstants.PHONE
+                      },
+                      })} />
+                     {errors?.phone?.type === "pattern" && (
+                                <p className='text-danger'>Số điện thoại không đúng định dạng</p>
+                              )}
                     </div>
                   </div>
                 </div>
@@ -104,7 +120,10 @@ const ProfileStaff = () => {
                       <span className="la la-map form-icon" />
                       <input className="form-control" type="text"  
                       defaultValue={data.user.address} 
-                      {...register("address")}/>
+                      {...register("address", {
+                        required: true
+                      })}/>
+                          {errors.full_name && <span className='text-danger'>Bạn chưa nhập Địa chỉ</span>}
                     </div>
                   </div>
                 </div>
@@ -116,7 +135,10 @@ const ProfileStaff = () => {
                       <span className="la la-history form-icon" />
                       <input className="form-control" type="text"  
                       defaultValue={data.user.experience_staff} 
-                      />
+                      {...register("experience_staff", {
+                        required: true
+                      })}/>
+                     {errors.experience_staff && <span className='text-danger'>Bạn chưa nhập kinh nghiệm</span>}
                     </div>
                   </div>
                 </div>
@@ -133,10 +155,13 @@ const ProfileStaff = () => {
                         name="desc"
                         id="desc"
                         placeholder="Giới thiệu bản thân"
-                        required
-                        {...register("description_staff")}
+                       
+                        {...register("description_staff",{
+                          required: true
+                        })}
                         defaultValue={data.user.description_staff}
                       />
+                         {errors.description_staff && <span className='text-danger'>Bạn chưa nhập mô tả</span>}
                     </div>
                   </div>
                 </div>

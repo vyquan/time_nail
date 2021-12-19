@@ -49,7 +49,7 @@ const BookingHistory = React.memo(() => {
   // Panagition
   const firstPageIndex = (page - 1) * postPerPage;
   const lastPageIndex = firstPageIndex + postPerPage;
-  const curentPosts = HistoryBook?.slice(firstPageIndex, lastPageIndex);
+  const curentPosts = HistoryBook && HistoryBook.length > 0 ? HistoryBook?.slice(firstPageIndex, lastPageIndex) : "";
 
   const dataBill = useSelector((state) => state.listbookHistory.billDetail);
   const showDetailBill = async (item) => {
@@ -415,9 +415,9 @@ const BookingHistory = React.memo(() => {
                   </tbody>
                 </table>
               ) : (
-                <div>
-                  Bạn chưa đặt lịch <Link to={AppRoutes.booking}>bạn có thể bấm qua link này để đăng ký đặt lịch</Link>
-                </div>
+                <p>
+                  Bạn chưa có lịch đặt nào! <Link to={AppRoutes.booking}>Đặt Lịch</Link> ngay để trải nghiệm nhiều dịch vụ làm đẹp chất lượng đến từ Times Nail
+                </p>
               )}
             </div>
           </div>

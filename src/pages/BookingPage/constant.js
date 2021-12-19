@@ -25,5 +25,53 @@ export const time = [
   { value: '19:30', label: '19:30' },
   { value: '20:00', label: '20:00' },
 ];
-
-
+export const settings = {
+  dots: false,
+  arrows: true,
+  infinite: true,
+  slidesToScroll: 5,
+  slidesToShow: 5,
+  autoplay: false,
+  cssEase: 'linear',
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        infinite: true,
+        dots: true,
+      },
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        infinite: true,
+        dots: true,
+        arrows: false,
+      },
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true,
+        arrows: false,
+      },
+    },
+    {
+      breakpoint: 320,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        infinite: true,
+        dots: true,
+        arrows: false,
+      },
+    },
+  ],
+};

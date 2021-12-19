@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
 import Slider from 'react-slick';
+import SlideAPI from '../../api/slideAPI';
 import LeftArrow from '../../assets/icons/left-arrow.svg';
 import RightArrow from '../../assets/icons/right-arrow.svg';
 
 const BannerSlider = () => {
+  const [slider, setSlider] = useState([])
+  console.log(slider);
+  useEffect(() => {
+    const getSlider = async () => {
+      try {
+        const { data: slider } = await SlideAPI.getAll();
+        setSlider(slider);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getSlider();
+  }, []);
+
   const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
     <div className="btn-prev">
       <img src={LeftArrow} alt="prevArrow" {...props} />
@@ -61,34 +77,15 @@ const BannerSlider = () => {
     <section className="hero-wrapper padding-bottom-50px">
       <div className="container-fluid" style={{ padding: '0px' }}>
         <Slider {...settings}>
-          <div>
+          {slider.map((item, index) =>(
+            <div key={index}>
             <img
-              src="https://nailroom.vn/wp-content/uploads/bfi_thumb/Cover-odou4k6zt1b7c8hi14o5t9gbrcgbb5tymcd3a41lii.png"
+              src={item.image}
               className="w-100 h-100"
-              alt="true"
+              alt={item.name_slider}
             />
           </div>
-          <div>
-            <img
-              src="https://nailroom.vn/wp-content/uploads/bfi_thumb/Linh-NR-pcgaxtm5efv7joestdfq6mmqnlksemeyc95ma0vk16.png"
-              className="w-100 h-100"
-              alt="true"
-            />
-          </div>
-          <div>
-            <img
-              src="https://nailroom.vn/wp-content/uploads/bfi_thumb/NR169-HethongNailRoom-Cover-pcgafipabkt7h0zwoym94qwm8hshisr45nu8v20j6y.png"
-              className="w-100 h-100"
-              alt="true"
-            />
-          </div>
-          <div>
-            <img
-              src="https://nailroom.vn/wp-content/uploads/bfi_thumb/10-1cover-ped1gcunyj52dj25dseb4ylzit3rg5wgpv17ilbc4q.png"
-              className="w-100"
-              alt="true"
-            />
-          </div>
+          ))}
         </Slider>
       </div>
     </section>

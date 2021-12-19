@@ -25,7 +25,7 @@ const hisToryBookReducer = (state = initialState, action) => {
     case Cancel_Bill:
       return {
         ...state,
-        listbookHistory: state.listbookHistory.findIndex(item => item.status_bill !== action.payload.status_bill)
+        listbookHistory: [...action.payload]
       }  
     default:
       return state;

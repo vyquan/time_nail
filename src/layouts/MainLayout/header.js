@@ -123,6 +123,11 @@ const Header = () => {
                             Liên Hệ
                           </NavLink>
                         </li>
+                        <li>
+                          <NavLink to={AppRoutes.booking} className="booking-link" activeClassName="active">
+                            Đặt Lịch
+                          </NavLink>
+                        </li>
                       </ul>
                     </nav>
                   </div>
