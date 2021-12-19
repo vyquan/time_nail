@@ -63,11 +63,11 @@ const ListBooking = () => {
   // Panagition today
   const firstPageIndex = (page - 1) * postPerPage;
   const lastPageIndex = firstPageIndex + postPerPage;
-  const curentPosts = historyBook.today?.slice(firstPageIndex, lastPageIndex);
+  const curentPosts = historyBook.today && historyBook.today.length > 0 ? historyBook.today?.slice(firstPageIndex, lastPageIndex) : ('');
   // panagition future
   const firstPage = (pagefuture - 1) * postPagefuture;
   const lastPage = firstPage + postPagefuture;
-  const curentput = historyBook.future?.slice(firstPage, lastPage);
+  const curentput = historyBook.future && historyBook.future.length > 0 ? historyBook.future?.slice(firstPage, lastPage) : ('');
   const dataBill = useSelector (state => state.listbookHistory.billDetail)
       const showDetailBill = async (item) => {
           dispatch(historyBillDetail(item))
@@ -188,7 +188,7 @@ const ListBooking = () => {
                                        <h3 className='card-title'>Khách 1</h3>
                                               {
                                                (() => {
-                                                 if(dataBill.nguoi1 && dataBill.nguoi1.staff) {
+                                                 if(dataBill.nguoi1) {
                                                    return <div className='d-flex justify-content-between '>
                                                      <div>
                                                       <h6 className='ml-2'><strong>Combo:</strong></h6>
@@ -224,7 +224,7 @@ const ListBooking = () => {
                                                     <div>
                                                     <h6 className='ml-2'><strong>Nhân viên:</strong></h6>
                                                        <div className='ml-2'>
-                                                       <p>{ dataBill.nguoi1.staff.full_name}.</p>
+                                                       <p>{dataBill.nguoi1.staff === null ? ('') : dataBill.nguoi1.staff.full_name}.</p>
                                                       </div>
                                                     </div>
                                                    </div>
@@ -241,7 +241,7 @@ const ListBooking = () => {
                                        <h3 className='card-title'>Khách 2</h3>
                                               {
                                                (() => {
-                                                 if(dataBill.nguoi2  && dataBill.nguoi2.staff) {
+                                                 if(dataBill.nguoi2 ) {
                                                    return <div className='d-md-flex justify-content-between '>
                                                      <div>
                                                       <h6 className='ml-2'><strong>Combo:</strong></h6>
@@ -277,7 +277,7 @@ const ListBooking = () => {
                                                     <div>
                                                     <h6 className='ml-2'><strong>Nhân viên:</strong></h6>
                                                        <div className='ml-2'>
-                                                       <p>{ dataBill.nguoi2.staff.full_name}.</p>
+                                                       <p>{dataBill.nguoi2.staff === null ? ('') : dataBill.nguoi2.staff.full_name}.</p>
                                                       </div>
                                                     </div>
                                                    </div>
@@ -296,7 +296,7 @@ const ListBooking = () => {
                                             <h3 className='card-title'>Khách 3</h3>
                                                    {
                                                     (() => {
-                                                      if(dataBill.nguoi3  && dataBill.nguoi3.staff) {
+                                                      if(dataBill.nguoi3 ) {
                                                         return <div className='d-md-flex justify-content-between '>
                                                           <div>
                                                            <h6 className='ml-2'><strong>Combo:</strong></h6>
@@ -332,7 +332,7 @@ const ListBooking = () => {
                                                          <div>
                                                          <h6 className='ml-2'><strong>Nhân viên:</strong></h6>
                                                             <div className='ml-2'>
-                                                            <p>{ dataBill.nguoi3.staff.full_name}.</p>
+                                                            <p>{ dataBill.nguoi3.staff === null ? ('') : dataBill.nguoi3.staff.full_name}.</p>
                                                            </div>
                                                          </div>
                                                         </div>
@@ -497,7 +497,7 @@ const ListBooking = () => {
                                        <h3 className='card-title'>Khách 1</h3>
                                               {
                                                (() => {
-                                                 if(dataBill.nguoi1  && dataBill.nguoi1.staff) {
+                                                 if(dataBill.nguoi1) {
                                                    return <div className='d-flex justify-content-between '>
                                                      <div>
                                                       <h6 className='ml-2'><strong>Combo:</strong></h6>
@@ -533,7 +533,7 @@ const ListBooking = () => {
                                                     <div>
                                                     <h6 className='ml-2'><strong>Nhân viên:</strong></h6>
                                                        <div className='ml-2'>
-                                                       <p>{ dataBill.nguoi1.staff.full_name}.</p>
+                                                       <p>{ dataBill.nguoi1.staff === null ? ('') : dataBill.nguoi1.staff.full_name}.</p>
                                                       </div>
                                                     </div>
                                                    </div>
@@ -550,7 +550,7 @@ const ListBooking = () => {
                                        <h3 className='card-title'>Khách 2</h3>
                                               {
                                                (() => {
-                                                 if(dataBill.nguoi2 && dataBill.nguoi2.staff) {
+                                                 if(dataBill.nguoi2 ) {
                                                    return <div className='d-md-flex justify-content-between '>
                                                      <div>
                                                       <h6 className='ml-2'><strong>Combo:</strong></h6>
@@ -586,7 +586,7 @@ const ListBooking = () => {
                                                     <div>
                                                     <h6 className='ml-2'><strong>Nhân viên:</strong></h6>
                                                        <div className='ml-2'>
-                                                       <p>{ dataBill.nguoi2.staff.full_name}.</p>
+                                                       <p>{dataBill.nguoi2.staff === null ? ('') : dataBill.nguoi2.staff.full_name}.</p>
                                                       </div>
                                                     </div>
                                                    </div>
@@ -605,7 +605,7 @@ const ListBooking = () => {
                                             <h3 className='card-title'>Khách 3</h3>
                                                    {
                                                     (() => {
-                                                      if(dataBill.nguoi3  && dataBill.nguoi3.staff) {
+                                                      if(dataBill.nguoi3) {
                                                         return <div className='d-md-flex justify-content-between '>
                                                           <div>
                                                            <h6 className='ml-2'><strong>Combo:</strong></h6>
@@ -641,7 +641,7 @@ const ListBooking = () => {
                                                          <div>
                                                          <h6 className='ml-2'><strong>Nhân viên:</strong></h6>
                                                             <div className='ml-2'>
-                                                            <p>{ dataBill.nguoi3.staff.full_name}.</p>
+                                                            <p>{dataBill.nguoi3.staff === null ? ('') : dataBill.nguoi3.staff.full_name}.</p>
                                                            </div>
                                                          </div>
                                                         </div>

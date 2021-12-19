@@ -45,7 +45,7 @@ const { id } = useParams();
   // Panagition
   const firstPageIndex = (page - 1) * postPerPage;
   const lastPageIndex = firstPageIndex + postPerPage;
-  const curentPosts = HistoryBook?.slice(firstPageIndex, lastPageIndex);
+  const curentPosts = HistoryBook && HistoryBook.length > 0 ? HistoryBook?.slice(firstPageIndex, lastPageIndex) : '';
     
 
      const dataBill = useSelector(state => state.listbookHistory.billDetail)
@@ -225,7 +225,7 @@ const { id } = useParams();
                                        <h3 className='card-title'>Khách 1</h3>
                                               {
                                                (() => {
-                                                 if(dataBill.nguoi1  && dataBill.nguoi1.staff) {
+                                                 if(dataBill.nguoi1) {
                                                    return <div className='d-flex justify-content-between '>
                                                      <div >
                                                       <h6 className='ml-2'><strong>Combo:</strong></h6>
@@ -263,7 +263,10 @@ const { id } = useParams();
                                                     <div>
                                                     <h6 className='ml-2'><strong>Nhân viên:</strong></h6>
                                                        <div className='ml-2'>
-                                                       <p>{ dataBill.nguoi1.staff.full_name}.</p>
+                                                       <p>{ dataBill.nguoi1.staff === null ?
+                                                        ('')
+                                                        :
+                                                       dataBill.nguoi1.staff.full_name}.</p>
                                                       </div>
                                                     </div>
                                                    </div>
@@ -281,7 +284,7 @@ const { id } = useParams();
                                         
                                               {
                                                (() => {
-                                                 if(dataBill.nguoi2  && dataBill.nguoi2.staff ) {
+                                                 if(dataBill.nguoi2 ) {
                                                    return <div className='d-flex justify-content-between  '>
                                                      <div>
                                                       <h6 className='ml-2'><strong>Combo:</strong></h6>
@@ -317,7 +320,7 @@ const { id } = useParams();
                                                     <div>
                                                     <h6 className='ml-2'><strong>Nhân viên:</strong></h6>
                                                        <div className='ml-2'>
-                                                       <p>{ dataBill.nguoi1.staff.full_name}.</p>
+                                                       <p>{dataBill.nguoi2.staff === null ? ('') : dataBill.nguoi2.staff.full_name}.</p>
                                                       </div>
                                                     </div>
                                                    </div>
@@ -336,7 +339,7 @@ const { id } = useParams();
                                             <h3 className='card-title'>Khách 3</h3>
                                                    {
                                                     (() => {
-                                                      if(dataBill.nguoi3   && dataBill.nguoi3.staff) {
+                                                      if(dataBill.nguoi3 ) {
                                                         return <div className='d-flex justify-content-between  '>
                                                           <div>
                                                            <h6 className='ml-2'><strong>Combo:</strong></h6>
@@ -371,7 +374,7 @@ const { id } = useParams();
                                                          <div>
                                                          <h6 className='ml-2'><strong>Nhân viên:</strong></h6>
                                                             <div className='ml-2'>
-                                                            <p>{ dataBill.nguoi3.staff.full_name}.</p>
+                                                            <p>{dataBill.nguoi3.staff === null ? ('') : dataBill.nguoi3.staff.full_name}.</p>
                                                            </div>
                                                          </div>
                                                         </div>
