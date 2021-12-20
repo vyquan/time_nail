@@ -16,7 +16,7 @@ const Staff = (props) => {
   }, []);
   return (
     <div className="notification-wrap d-flex align-items-center">
-        <div className="notification-item mr-2">
+      <div className="notification-item mr-2">
         <div className="dropdown">
           <Link
             to="#"
@@ -31,7 +31,7 @@ const Staff = (props) => {
           </Link>
           <div className="dropdown-menu dropdown-reveal dropdown-menu-xl dropdown-menu-right">
             <div className="dropdown-header drop-reveal-header">
-            {data.length > 0 ? (
+              {data.length > 0 ? (
                 <h6 className="title">
                   Bạn có <strong className="text-black">{data.length}</strong> thông báo
                 </h6>
@@ -40,11 +40,11 @@ const Staff = (props) => {
               )}
             </div>
             <div className="list-group drop-reveal-list">
-            {data &&
+              {data &&
                 data.map((item, index) => {
                   return (
                     <Link
-                      to={`/staff/list-booking/${isAuthenTicate().user.id }`}
+                      to={`/staff/list-booking/${isAuthenTicate().user.id}`}
                       className="list-group-item list-group-item-action"
                       key={index}
                     >
@@ -94,7 +94,6 @@ const Staff = (props) => {
             <div className="dropdown-item drop-reveal-header user-reveal-header">
               <h6 className="title text-uppercase">Welcome!</h6>
             </div>
-            
 
             <div className="list-group drop-reveal-list user-drop-reveal-list">
               <div className="section-block" />

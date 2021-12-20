@@ -62,68 +62,82 @@ const CarouseFeedback = () => {
           <div className="col-lg-12">
             <Slider {...settings}>
               {
-              // feedback && feedback.user === 4 ?
-              feedback.slice(0,5).map((item, index) => (
-                <div key={index} className="testimonial-card">
-                  <div className="testi-desc-box text-center">
-                    <p className="testi__desc">
-                      <i className="la la-quote-left"></i> {item.comment} <i className="la la-quote-right"></i>
-                    </p>
-                  </div>
-                  <div className="author-content d-flex justify-content-center">
-                    <div>
-                    <img className="author-img" src={item.user.avatar.includes('https') ? item.user.avatar : 'http://localhost:8000/storage/'+item.user.avatar} alt="true" />
+                // feedback && feedback.user === 4 ?
+                feedback.slice(0, 5).map((item, index) => (
+                  <div key={index} className="testimonial-card">
+                    <div className="testi-desc-box text-center">
+                      <p className="testi__desc">
+                        <i className="la la-quote-left"></i> {item.comment} <i className="la la-quote-right"></i>
+                      </p>
+                    </div>
 
-                      <div className="author-bio text-center">
-                
-                        <h4 className="author__title">{item.user.full_name}</h4>
-                        <span className="ratings d-flex align-items-center mr-1">
-                       {
-                         (() => {
-                            if(item.number_star === 5) {
-                            return <>  
-                            <i className="la la-star" />
-                            <i className="la la-star" />
-                            <i className="la la-star" />
-                            <i className="la la-star" />
-                            <i className="la la-star" /></>
+                    <div className="author-content d-flex justify-content-center">
+                      <div>
+                        <span className="ratings d-flex justify-content-center align-items-center mr-1 mb-3">
+                          {(() => {
+                            if (item.number_star === 5) {
+                              return (
+                                <>
+                                  <i className="la la-star" />
+                                  <i className="la la-star" />
+                                  <i className="la la-star" />
+                                  <i className="la la-star" />
+                                  <i className="la la-star" />
+                                </>
+                              );
+                            } else if (item.number_star === 4) {
+                              return (
+                                <>
+                                  <i className="la la-star" />
+                                  <i className="la la-star" />
+                                  <i className="la la-star" />
+                                  <i className="la la-star" />
+                                </>
+                              );
+                            } else if (item.number_star === 3) {
+                              return (
+                                <>
+                                  <i className="la la-star" />
+                                  <i className="la la-star" />
+                                  <i className="la la-star" />
+                                </>
+                              );
+                            } else if (item.number_star === 2) {
+                              return (
+                                <>
+                                  <i className="la la-star" />
+                                  <i className="la la-star" />
+                                </>
+                              );
+                            } else if (item.number_star === 1) {
+                              return (
+                                <>
+                                  <i className="la la-star" />
+                                </>
+                              );
                             }
-                            else if(item.number_star === 4) {
-                              return <>  
-                              <i className="la la-star" />
-                              <i className="la la-star" />
-                              <i className="la la-star" />
-                              <i className="la la-star" /></>
-                            }
-                            else if(item.number_star === 3) {
-                              return <>  
-                              <i className="la la-star" />
-                              <i className="la la-star" />
-                              <i className="la la-star" /></>
-                            }
-                            else if(item.number_star === 2) {
-                              return <>  
-                              <i className="la la-star" />
-                              <i className="la la-star" /></>
-                            }
-                            else if(item.number_star === 1) {
-                              return <>  
-                              <i className="la la-star" /></>
-                            }
-                           
-                         })()
-                       }
-                      </span>
+                          })()}
+                        </span>
+                        <img
+                          className="author-img"
+                          src={
+                            item.user.avatar.includes('https')
+                              ? item.user.avatar
+                              : 'http://localhost:8000/storage/' + item.user.avatar
+                          }
+                          alt="true"
+                        />
+
+                        <div className="author-bio text-center">
+                          <h4 className="author__title">{item.user.full_name}</h4>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  </div>
                 ))
-              } 
-               
+              }
             </Slider>
-            </div>
-        
+          </div>
         </div>
       </div>
     </section>

@@ -6,8 +6,7 @@ import LeftArrow from '../../assets/icons/left-arrow.svg';
 import RightArrow from '../../assets/icons/right-arrow.svg';
 
 const BannerSlider = () => {
-  const [slider, setSlider] = useState([])
-  console.log(slider);
+  const [slider, setSlider] = useState([]);
   useEffect(() => {
     const getSlider = async () => {
       try {

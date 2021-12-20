@@ -23,7 +23,7 @@ const ServicePage = () => {
                 <div className="col-lg-6">
                   <div className="breadcrumb-content">
                     <div className="section-heading">
-                      <h2 className="sec__title text-white">Dịch Vụ</h2>
+                      <h2 className="sec__title text-white">Dịch vụ</h2>
                     </div>
                   </div>
                 </div>

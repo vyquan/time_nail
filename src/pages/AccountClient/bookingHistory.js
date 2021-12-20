@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import historyBookAPI from '../../api/historyBook';
-import { historyBillDetail, historyBookInfo, cancelBill } from '../../redux/actions/historyBook';
+import { historyBillDetail, historyBookInfo } from '../../redux/actions/historyBook';
 import { Button, Modal, Pagination } from 'antd';
 import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../helpers/app.routes';
 import { MoreOutlined } from '@ant-design/icons';
-import { render } from 'nprogress';
 
 const BookingHistory = React.memo(() => {
   const [HistoryBook, setHistoryBook] = useState([]);

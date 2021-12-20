@@ -52,7 +52,7 @@ const Footer = () => {
                     <Link to={AppRoutes.comboService}>Combo</Link>
                   </li>
                   <li>
-                    <Link to={AppRoutes.news}>Tin tức</Link>
+                    <Link to={AppRoutes.news}>Bài viết</Link>
                   </li>
                   <li>
                     <Link to={AppRoutes.contact}>Liên hệ</Link>
