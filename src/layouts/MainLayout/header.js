@@ -115,7 +115,7 @@ const Header = () => {
                         </li>
                         <li>
                           <NavLink to={AppRoutes.news.list} activeClassName="active">
-                            Tin Tức
+                            Bài Viết
                           </NavLink>
                         </li>
                         <li>

@@ -36,7 +36,7 @@ const NewsDetail = () => {
               <div className="col-lg-6">
                 <div className="breadcrumb-content">
                   <div className="section-heading">
-                    <h2 className="sec__title text-white">Tin tức</h2>
+                    <h2 className="sec__title text-white">Bài Viết</h2>
                   </div>
                 </div>
               </div>
@@ -65,9 +65,8 @@ const NewsDetail = () => {
                   <h1 className="card-titles text-uppercase">{news.title}</h1>
                   <p className="card-meta pb-3">
                     <span className="post__author">
-                      By- 
                       <Link to="#" className="text-gray">
-                        Nguyen Duy Thin
+                        By Admin
                       </Link>
                     </span>
                     <span className="post-dot" />

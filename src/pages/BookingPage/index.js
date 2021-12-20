@@ -107,6 +107,10 @@ const BookingPage = () => {
   const [paymentComboG2, setPaymentComboG2] = useState([]);
   const [paymentComboG3, setPaymentComboG3] = useState([]);
 
+  const validation1 = () => (paymentServiceG1.length || paymentComboG1.length) ===0 ? true : false
+  const validation2 = () => guest === 2 && ( paymentServiceG2.length || paymentComboG2.length) === 0 ? true : false
+  const validation3 = () => guest === 3 && ( paymentServiceG3.length || paymentComboG3.length) === 0 ? true : false
+  
   const handleChangeServiceG1 = (value) => {
     setPaymentServiceG1(value);
   };
@@ -533,7 +537,20 @@ const BookingPage = () => {
                             </p>
                           </div>
                         </div>
-
+                        <div className="col-lg-12">
+                          <Form.Item
+                            name="guest1"
+                            className='text-center'
+                            rules={[
+                              {
+                                required: validation1(),
+                                message: 'Vui lòng chọn dịch vụ hoặc combo.',
+                              },
+                            ]}
+                          >
+                            <Input bordered={false} disabled={true}/>
+                          </Form.Item>
+                        </div>
                         <div
                           className="col-lg-12  section-tab check-mark-tab pb-4"
                           style={{ display: guest === 2 || guest === 3 ? ' block' : 'none' }}
@@ -661,7 +678,20 @@ const BookingPage = () => {
                             </p>
                           </div>
                         </div>
-
+                        <div className="col-lg-12" style={{ display: guest === 2 || guest === 3 ? ' block' : 'none' }}>
+                          <Form.Item
+                            name="guest2"
+                            className='text-center'
+                            rules={[
+                              {
+                                required: validation2(),
+                                message: 'Vui lòng chọn dịch vụ hoặc combo.',
+                              },
+                            ]}
+                          >
+                            <Input bordered={false} disabled={true}/>
+                          </Form.Item>
+                        </div>
                         <div
                           className="col-lg-12  section-tab check-mark-tab pb-4"
                           style={{ display: guest === 3 ? ' block' : 'none' }}
@@ -789,7 +819,20 @@ const BookingPage = () => {
                             </p>
                           </div>
                         </div>
-
+                        <div className="col-lg-12" style={{ display: guest === 3 ? ' block' : 'none' }}>
+                          <Form.Item
+                            name="guest3"
+                            className='text-center'
+                            rules={[
+                              {
+                                required: validation3(),
+                                message: 'Vui lòng chọn dịch vụ hoặc combo.',
+                              },
+                            ]}
+                          >
+                            <Input bordered={false} disabled={true}/>
+                          </Form.Item>
+                        </div>
                         <div className="col-lg-12 ">
                           <Divider />
                           <Form.Item

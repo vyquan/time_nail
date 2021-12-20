@@ -17,7 +17,7 @@ const RelatedNews = ({ id }) => {
       <div className="row">
         <div className="col-lg-12">
           <div className="section-heading text-center">
-            <h2 className="sec__title">TIN TỨC KHÁC</h2>
+            <h2 className="sec__title">BÀI VIẾT KHÁC</h2>
           </div>
         </div>
       </div>

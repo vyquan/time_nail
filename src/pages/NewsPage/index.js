@@ -23,7 +23,7 @@ const NewsPage = () => {
               <div className="col-lg-6">
                 <div className="breadcrumb-content">
                   <div className="section-heading">
-                    <h2 className="sec__title text-white">Tin tức</h2>
+                    <h2 className="sec__title text-white">Bài viết</h2>
                   </div>
                 </div>
               </div>
@@ -34,7 +34,7 @@ const NewsPage = () => {
                       <Link to={AppRoutes.home}>Trang chủ</Link>
                     </li>
                     <li>
-                      <Link to={AppRoutes.news}>Tin tức</Link>
+                      <Link to={AppRoutes.news}>Bài viết</Link>
                     </li>
                   </ul>
                 </div>
