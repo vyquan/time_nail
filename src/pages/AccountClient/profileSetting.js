@@ -50,7 +50,7 @@ const ProfileSetting = () => {
                     {data.user || image ? (
                       <img src={image ? image : data.user.avatar} alt="true" max-width="600" height="250" />
                     ) : (
-                      <img src={data.avatar} alt="true" />
+                      <img src={data.avatar.includes(`https`) ? data.avatar : 'http://localhost:8000/storage/'+data.avatar } alt="true" />
                     )}
                     <span>
                       <i className="fas fa-camera"></i>

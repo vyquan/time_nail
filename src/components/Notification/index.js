@@ -26,7 +26,7 @@ const Notification = (props) => {
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false"
-          >
+           >
             <i className="la la-bell text-black" />
             {data.length > 0 && <span className="noti-count text-black">{data.length}</span>}
           </Link>
@@ -91,7 +91,7 @@ const Notification = (props) => {
                 {isAuthenTicate().user ? (
                   <img src={isAuthenTicate().user.avatar} alt="team-img" />
                 ) : (
-                  <img src={isAuthenTicate().avatar} alt="team-img" />
+                  <img src={isAuthenTicate().avatar.includes(`https`) ? isAuthenTicate().avatar : 'http://localhost:8000/storage/'+isAuthenTicate().avatar  } alt="true" />
                 )}
               </div>
               <span className="font-size-14 text-black font-weight-bold">
