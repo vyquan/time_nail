@@ -72,7 +72,7 @@ const News = () => {
             <div className="col-lg-12">
               <div className="btn-box mt-3 text-center">
                 <Link to={AppRoutes.news.list} type="button" className="theme-btn">
-                  DANH SÁCH TIN
+                  DANH SÁCH BÀI VIẾT
                 </Link>
               </div>
             </div>

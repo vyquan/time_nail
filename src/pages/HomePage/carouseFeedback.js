@@ -72,7 +72,7 @@ const CarouseFeedback = () => {
                     </div>
 
                     <div className="author-content d-flex justify-content-center">
-                      <div>
+                      <div className='d-flex flex-column justify-content-center'>
                         <span className="ratings d-flex justify-content-center align-items-center mr-1 mb-3">
                           {(() => {
                             if (item.number_star === 5) {
@@ -128,7 +128,7 @@ const CarouseFeedback = () => {
                           alt="true"
                         />
 
-                        <div className="author-bio text-center">
+                        <div className="author-bio text-center mb-4">
                           <h4 className="author__title">{item.user.full_name}</h4>
                         </div>
                       </div>
